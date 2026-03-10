@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essential Oils Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #eef2f8; color: #1a2a3a; }
+  header { background: #1a3358; color: #e8f0fc; padding: 20px 24px; }
+  header h1 { font-size: 1.6rem; font-weight: 600; }
+  header p { font-size: 0.85rem; color: #88aadd; margin-top: 4px; }
+  .controls { background: #fff; border-bottom: 1px solid #cdd9ee; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+  .search-row { display: flex; gap: 10px; align-items: center; }
+  #search { flex: 1; padding: 10px 14px; border: 1px solid #b8cce4; border-radius: 8px; font-size: 0.95rem; background: #f4f8fc; }
+  #search:focus { outline: none; border-color: #2563a8; box-shadow: 0 0 0 3px rgba(37,99,168,0.12); }
+  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .chip { padding: 5px 12px; border-radius: 20px; border: 1px solid #b8cce4; background: #f4f8fc; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; white-space: nowrap; color: #2a4a78; }
+  .chip:hover { border-color: #2563a8; color: #2563a8; }
+  .chip.active { background: #2563a8; border-color: #2563a8; color: #fff; }
+  .main { display: grid; grid-template-columns: 1fr 380px; gap: 0; min-height: calc(100vh - 140px); }
+  .grid-area { padding: 20px 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .card { background: #fff; border-radius: 10px; padding: 16px; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+  .card:hover { border-color: #88aadd; box-shadow: 0 3px 12px rgba(37,99,168,0.12); }
+  .card.selected { border-color: #2563a8; background: #f0f6fe; }
+  .card-name { font-size: 1rem; font-weight: 600; color: #1a3358; }
+  .card-botanical { font-size: 0.72rem; color: #6a88aa; font-style: italic; margin-top: 2px; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+  .tag { font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; background: #dce8f8; color: #2a4a78; }
+  .tag.respiratory { background: #d8eef8; color: #1a5878; }
+  .tag.digestive { background: #d8f0e8; color: #1a5838; }
+  .tag.emotional { background: #e8d8f8; color: #481878; }
+  .tag.skin { background: #f8f0d8; color: #684818; }
+  .tag.immune { background: #f8d8d8; color: #781818; }
+  .tag.pain { background: #d8e8f8; color: #183878; }
+  .tag.hormonal { background: #f8d8ee; color: #781848; }
+  .tag.hair { background: #d8f0d8; color: #185818; }
+  .tag.sleep { background: #e0d8f8; color: #281878; }
+  .tag.spiritual { background: #f8f0e8; color: #584028; }
+  .tag.energy { background: #fef0d8; color: #784808; }
+  .detail-panel { background: #fff; border-left: 1px solid #cdd9ee; padding: 24px; overflow-y: auto; position: sticky; top: 65px; height: calc(100vh - 65px); }
+  .detail-panel .empty { text-align: center; color: #7a9abd; margin-top: 60px; font-size: 0.9rem; }
+  .detail-panel .empty .icon { font-size: 3rem; margin-bottom: 12px; }
+  .detail-name { font-size: 1.4rem; font-weight: 700; color: #1a3358; }
+  .detail-botanical { font-size: 0.8rem; color: #6a88aa; font-style: italic; margin-top: 2px; margin-bottom: 14px; }
+  .section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #6a88aa; margin: 16px 0 6px; }
+  .prop-list { list-style: none; }
+  .prop-list li { font-size: 0.85rem; padding: 3px 0; padding-left: 12px; position: relative; color: #2a3a4a; }
+  .prop-list li::before { content: '·'; position: absolute; left: 0; color: #2563a8; }
+  .combo-item { background: #f0f6fe; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 0.83rem; }
+  .combo-item strong { color: #1a3358; display: block; margin-bottom: 3px; }
+  .combo-item span { color: #3a5a7a; }
+  .caution { background: #fff8e0; border-left: 3px solid #e0a020; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; color: #6a4a10; margin-top: 4px; }
+  .result-count { font-size: 0.8rem; color: #6a88aa; margin-bottom: 14px; }
+  .tab-bar { display: flex; gap: 2px; margin-bottom: 16px; }
+  .tab { padding: 7px 14px; border-radius: 6px; font-size: 0.82rem; cursor: pointer; color: #2a4a78; background: #dce8f8; border: none; }
+  .tab.active { background: #2563a8; color: #fff; }
+  #combos-tab { display: none; }
+  .blend-card { background: #f4f8fe; border: 1px solid #c8daf0; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+  .blend-card h3 { font-size: 0.95rem; color: #1a3358; margin-bottom: 6px; }
+  .blend-card .oils { font-size: 0.83rem; color: #2563a8; font-weight: 600; margin-bottom: 4px; }
+  .blend-card .purpose { font-size: 0.82rem; color: #3a5a7a; }
+  @media (max-width: 768px) {
+    .main { grid-template-columns: 1fr; }
+    .detail-panel { position: fixed; bottom: 0; left: 0; right: 0; height: 60vh; border-left: none; border-top: 2px solid #2563a8; display: none; }
+    .detail-panel.open { display: block; }
+    .close-btn { display: inline-block; }
+  }
+  .close-btn { display: none; float: right; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #6a88aa; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Essential Oils Guide</h1>
+  <p>Properties, uses, combinations &amp; application methods</p>
+</header>
+
+<div class="controls">
+  <div class="search-row">
+    <input id="search" type="text" placeholder="Search oils, conditions, properties...">
+  </div>
+  <div class="filter-row" id="filters">
+    <div class="chip active" data-cat="all">All</div>
+    <div class="chip" data-cat="respiratory">Respiratory</div>
+    <div class="chip" data-cat="immune">Immune</div>
+    <div class="chip" data-cat="digestive">Digestive</div>
+    <div class="chip" data-cat="emotional">Emotional</div>
+    <div class="chip" data-cat="pain">Pain &amp; Inflammation</div>
+    <div class="chip" data-cat="skin">Skin</div>
+    <div class="chip" data-cat="hormonal">Hormonal</div>
+    <div class="chip" data-cat="hair">Hair</div>
+    <div class="chip" data-cat="sleep">Sleep</div>
+    <div class="chip" data-cat="spiritual">Spiritual</div>
+    <div class="chip" data-cat="energy">Energy</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="grid-area">
+    <div class="tab-bar">
+      <button class="tab active" onclick="showTab('oils')">Oils</button>
+      <button class="tab" onclick="showTab('combos')">Blends &amp; Combinations</button>
+    </div>
+    <div id="oils-tab">
+      <div class="result-count" id="result-count"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+    <div id="combos-tab">
+      <div id="blends-grid"></div>
+    </div>
+  </div>
+  <div class="detail-panel" id="detail">
+    <button class="close-btn" onclick="closeDetail()">✕</button>
+    <div class="empty">
+      <div class="icon">🌿</div>
+      <p>Select an oil to see details</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const oils = [
+  {
+    name: "Eucalyptus",
+    botanical: "Eucalyptus globulus",
+    categories: ["respiratory","immune","pain","energy"],
+    properties: ["antibacterial","antiviral","antifungal","antiseptic","expectorant","mucolytic","analgesic","anti-inflammatory","neuroprotective"],
+    uses: [
+      "Colds, flu, bronchitis, sinusitis, rhinitis",
+      "Respiratory infections and congestion",
+      "Asthma prevention (chronic obstructive conditions)",
+      "Neuropathic pain relief",
+      "Headaches",
+      "Improving concentration and mood",
+      "Household disinfection",
+      "Repelling dust mites"
+    ],
+    emotional: "Refreshing and resetting — like a cold, clear wind. Clears mental fog and congestion (physical and emotional).",
+    methods: [
+      "Diffuser: a few drops, 30 min sessions, 1-2x daily for infection prevention",
+      "Massage oil (diluted): chest and back for colds",
+      "Foot bath: half cup sea salt + 7 drops, 15 minutes",
+      "Compress: add to warm water for painful areas",
+      "Household spray: add to natural cleaning products"
+    ],
+    combinations: [
+      { oils: "Ravensara", purpose: "Herpes treatment" },
+      { oils: "Mint, lemongrass, basil", purpose: "Leg cramps (in 30ml almond oil)" },
+      { oils: "Lemon, rosemary, clove, cinnamon", purpose: "Four Thieves blend" },
+      { oils: "Mint", purpose: "Fever compress or spray" }
+    ],
+    cautions: "Use diluted on skin and mucous membranes. Do not use directly on children under 6. Avoid undiluted on sensitive airways — eucalyptol can trigger breathing difficulty in sensitive individuals. Apply only to feet and back of young children.",
+    keyCompound: "Eucalyptol (1,8-cineol) — increases absorption of other essential oils through skin by over 90%"
+  },
+  {
+    name: "Clove",
+    botanical: "Syzygium aromaticum",
+    categories: ["immune","pain","respiratory","digestive","energy"],
+    properties: ["antibacterial","antifungal","antispasmodic","antiparasitic","analgesic","antioxidant","warming","free radical scavenger"],
+    uses: [
+      "Immunity strengthening",
+      "Rheumatism, gout, arthritis, arthrosis",
+      "Neuralgia, sciatica, lumbago",
+      "Bronchitis, colds",
+      "Toothache and periodontitis",
+      "Stomach pain, diarrhea with bloating",
+      "Infected wounds",
+      "Insect repellent"
+    ],
+    emotional: "Warming, stimulating, strengthening. Stimulates sexual arousal. Antispasmodic effect on the mind as well as body.",
+    methods: [
+      "Candle/diffuser: 1-2 drops per 5m²",
+      "Inhalation: 2-3 drops up to 5 min — bronchitis, asthma, laryngitis",
+      "Bath: 5-7 drops with emulsifier — rheumatism, arthritis, muscle pain",
+      "Massage: 3-5 drops in 10ml carrier oil",
+      "Gum application: 5 drops in 10ml carrier oil for periodontitis",
+      "Toothache: 1-2 drops on damp cotton ball applied to painful spot",
+      "Wound disinfection: 30 drops in 100ml water (2% solution)",
+      "Internal (with caution): 1 drop 2x/day after meals with 2 tsp honey in 100ml water"
+    ],
+    combinations: [
+      { oils: "Lemon, eucalyptus, cinnamon, rosemary", purpose: "Four Thieves blend" },
+      { oils: "Orange, olive oil", purpose: "Gum treatment blend" },
+      { oils: "Ravensara, cinnamon", purpose: "Low morale, chronic fatigue" },
+      { oils: "Cinnamon", purpose: "Onset of cold — 1 drop each in oil or on neutral tablet 3x/day" },
+      { oils: "Fennel", purpose: "Gout/lumbago bath (10 drops fennel + 3 drops clove)" }
+    ],
+    cautions: "Use with caution in hypertension. Irritates mucous membranes — always dilute, maximum 1% concentration. Dermocaustic — can irritate skin.",
+    keyCompound: "Eugenol — potent natural antibiotic, stimulates antibody production"
+  },
+  {
+    name: "Rosemary",
+    botanical: "Rosmarinus officinalis",
+    categories: ["respiratory","energy","pain","hair","emotional"],
+    properties: ["expectorant","decongestant","stimulant","circulatory","antibacterial","antiseptic","neuroprotective","analgesic"],
+    uses: [
+      "Mental fatigue, brain fog, poor memory",
+      "Low blood pressure",
+      "Respiratory problems: bronchitis, sinusitis, rhinitis",
+      "Muscle and joint pain",
+      "Hair loss and scalp stimulation",
+      "Exhaustion and burnout",
+      "Prevention of cognitive decline / Alzheimer's",
+      "Improving focus and alertness"
+    ],
+    emotional: "Reviving and refreshing. Strongest mind-stimulating (cephalic) essential oil. Awakens ambition and readiness for life. Soothes bitterness and need for revenge. Helps when you need to keep a decision and stay determined. Can lower cortisol when inhaled.",
+    methods: [
+      "Diffuser: morning use for focus and alertness",
+      "Massage oil: joints and muscles",
+      "Hair treatment: add to shampoo or dilute in alcohol for scalp massage",
+      "Inhalation: from tissue for quick mental boost",
+      "Combine with lemon and mint in almond oil for cognitive support (10 drops each in 10ml)"
+    ],
+    combinations: [
+      { oils: "Lavender", purpose: "Anxiety reduction; spinal massage for relaxation and invigoration" },
+      { oils: "Lemon, bergamot", purpose: "Mood uplift and memory boost (diffuser)" },
+      { oils: "Mint, basil", purpose: "Hair growth treatment (in macadamia oil)" },
+      { oils: "Lemon, eucalyptus, clove, cinnamon", purpose: "Four Thieves blend" },
+      { oils: "Lemon, mint", purpose: "Cognitive support massage (in almond oil)" }
+    ],
+    cautions: "Do not use if epileptic. The first 'eau de cologne' (Hungarian Water) was made from rosemary, lavender and brandy — created as a medicine for Queen Elizabeth of Hungary's gout and rheumatism.",
+    keyCompound: "1,8-cineol — inhibits acetylcholinesterase, supporting memory and learning; stimulates new neuron synthesis in the hippocampus"
+  },
+  {
+    name: "Cinnamon Bark",
+    botanical: "Cinnamomum zeylanicum",
+    categories: ["immune","digestive","energy","pain"],
+    properties: ["antioxidant","antibacterial","antifungal","antiviral","antiparasitic","anti-inflammatory","analgesic","warming","digestive stimulant"],
+    uses: [
+      "General stimulant for fatigue, exhaustion, rehabilitation",
+      "Athletes — energizing before training",
+      "Intestinal infections with diarrhea and bloating",
+      "Physical and mental exhaustion",
+      "Immunity strengthening",
+      "Digestive support"
+    ],
+    emotional: "Warming, strengthening, invigorating. Small doses stimulate; large doses depress — use in short periods only.",
+    methods: [
+      "Diffuser: always in small concentration (1-2 drops) with citrus oils (5-6 drops lemon, orange, grapefruit, or bergamot)",
+      "Internal: 1 drop + 1 drop lemon on neutral tablet 2x/day for intestinal infections",
+      "Internal: 1 drop ravensara + 1 drop cinnamon on neutral tablet 3x/day for exhaustion",
+      "At cold onset: 1 drop cinnamon + 1 drop clove in oil or on tablet after meals 3x/day"
+    ],
+    combinations: [
+      { oils: "Lemon", purpose: "Intestinal infection; detox blend" },
+      { oils: "Ravensara, clove", purpose: "Low morale and chronic fatigue" },
+      { oils: "Lemon, eucalyptus, rosemary, clove", purpose: "Four Thieves blend" },
+      { oils: "Neroli, rose, sandalwood, all citrus", purpose: "Harmonizing blends (from frankincense combinations)" }
+    ],
+    cautions: "Dermocaustic — high concentration of cinnamaldehyde can irritate skin and mucous membranes. Use with great care. Stimulates in small doses but causes depression in large doses. Use only for short periods."
+  },
+  {
+    name: "Lemon",
+    botanical: "Citrus limon",
+    categories: ["immune","energy","skin","digestive"],
+    properties: ["antioxidant","antibacterial","antiseptic","lymphatic tonic","anti-inflammatory","detoxifying","astringent","uplifting"],
+    uses: [
+      "Immune support — stimulates white blood cell production",
+      "Lymphatic system support",
+      "Skin brightening, reducing age spots and pigmentation",
+      "Greasy/combination skin care",
+      "Detoxification",
+      "Mental clarity and decision making",
+      "Uplifting mood, mild antidepressant",
+      "Preventing emotional outbursts",
+      "Boosting circulation"
+    ],
+    emotional: "Stimulating, reviving. Aids decision making and brings clarity when the mind is foggy. Uplifting antidepressant effect. Helps prevent emotional outbursts.",
+    methods: [
+      "Diffuser: combine with rosemary and bergamot for mood and memory",
+      "Skin mask: 5 drops + lavender + neroli for pigmentation (evenings only)",
+      "Internal: 1 drop in honey 2x/day after meals",
+      "Massage: diluted in carrier oil",
+      "Skin tonic: 5-7 drops lemon + 15ml water + 5ml 3% hydrogen peroxide"
+    ],
+    combinations: [
+      { oils: "Rosemary, bergamot", purpose: "Mood boost and memory (diffuser)" },
+      { oils: "Lavender, neroli", purpose: "Anti-pigmentation face mask" },
+      { oils: "Eucalyptus, clove, cinnamon, rosemary", purpose: "Four Thieves blend" },
+      { oils: "Mint, rosemary", purpose: "Cognitive support blend" }
+    ],
+    cautions: "Photosensitive — do not expose skin to sun for 12 hours after topical use. Take care with sensitive skin."
+  },
+  {
+    name: "Fragonija",
+    botanical: "Agonis fragrans",
+    categories: ["respiratory","immune","emotional","skin"],
+    properties: ["analgesic","anti-inflammatory","antimicrobial","antiseptic","decongestant","expectorant","immunostimulant","adaptogenic"],
+    uses: [
+      "Laryngitis, tonsillitis, upper respiratory problems (spring)",
+      "Excess mucus production",
+      "Acne, impetigo, skin infections",
+      "Candida and fungal infections",
+      "Herpes (viral)",
+      "Seasonal adaptation (spring)",
+      "Releasing past negative emotions and stress",
+      "Supporting lymph nodes (neck, groin, armpits)"
+    ],
+    emotional: "Excellent adaptogen — helps adjust to new seasons and changes. Helps release past negative emotions and stress. Can help create inner peace.",
+    methods: [
+      "Gargle: 1 tsp apple cider vinegar + 2 drops fragonija in warm water, morning and evening",
+      "Diffuser and massage oil (3%)",
+      "Compress on lymph node areas (neck, groin, armpits)",
+      "Local application for acne and skin infections",
+      "Bladder problems: in carrier oil for abdominal massage, sitz baths"
+    ],
+    combinations: [
+      { oils: "Ravensara", purpose: "Cough" },
+      { oils: "Tea tree", purpose: "Face infections" },
+      { oils: "Basil, lavender", purpose: "Bladder infection bath (in milk with water, 5 min sitz bath)" }
+    ],
+    cautions: "Generally gentle and safe. One of the milder therapeutic oils."
+  },
+  {
+    name: "Tulsi (Holy Basil)",
+    botanical: "Ocimum tenuiflorum",
+    categories: ["respiratory","immune","energy","spiritual"],
+    properties: ["antiseptic","antibacterial","anti-inflammatory","respiratory tonic","prana enhancing","concentration improving"],
+    uses: [
+      "Improving concentration and mental clarity",
+      "Protecting against infections",
+      "Tonsillitis (gargling blend)",
+      "Upper respiratory infections",
+      "Bladder infections (abdominal massage)",
+      "Joint pain (anti-inflammatory blend)",
+      "Energy and will enhancement"
+    ],
+    emotional: "In Ayurveda, purifies negative thoughts and facilitates devotion and focus. Holy basil is found in every Indian temple. Enhances prana (life force) and brings more oxygen to the body.",
+    methods: [
+      "Diffuser: for concentration and mental clarity",
+      "Daily: a drop or two on the feet for energy and willpower",
+      "Massage oil: diluted in carrier oil for joints",
+      "Gargling: 2-3 drops in baking soda + 200ml warm water for tonsillitis"
+    ],
+    combinations: [
+      { oils: "Copaiba, lavender, kurkuma (turmeric)", purpose: "Muscle stiffness blend (in almond oil)" },
+      { oils: "Oregano, frankincense, fir", purpose: "Anti-cancer support blend (Baudoux formula)" },
+      { oils: "Lavender, fragonija", purpose: "Bladder infection sitz bath" }
+    ],
+    cautions: "Avoid in pregnancy."
+  },
+  {
+    name: "Cardamom",
+    botanical: "Elettaria cardamomum",
+    categories: ["digestive","respiratory","emotional","energy"],
+    properties: ["antispasmodic","carminative","diuretic","detoxifying","expectorant","kidney tonic","anti-nausea","secretolytic"],
+    uses: [
+      "Nausea, stomach acidity",
+      "Kidney tonic and detox (especially urinary infections)",
+      "Cramps and digestive spasms",
+      "Bad breath (including garlic odor)",
+      "Hiccups and digestive problems",
+      "Spring detox of lymphatic system",
+      "Anxiety and concentration issues",
+      "Respiratory congestion (secretolytic)"
+    ],
+    emotional: "Gives courage, strength and self-confidence. Helps with concentration problems caused by anxiety and intense tension.",
+    methods: [
+      "1 drop in a teaspoon of honey in a cup of warm water before bed — promotes detox",
+      "Gargling: a few drops in olive oil to freshen breath",
+      "Diffuser: for respiratory and mental benefits",
+      "Massage oil for digestive and kidney support"
+    ],
+    combinations: [
+      { oils: "Fennel, coriander, star anise", purpose: "Digestive support and weight management" }
+    ],
+    cautions: "Generally safe. A spring-specific oil for detox and renewal."
+  },
+  {
+    name: "Coriander",
+    botanical: "Coriandrum sativum",
+    categories: ["digestive","pain","emotional"],
+    properties: ["antiseptic","antibacterial","analgesic","carminative","deodorant","choleretic","healing","immunostimulant","antispasmodic","sedative","memory improving","aphrodisiac"],
+    uses: [
+      "Gastrointestinal problems: gastralgia, colitis, gastritis, indigestion, flatulence",
+      "Gallbladder problems: dyskinesia, cholecystitis",
+      "Neurological symptoms: dizziness, epilepsy (with caution), muscle cramps",
+      "Exhaustion, reduced appetite, anorexia",
+      "Sexual impotence and frigidity",
+      "Rheumatism and muscle/joint pain",
+      "Metabolic issues and lipid metabolism support"
+    ],
+    emotional: "Low doses: sedative, relieves worry and anxiety. Higher doses: very euphoric and uplifting. Helps with depression and melancholy.",
+    methods: [
+      "Bath or massage oil for the abdomen",
+      "Combine with other oils for digestive support"
+    ],
+    combinations: [
+      { oils: "Bergamot, clove, jasmine, cardamom, lavender, lemon, mint, sandalwood, clary sage", purpose: "Compatible blending oils" }
+    ],
+    cautions: "Avoid in pregnancy. Do not use after heart attack or stroke. Do not apply to open wounds. Overdose risk: nervous system and kidney damage (anuria). Use only in low concentrations."
+  },
+  {
+    name: "Fennel",
+    botanical: "Foeniculum vulgare",
+    categories: ["digestive","hormonal","skin","emotional"],
+    properties: ["anti-inflammatory","antispasmodic","expectorant","diuretic","detoxifying","liver tonic","kidney tonic","spleen tonic","estrogenic","carminative","anti-appetite"],
+    uses: [
+      "Gas, poor digestion, hiccups, constipation",
+      "Detox: bladder and kidneys",
+      "Arthritis and rheumatism (prevents toxin buildup in joints)",
+      "Menopausal symptoms, irregular menstruation",
+      "Cellulite and fluid retention",
+      "Breast tone improvement",
+      "Post-partum milk stimulation",
+      "Post-alcohol/food detox",
+      "Cough and bronchitis",
+      "Insomnia and stress"
+    ],
+    emotional: "Reduces stress and insomnia. Provides a feeling of protection, strength and courage during emotional lows. Improves verbal self-expression and reduces fear.",
+    methods: [
+      "Massage oil (diluted) for abdomen in clockwise direction",
+      "Foot bath or full bath",
+      "1 drop in honey in tea",
+      "Hot tonic bath: 10 drops fennel + 3 drops clove for gout/lumbago",
+      "Sitz bath for cystitis and prostatitis"
+    ],
+    combinations: [
+      { oils: "Clove", purpose: "Gout/lumbago bath" },
+      { oils: "Cardamom, coriander, star anise", purpose: "Digestive and weight support" }
+    ],
+    cautions: "Do not use if you have hormone-dependent tumors. Do not use in epilepsy. Avoid with liver damage, alcoholism history, or long-term paracetamol use. Not for use during pregnancy.",
+    keyCompound: "Active against Aspergillus flavus and Penicillium italicum — researched as food preservative"
+  },
+  {
+    name: "Black Cumin",
+    botanical: "Nigella sativa",
+    categories: ["immune","respiratory","digestive","skin","pain"],
+    properties: ["immunostimulant","antibacterial","antiviral","anti-inflammatory","analgesic","antihistamine","antifungal","antihypertensive","antidiabetic"],
+    uses: [
+      "Bronchial asthma, cough, respiratory diseases",
+      "Influenza and flu immunity",
+      "Fever reduction",
+      "Rhinitis (runny nose)",
+      "Ear infection (otitis media)",
+      "High blood pressure",
+      "Allergies",
+      "Stomach ulcers",
+      "Diarrhea",
+      "Intestinal worms and parasites",
+      "Bloating and gas",
+      "Hemorrhoids",
+      "Rheumatism and muscle pain",
+      "Skin conditions: eczema, psoriasis, acne, herpes, ringworm",
+      "Memory improvement",
+      "Prostatitis",
+      "Insomnia",
+      "Hair loss prevention"
+    ],
+    emotional: "General strengthening and immune support.",
+    methods: [
+      "Bronchial/respiratory: 1 tsp 2x/day for 7 days; rub chest and back",
+      "Flu: 1 tsp 2x/day (30 min before breakfast and dinner)",
+      "Fever: 8 drops in cup of tea or mint infusion, 3x/day",
+      "Rhinitis: apply externally to nose; insert cotton swab soaked in oil for 5-7 min",
+      "Ear infection: place cotton soaked in oil in ear for 1 hour",
+      "Blood pressure: 100ml black cumin + 100ml lemon juice + 100ml honey, rest 2 hours, 1 tbsp 2x/day",
+      "Hair mask: warm oil on full hair length, plastic cap + towel, 1 hour, wash out with shampoo"
+    ],
+    combinations: [
+      { oils: "Linseed oil", purpose: "Stomach ulcer: 1 tbsp each, 2x/day before meals" },
+      { oils: "Kefir", purpose: "Diarrhea: 0.5 cup kefir + 1 tbsp black cumin, morning and evening for 3 days" },
+      { oils: "Pumpkin seed oil", purpose: "Prostatitis: 1 tsp each 2x/day" },
+      { oils: "Sesame oil, linseed oil", purpose: "Skin conditions: equal parts mixture" }
+    ],
+    cautions: "This is a carrier/vegetable oil used therapeutically, not a distilled essential oil. Use the amounts as described — teaspoons, not drops."
+  },
+  {
+    name: "Oregano",
+    botanical: "Origanum vulgare",
+    categories: ["immune","respiratory","digestive","pain","skin"],
+    properties: ["antibacterial","antiviral","antifungal","antiseptic","immunostimulant","antiparasitic","analgesic","anti-inflammatory","diaphoretic"],
+    uses: [
+      "Respiratory infections: bronchitis, pneumonia, whooping cough, tuberculosis",
+      "Mouth, gum and throat infections",
+      "Bacterial and viral infections",
+      "Chronic rheumatism and muscle pain",
+      "Skin: warts, infected wounds, insect bites, cellulite",
+      "Deafness, ear pain or tinnitus, migraines",
+      "Nervous stomach disorders, intestinal spasm",
+      "Bloating, loss of appetite",
+      "Menstrual problems"
+    ],
+    emotional: "Corrects, liberates and awakens the spirit. Normalizes intention. Helps with mental illness, facial tics, feelings of insecurity.",
+    methods: [
+      "Internal in olive oil: strengthens immune system",
+      "Capsules of oregano oil with olive oil",
+      "Diluted topical application to skin (avoid sensitive or damaged skin)"
+    ],
+    combinations: [
+      { oils: "Turmeric, frankincense, fir, Greenlandic moss", purpose: "Anti-cancer support (Baudoux formula)" }
+    ],
+    cautions: "Do NOT use on sensitive, diseased or damaged skin. Do not use on children under 2. Can cause extreme skin irritation. Only use in small quantities for short periods for acute bacterial infections. Long-term use can disrupt liver metabolism due to high phenol content. Can be toxic to kidneys and nerves.",
+    fiveElements: "Metal, Fire, Earth. Chakras: 4th (primarily) and 3rd"
+  },
+  {
+    name: "Tea Tree",
+    botanical: "Melaleuca alternifolia",
+    categories: ["immune","skin","respiratory","emotional","hair"],
+    properties: ["antibacterial","antifungal","antiviral","antiseptic","immunostimulant","anti-inflammatory"],
+    uses: [
+      "Skin infections, acne, herpes",
+      "Fungal infections",
+      "Scalp issues: dandruff, itching, lice",
+      "Hair loss related to infections",
+      "Bladder infections (abdominal compress)",
+      "Dry eyes and poor vision (navel application)",
+      "Navel application for general health"
+    ],
+    emotional: "Source of intellectual agility. Activates perception and memory processes. Helps quickly redirect attention between activities — perfect stimulator for multi-tasking. Emotional antiseptic — destroys 'viral' emotions like hysteria and panic. Develops independence and fast decision-making in complicated situations.",
+    methods: [
+      "Add to shampoo for scalp treatment",
+      "Diluted in carrier oil for skin infections",
+      "Navel application for dry eyes, joint pain, general health",
+      "Inhalation for respiratory benefit"
+    ],
+    combinations: [
+      { oils: "Ravensara, melissa", purpose: "Herpes simplex treatment blend" },
+      { oils: "Cedar, rosemary", purpose: "Scalp and dandruff treatment (add to shampoo)" }
+    ],
+    cautions: "Generally safe. Do not apply undiluted to large skin areas."
+  },
+  {
+    name: "Ravensara",
+    botanical: "Cinnamomum camphora",
+    categories: ["immune","respiratory","emotional","energy"],
+    properties: ["antibacterial","antiviral","antifungal","antiseptic","non-toxic","adaptogenic","immunostimulant"],
+    uses: [
+      "Viral hepatitis, infectious mononucleosis",
+      "Herpes (with eucalyptus)",
+      "Colds and flu (first signs of fever, chills or fatigue)",
+      "Bronchitis, pneumonia, sinusitis, rhinopharyngitis",
+      "Skin infections",
+      "Children (very safe)",
+      "Depression and psychosomatic conditions"
+    ],
+    emotional: "Ancient panacea — 'the tree with good leaves.' Brings out the best in people. Helps wake from depression and psychosomatic states. When used consciously with personal effort, helps align the physical body with higher human virtues. Helps people find their way to accept responsibility and do the right thing.",
+    methods: [
+      "Diffuser",
+      "Massage oil: diluted in carrier oil",
+      "Roll-on: 5 drops ravensara + 5 drops sweet orange in 10ml jojoba — use as perfume and under nose for antiviral protection"
+    ],
+    combinations: [
+      { oils: "Mint", purpose: "Nervous fatigue with anxiety and depression in self-doubters" },
+      { oils: "Lavender", purpose: "Spinal massage for relaxation and invigoration" },
+      { oils: "Cinnamon, clove", purpose: "Low morale and chronic fatigue (also cancer prevention)" },
+      { oils: "Fragonija", purpose: "Cough" },
+      { oils: "Eucalyptus", purpose: "Herpes" },
+      { oils: "Black pepper, lemon eucalyptus", purpose: "Painful joints" }
+    ],
+    cautions: "One of the safest, most versatile oils. No known toxicity. Always use at first sign of fever, chills or fatigue, especially in children."
+  },
+  {
+    name: "Lemongrass",
+    botanical: "Cymbopogon citratus / Cymbopogon flexuosus",
+    categories: ["pain","skin","emotional","energy","digestive"],
+    properties: ["analgesic","anti-inflammatory","sedative","antifungal","antibacterial","insect repellent","revitalizing","detoxifying"],
+    uses: [
+      "Rheumatism, arthritis, muscle and joint pain",
+      "Slow digestion improvement",
+      "Herpes and acne",
+      "Cellulite",
+      "Insect repellent",
+      "Stress and anxiety reduction",
+      "Depression and mental fatigue",
+      "Hair health improvement",
+      "Household cleaning and deodorizing"
+    ],
+    emotional: "Cleansing and purifying on a deep level. Reduces irritability and stress. Unblocks and clears emotional blockages, releasing bitterness. Excellent for clearing negative thoughts and fatigue. Stimulates, revitalizes, renews and calms. Solar plexus chakra.",
+    methods: [
+      "Massage oil for joints and muscles",
+      "Diffuser: 5 drops lemongrass + 2-3 drops bergamot + 2 drops lemon for energy",
+      "Leg cramps: 10 drops lemongrass + 10 drops mint + 5 drops eucalyptus + 5 drops basil in 30ml almond oil",
+      "Cleaning spray: add to vinegar and water",
+      "Insect repellent: dilute in oil or alcohol for skin application",
+      "Add to shampoo for hair health"
+    ],
+    combinations: [
+      { oils: "Bergamot, lemon", purpose: "Energy boost diffuser blend" },
+      { oils: "Mint, eucalyptus, basil", purpose: "Muscle cramp massage oil" },
+      { oils: "Neroli, orange, ylang-ylang", purpose: "Relaxing massage blend (in sweet almond oil)" }
+    ],
+    cautions: "Contains ~80% terpene aldehydes — can irritate skin and mucous membranes. Always dilute. Use in low concentrations.",
+    keyCompound: "Citral (anti-inflammatory, antimicrobial), geraniol (antioxidant, insect repellent), limonene (mood lifting), citronellal (repellent), myrcene (relaxing, sedative)"
+  },
+  {
+    name: "Grapefruit",
+    botanical: "Citrus paradisi",
+    categories: ["emotional","skin","energy","pain"],
+    properties: ["uplifting","euphoric","astringent","draining","lymphatic stimulant","detoxifying","anti-cellulite","analgesic","antioxidant"],
+    uses: [
+      "Stress, nervous irritability, nervous exhaustion",
+      "Depression, anxiety, puberty crises",
+      "Appetite control and emotional eating",
+      "Oily and combination skin — tightens enlarged pores",
+      "Cellulite treatment",
+      "Sports recovery — muscle tension, tendons, ligaments",
+      "Preventing post-workout muscle inflammation",
+      "Fluid retention and swelling",
+      "Workplace or study environment air freshening"
+    ],
+    emotional: "Powerful uplifting and euphoric effect — like an invitation to dance. Symbol of freshness and vitality. Helps with bad moods, listlessness, when 'all ships have sunk.' Ideal for workplaces and children's study areas: cleans air, improves concentration and motivation.",
+    methods: [
+      "Diffuser: mood lift, concentration, air purification",
+      "Skin mask/tonic (avoid sun exposure for 12 hours — photosensitive)",
+      "Cellulite massage: 3ml grapefruit in 100ml apricot kernel oil, 2x/day",
+      "Sports bath or compress after training",
+      "Roll-on with black pepper: 3 drops each on tissue, inhale at nicotine craving"
+    ],
+    combinations: [
+      { oils: "Black pepper", purpose: "Nicotine craving relief (inhalation)" },
+      { oils: "Lemon eucalyptus", purpose: "Cellulite massage" }
+    ],
+    cautions: "Photosensitive — do not expose skin to sun for 12 hours after topical use. Take care with sensitive skin."
+  },
+  {
+    name: "Clary Sage",
+    botanical: "Salvia sclarea",
+    categories: ["hormonal","emotional","skin","sleep","hair"],
+    properties: ["estrogenic","antispasmodic","antiseptic","deodorant","anti-perspiration","sedative","libido enhancing","uterine tonic"],
+    uses: [
+      "PMS and menstrual cramps",
+      "Menopausal symptoms (hot flashes, valungs)",
+      "Hormonal cycle regulation",
+      "Anxiety, panic, insomnia, nervous exhaustion, nightmares",
+      "Excessive sweating / hyperhidrosis",
+      "Oily skin (regulates sebum production)",
+      "Hair care: seborrhea, scalp regulation",
+      "Libido enhancement",
+      "Addiction support (drugs and medications)"
+    ],
+    emotional: "Faithful companion for women — awakens feminine energy, creativity and intuition. Normalizes mood and hormonal balance. Said to 'open the third eye', improves intuition and helps deepen meditation. Reduces anxiety, panic, insomnia, nervous exhaustion, nightmares and fears.",
+    methods: [
+      "Diffuser: relaxing, helps depression, bad moods, anxiety, nervousness, insomnia",
+      "Bath: sensual bath that improves libido",
+      "Massage oil: dysmenorrhea — 5 drops in 1 tsp almond oil, massage lower abdomen",
+      "Foot bath for menopause hot flashes: with geranium",
+      "Skin: 10 drops clary sage + 5 drops rose in 10ml almond oil, apply to face at night",
+      "Hair mask: 2 tbsp jojoba + 8 drops clary sage, massage scalp, leave 2 hours, wash"
+    ],
+    combinations: [
+      { oils: "Rose, ylang-ylang, jasmine, neroli", purpose: "Women's blends for femininity" },
+      { oils: "Geranium", purpose: "Menopausal foot baths" },
+      { oils: "Cedar", purpose: "Sleep blend (3 drops clary sage + 2 drops cedar in liquid bath base)" },
+      { oils: "Frankincense, bergamot, jasmine, ylang-ylang", purpose: "Spring allergy / emotional release blend" }
+    ],
+    cautions: "P. Holmes states clary sage has estrogenic effect and stimulates ovaries. Not to be used by those with hormone-dependent tumors. Safe for children and pregnant women as a relaxant (in small amounts for relaxation only — check with provider for pregnancy use)."
+  },
+  {
+    name: "Neroli",
+    botanical: "Citrus aurantium (flowers)",
+    categories: ["emotional","skin","hormonal","sleep"],
+    properties: ["calming","hypnotic","antispasmodic","aphrodisiac","antidepressant","uplifting","anti-anxiety","regenerating","skin tonic"],
+    uses: [
+      "High sensitivity and reactivity (blushing, palpitations, chest spasms)",
+      "Chronic anxiety, timidity, depression, panic attacks, hysteria",
+      "Chronic diarrhea due to nerves",
+      "PMS cramps and stomach spasms",
+      "Preventing and fading stretch marks",
+      "Post-traumatic stress",
+      "Insomnia",
+      "Skin regeneration — all skin types",
+      "Improving skin elasticity"
+    ],
+    emotional: "Gentle, fresh, calming, mildly hypnotic. Lifts confidence, initiative and optimism. Encourages and brings joy. Helps overcome shame, chronic anxiety, despondency, shock, despair. Overcomes panic attacks and hysteria. Always reminds of the beauty and purity of youth — you can always return to that place.",
+    methods: [
+      "Perfume, diffuser",
+      "Massage oil for stretch marks: 10 drops neroli + 10 drops orange + 5 drops mint in 10ml almond oil",
+      "Relaxing massage blend: 10 drops neroli + 5 drops orange + 5 drops lemongrass + 5 drops ylang-ylang in 50ml sweet almond oil",
+      "Hand massage: 2-3 drops undiluted on inner wrist, rub wrists together, inhale deeply"
+    ],
+    combinations: [
+      { oils: "Rose, geranium, vetiver", purpose: "Panic attack blend" },
+      { oils: "Orange, lemongrass, ylang-ylang", purpose: "Full-body relaxing massage (50ml almond oil)" },
+      { oils: "Orange, mint", purpose: "Stretch mark prevention (in almond oil)" },
+      { oils: "Bergamot, cedar", purpose: "Emotional stability blend (2 drops each in diffuser)" },
+      { oils: "Clary sage, orange", purpose: "Aromatic bath blend (with salt)" }
+    ],
+    cautions: "Very safe. Suitable for children and pregnant women. Excellent for prevention of stretch marks in pregnancy."
+  },
+  {
+    name: "Vetiver",
+    botanical: "Chrysopogon zizanioides",
+    categories: ["emotional","sleep","pain","spiritual"],
+    properties: ["grounding","sedative","anxiolytic","analgesic","immunostimulant","calming","pain-reducing"],
+    uses: [
+      "Anxiety, sadness, insomnia",
+      "Headaches and pain perception reduction",
+      "Deep relaxation and better sleep",
+      "Daytime tension and restlessness",
+      "Immune system strengthening",
+      "Emotional stabilization during stress"
+    ],
+    emotional: "Sweet, earthy scent. Grounding — like earth itself. Releasing calming neurotransmitters that reduce anxiety, reduce pain perception and bring peace and relaxation. A powerful, comforting aroma for shock, panic, trauma and prolonged sadness. Provides a sense of being rooted and safe.",
+    methods: [
+      "Inhale from bottle — 3-5 times for panic attacks",
+      "Diffuser: with lavender, mint, geranium, melissa",
+      "Massage blend: 20 drops geranium + 20 drops lavender + 10 drops vetiver + 50 drops sweet almond oil — solar plexus and wrists 3x/day for a month"
+    ],
+    combinations: [
+      { oils: "Lavender, mint, geranium, melissa", purpose: "Diffuser blends for anxiety and sleep" },
+      { oils: "Bergamot", purpose: "Confidence and self-love blend" },
+      { oils: "Geranium, lavender", purpose: "General anxiety blend for solar plexus and wrists" },
+      { oils: "Neroli, rose, geranium", purpose: "Panic attack blend" },
+      { oils: "Cedar, bergamot, grapefruit, orange, lemon", purpose: "Personal anti-anxiety mix" }
+    ],
+    cautions: "Very safe. Deep, earthy scent — best used in small amounts in blends as it can be overpowering."
+  },
+  {
+    name: "Jasmine",
+    botanical: "Jasminum officinale / grandiflorum",
+    categories: ["emotional","hormonal","spiritual"],
+    properties: ["aphrodisiac","antidepressant","euphoric","uterine supportive","uplifting","sensual"],
+    uses: [
+      "Sexual desire and sensuality",
+      "Childbirth support (strong support for new life)",
+      "Seeing more clearly and understanding growth",
+      "Emotional clarity and openness",
+      "Depression and lack of energy",
+      "Hormonal/feminine energy"
+    ],
+    emotional: "The scent of longing, of dreaming of love. The scent of strength for love to grow and endure. Used in childbirth as strong support for bringing pure love into the world. Helps see clearly and understand that we grow throughout life. In Sufism, fragrance is connected to fire — jasmine helps discover all sides of sexuality, its beauty and difficulties, and then transcend them.",
+    methods: [
+      "2 drops on inner wrists, rub together, inhale deeply 5 times",
+      "Diffuser",
+      "Perfume application"
+    ],
+    combinations: [
+      { oils: "Frankincense, bergamot, clary sage, ylang-ylang", purpose: "Spring allergy / emotional release blend (applied to heart chakra area)" },
+      { oils: "Coriander, cardamom, sandalwood", purpose: "Aphrodisiac blends" }
+    ],
+    cautions: "True jasmine absolute is expensive and potent — use sparingly. Generally safe."
+  },
+  {
+    name: "Rose",
+    botanical: "Rosa damascena",
+    categories: ["emotional","skin","spiritual","hormonal"],
+    properties: ["antidepressant","antianxiety","hormone balancing","skin regenerating","neuroprotective","aphrodisiac","uplifting","cooling (Ayurveda)"],
+    uses: [
+      "Fear, jealousy, mistrust, doubt — transforming to courage and creativity",
+      "Depression and grief",
+      "PMS and nervous tension",
+      "Skin regeneration and anti-aging",
+      "Rosacea (rosehip oil — strengthens blood vessel walls)",
+      "Pigmentation (in face mask blends)"
+    ],
+    emotional: "Symbol of love and beauty. Transforms fear into love. Brings lightness, can instill deep devotion and inspiration. Rose is like Sleeping Beauty awakening — we can create anew. According to one study, women who wore rose essential oil for 30 days showed significant increase in gray matter volume across the whole brain (MRI confirmed). Ayurveda: cooling effect on hot emotional states. With sandalwood: spreads joy and calm, helps PMS-related depression.",
+    methods: [
+      "Diffuser: 2 drops rose + 2 drops sandalwood for joy and calm",
+      "Massage blend: 3 drops copaiba + 2 drops rose + 2 drops sandalwood on inner wrist",
+      "Anti-pigmentation mask: with lemon, lavender, neroli",
+      "Hand massage with lavender and sweet orange for connection",
+      "Anti-aging cream: add to any cream base"
+    ],
+    combinations: [
+      { oils: "Sandalwood", purpose: "Joy, calm, PMS support (diffuser)" },
+      { oils: "Copaiba, sandalwood", purpose: "Emotional support blend (inner wrist)" },
+      { oils: "Frankincense", purpose: "Support for those who feel victimized / blocked self-love" },
+      { oils: "Neroli, geranium, vetiver", purpose: "Panic attack blend" },
+      { oils: "Clary sage", purpose: "Evening facial blend for oily skin" }
+    ],
+    cautions: "True rose essential oil is very expensive — ensure quality. Generally very safe and gentle."
+  },
+  {
+    name: "Frankincense",
+    botanical: "Boswellia serrata / carterii / sacra",
+    categories: ["spiritual","emotional","respiratory","skin","pain","immune"],
+    properties: ["antiseptic","antistress","antitoxic","analgesic","carminative","healing","immunostimulant","diuretic","expectorant","uterine tonic","sedative","antispasmodic","cytophylactic","anti-aging"],
+    uses: [
+      "Chronic bronchitis, bronchial asthma, cough, colds, laryngitis",
+      "Gastrointestinal spasms, indigestion",
+      "Urinary tract infections (cystitis)",
+      "Heavy menstruation, uterine bleeding",
+      "Headache, migraine, dizziness, nervousness, depression, anxiety, obsessive memories",
+      "Infected wounds, burns, skin conditions (dermatitis, mature skin, wrinkles)",
+      "Meditation and spiritual practice",
+      "Joint and muscle tension"
+    ],
+    emotional: "Supports spiritual quest for meaning. Feeling of divine presence and blessing. Serenity and connection with what matters. Calms obsessive thoughts and cultivates optimism. In meditation: dense, penetrating aroma evokes stability and introspection. Connects with the energy of spiritual fire that transforms and purifies.",
+    methods: [
+      "Diffuser: 10 drops for meditation space",
+      "Tissue inhalation: 1-3 drops for introspection and grounding",
+      "Space clearing spray: 50 drops in 50ml alcohol + 50ml water",
+      "Massage: 6 drops in 1 tbsp carrier oil — muscle tension, joint pain, chest for asthma",
+      "Skin cream: 3-5 drops in 15ml cream for regeneration and anti-aging",
+      "Hair: 20 drops in 100ml shampoo for scalp revitalization",
+      "Meditation beads: apply to mala or rosary"
+    ],
+    combinations: [
+      { oils: "Cinnamon, neroli, rose, sandalwood, all citrus", purpose: "Harmonizing blends" },
+      { oils: "Bergamot, clary sage, jasmine, ylang-ylang", purpose: "Spring allergy / emotional release blend" },
+      { oils: "Rose", purpose: "Victim mentality / blocked self-love support" },
+      { oils: "Turmeric, oregano, fir", purpose: "Anti-cancer support (Baudoux formula)" }
+    ],
+    cautions: "Avoid in pregnancy. Contraindicated in early infancy and epilepsy. Different species (Boswellia carterii, sacra, frereana, serrata) have different aromatic profiles.",
+    keyCompound: "Boswellic acids (anti-inflammatory) — present in the resin, some in the oil. Alpha-pinene, limonene (monoterpenes); alpha-gurjunene, guaiene (sesquiterpenes)"
+  },
+  {
+    name: "Sandalwood",
+    botanical: "Santalum album",
+    categories: ["spiritual","emotional","skin","respiratory"],
+    properties: ["anti-inflammatory","antiseptic","antispasmodic","sedative","aphrodisiac","harmonizing","skin toning","urinary tonic","fixative (perfumery)"],
+    uses: [
+      "Genital and urinary infections",
+      "Digestive problems",
+      "Dry cough, persistent cough, throat irritation",
+      "Laryngitis",
+      "Nervous disorders, depression, anxiety",
+      "Dry and cracked skin, rashes, acne",
+      "Meditation and spiritual practice",
+      "Bladder infections (as Ayurvedic #1 for 'cooling hot inflammation')"
+    ],
+    emotional: "Ancient use in Eastern spiritual traditions. Aids meditation — calms and focuses the mind. Reminds of fragrant realms of heaven. Sandalwood deities are placed in shrines; sandalwood paste used in fire ceremonies. A drop or two on forehead, temples or between eyebrows before meditation sets intention and prepares mind for inner journey. With rose in diffuser: spreads joy and calm.",
+    methods: [
+      "Diffuser: 2 drops sandalwood + 2 drops rose for joy and calm",
+      "Pre-meditation: 1-2 drops on forehead, temples, or between eyebrows",
+      "Massage: diluted in carrier oil",
+      "Bladder/UTI: abdominal massage in carrier oil",
+      "Perfumery: base note and fixative, combines with florals and citrus"
+    ],
+    combinations: [
+      { oils: "Rose", purpose: "Joy and calm diffuser blend" },
+      { oils: "Copaiba, rose", purpose: "Emotional support blend" },
+      { oils: "Jasmine, star anise, cinnamon", purpose: "Anti-anxiety personal blend" }
+    ],
+    cautions: "True sandalwood (Santalum album) is endangered and expensive. Ensure ethical sourcing. Generally very safe."
+  },
+  {
+    name: "Lemon Eucalyptus",
+    botanical: "Eucalyptus citriodora",
+    categories: ["pain","skin","immune","energy"],
+    properties: ["analgesic","anti-inflammatory","antifungal","antibacterial","insect repellent","sedative (mild)","antipyretic","antihypertensive (mild)"],
+    uses: [
+      "Insect repellent (mosquitoes, ticks, flies)",
+      "Tendinitis, sciatica, arthritis, joint and muscle pain",
+      "Fever (foot massage oil)",
+      "Fungal skin infections",
+      "Skin infections and inflammation with eczema and itching",
+      "Cellulite treatment",
+      "Menstrual pain (abdominal massage)",
+      "Lowering blood pressure (mild, via aromatherapy)"
+    ],
+    emotional: "In mild concentrations: deeply relaxing, calms negative thoughts. Said to help lower blood pressure.",
+    methods: [
+      "Insect repellent: dilute in oil or alcohol, spray or apply to skin",
+      "Diffuser on terrace or patio",
+      "Massage oil for pain: dilute in almond oil, massage several times daily",
+      "Fever: dilute and massage into feet",
+      "Helichrysum + lemon eucalyptus + mint in avocado oil: for sprains and tendon problems"
+    ],
+    combinations: [
+      { oils: "Ravensara, black pepper", purpose: "Painful joints" },
+      { oils: "Helichrysum, mint", purpose: "Sprains and tendon problems (in avocado oil)" },
+      { oils: "Copaiba, turmeric", purpose: "Knee pain massage oil" }
+    ],
+    cautions: "Avoid direct contact with eyes. Do not use undiluted. Safe as insect repellent (CDC-approved active ingredient citronellal)."
+  },
+  {
+    name: "Geranium",
+    botanical: "Pelargonium graveolens",
+    categories: ["skin","hormonal","emotional","hair","pain"],
+    properties: ["healing","toning","anti-inflammatory","astringent","antiseptic","antifungal","lymphatic stimulant","hormone balancing","antidepressant"],
+    uses: [
+      "Small skin lesions: cuts, burns, herpes, folliculitis",
+      "Oily and acne-prone skin",
+      "Skin fungal infections",
+      "Fluid retention, venous and lymphatic stasis",
+      "Cellulite",
+      "Stretch mark prevention",
+      "Oral ulcers (aphthae) — diluted in olive oil",
+      "Gingivitis and pharyngitis (gargling)",
+      "Breast congestion / insufficient milk",
+      "Scalp dryness and hair loss prevention",
+      "Excessive sebum regulation",
+      "Anemias (with lemon — helps stop heavy bleeding)",
+      "Reducing dark circles under eyes"
+    ],
+    emotional: "Balancing for psycho-emotional problems. Particularly indicated for skin and emotional issues together.",
+    methods: [
+      "Compress, rinses, oils for skin conditions",
+      "Bath or massage for lymphatic support (legs upward toward groin)",
+      "2 drops in olive oil/honey/propolis for mouth ulcers",
+      "Gargling for gingivitis/pharyngitis",
+      "Warm compress for breast congestion",
+      "Add to shampoo or scalp massage oil"
+    ],
+    combinations: [
+      { oils: "Lavender, vetiver", purpose: "Anxiety blend (20 drops each geranium+lavender, 10 drops vetiver in 50ml almond oil)" },
+      { oils: "Neroli, rose, vetiver", purpose: "Panic attack blend" },
+      { oils: "Clary sage", purpose: "Menopausal foot baths and hormonal support" },
+      { oils: "Melissa", purpose: "Herpes treatment" }
+    ],
+    cautions: "Generally safe. Can cause skin sensitization in some individuals."
+  },
+  {
+    name: "Lavender",
+    botanical: "Lavandula angustifolia",
+    categories: ["emotional","sleep","pain","skin","respiratory","immune"],
+    properties: ["calming","balancing","antidepressant","analgesic","antiseptic","anti-inflammatory","antispasmodic","healing"],
+    uses: [
+      "Insomnia",
+      "Anxiety, stress, tension",
+      "Headaches and pain",
+      "Colds and flu",
+      "Skin healing (burns, cuts, wounds)",
+      "Eczema and itching",
+      "Hair loss support"
+    ],
+    emotional: "Calming, soothing and balancing antidepressant. Most versatile essential oil. Helpful for insomnia. One of the two essential oils (with ravensara) considered truly universal — safe for all ages.",
+    methods: [
+      "Diffuser",
+      "Massage: 3 drops lavender + 3 drops sweet orange in 20ml grapeseed oil for hands and feet",
+      "Bath: combined with other relaxing oils",
+      "On pillow or in room before sleep",
+      "Topical for skin (can be used undiluted in small amounts)",
+      "Scalp massage in carrier oil for hair support"
+    ],
+    combinations: [
+      { oils: "Rosemary", purpose: "Anxiety reduction; spinal massage" },
+      { oils: "Sweet orange", purpose: "Connecting massage blend; insomnia" },
+      { oils: "Ravensara", purpose: "Spinal relaxation massage" },
+      { oils: "Geranium, vetiver", purpose: "Anti-anxiety massage blend" },
+      { oils: "Frankincense, clary sage, jasmine, ylang-ylang", purpose: "Spring emotional release blend" }
+    ],
+    cautions: "One of the safest oils available. Safe for children, pregnancy, and elderly."
+  },
+  {
+    name: "Peppermint",
+    botanical: "Mentha piperita",
+    categories: ["pain","respiratory","energy","digestive","emotional","skin","hair"],
+    properties: ["analgesic","anti-inflammatory","antispasmodic","cooling","antibacterial","antifungal","vasodilating","stimulant","expectorant"],
+    uses: [
+      "Headaches and migraines (topical)",
+      "Muscle and joint pain",
+      "Scalp itching — most important oil for itching",
+      "Hair growth stimulation",
+      "Nausea",
+      "Lethargy and tiredness",
+      "Improving concentration",
+      "Fever reduction (foot massage)",
+      "Respiratory problems (inhalation)",
+      "Leg cramps"
+    ],
+    emotional: "As a psychostimulant: combats fatigue and listlessness. Cooling and clearing.",
+    methods: [
+      "Dilute in carrier oil for itching — apply directly or in spray bottle with alcohol",
+      "Foot massage for fever",
+      "Inhale from tissue for headaches",
+      "Add to shampoo for scalp and hair growth",
+      "Roll-on or massage for muscle pain"
+    ],
+    combinations: [
+      { oils: "Lavender", purpose: "Anxiety (diffuser blend with rosemary)" },
+      { oils: "Lemon eucalyptus, helichrysum", purpose: "Sprains and tendon problems" },
+      { oils: "Ravensara", purpose: "Nervous fatigue with anxiety and depression" },
+      { oils: "Lemongrass, eucalyptus, basil", purpose: "Leg cramp massage" },
+      { oils: "Rosemary, basil", purpose: "Hair growth treatment" }
+    ],
+    cautions: "Strong oil. Do not apply near the face of infants or young children. Always dilute for skin use."
+  },
+  {
+    name: "Black Pepper",
+    botanical: "Piper nigrum",
+    categories: ["energy","immune","pain","digestive"],
+    properties: ["stimulant","warming","analgesic","antibacterial","antioxidant","digestive","spleen stimulant","anti-anemia"],
+    uses: [
+      "Complete exhaustion and fatigue (especially anemia-related)",
+      "Stimulating spleen for new blood cell production",
+      "Muscle pain (warming)",
+      "Digestive support",
+      "Nicotine craving reduction (inhalation)",
+      "Detox and energy activation"
+    ],
+    emotional: "Stimulates and warms the organism. Helps with sense of complete exhaustion often present in anemia.",
+    methods: [
+      "Nicotine craving: 3 drops black pepper + 3 drops grapefruit on tissue, inhale deeply",
+      "Inhalation (dry): 2-minute dry inhalation from paper towel when nicotine craving appears",
+      "Bath: 2 drops black pepper + 2 drops lemon in half cup salt in 37-38°C bath for 10 min",
+      "Massage oil for painful areas"
+    ],
+    combinations: [
+      { oils: "Grapefruit", purpose: "Nicotine craving inhalation" },
+      { oils: "Lemon", purpose: "Invigorating bath for exhaustion/anemia" },
+      { oils: "Ravensara, lemon eucalyptus", purpose: "Painful joints" }
+    ],
+    cautions: "Stimulating — use in moderation. Can irritate skin if undiluted."
+  },
+  {
+    name: "Copaiba",
+    botanical: "Copaifera officinalis",
+    categories: ["pain","skin","emotional","respiratory","immune"],
+    properties: ["anti-inflammatory","analgesic","antiseptic","antibacterial","antiviral","antifungal","expectorant","antitumor","relaxing","fixative (perfumery)"],
+    uses: [
+      "All inflammatory processes",
+      "Bone, muscle and joint pain",
+      "Migraines (massage + inhalation)",
+      "Respiratory infections (inhalation, chest massage)",
+      "Urogenital tract inflammation (abdominal massage, sitz baths)",
+      "Skin healing: wounds, cuts, acne scars, stretch marks, dermatitis, psoriasis",
+      "Reducing blood pressure",
+      "Anxiety and stress reduction",
+      "Cancer support (in vitro research: increases chemotherapy absorption, direct cytotoxic effect on tumor cells)"
+    ],
+    emotional: "Deep, woody aroma promotes relaxation, centering and focus. Helps with mental and emotional organization especially during instability or stress. Historically used by Amazonian shamans for healing wounds and inflammatory skin conditions. Also used in protective ointments and ancestral healing rituals.",
+    methods: [
+      "Diffuser: with bergamot for stress and anxiety",
+      "Massage: diluted in carrier oil for pain",
+      "Skin: diluted in rosehip seed oil for scars, stretch marks, psoriasis",
+      "Abdominal massage for urogenital issues"
+    ],
+    combinations: [
+      { oils: "Bergamot", purpose: "Stress and anxiety (diffuser)" },
+      { oils: "Rose, sandalwood", purpose: "Emotional support blend (inner wrist)" },
+      { oils: "Lemon eucalyptus, turmeric, tulsi", purpose: "Knee pain massage (in jojoba)" },
+      { oils: "Turmeric, lavender, tulsi", purpose: "Muscle stiffness blend" }
+    ],
+    cautions: "Generally safe. High beta-caryophyllene content — binds to CB2 endocannabinoid receptors. Anti-inflammatory effect similar to cannabinoids. Effective against Staphylococcus aureus, Pseudomonas aeruginosa, Candida albicans.",
+    keyCompound: "Beta-caryophyllene — binds CB2 endocannabinoid receptors; highest percentage of sesquiterpenes among known essential oils"
+  },
+  {
+    name: "Myrrh",
+    botanical: "Commiphora myrrha",
+    categories: ["spiritual","emotional","pain","skin"],
+    properties: ["analgesic","healing","calming","invigorating","anti-inflammatory","antiseptic"],
+    uses: [
+      "Pain and wound healing",
+      "Weakness, apathy, discouragement",
+      "Restless and irritated states",
+      "Spiritual and ritual use"
+    ],
+    emotional: "One of the three gifts to the infant Jesus (myrrh, gold, frankincense). Symbolically: protection from bitterness of being through the mind. Myrrh wine was offered to Christ on the cross to ease suffering (and refused). Invigorating effect in cases of weakness, apathy and discouragement. Calming in restless, irritated states.",
+    methods: [
+      "Diffuser",
+      "Massage oil (diluted)",
+      "Spiritual/ritual practice"
+    ],
+    combinations: [
+      { oils: "Cedar", purpose: "Anxiety with tendency to give up / lack of perseverance" }
+    ],
+    cautions: "Avoid in pregnancy."
+  },
+  {
+    name: "Basil",
+    botanical: "Ocimum basilicum",
+    categories: ["energy","digestive","respiratory","emotional","hair"],
+    properties: ["stimulant","adrenal cortex stimulant","antibacterial","antispasmodic","carminative","cephalic","analgesic","anti-insomnia"],
+    uses: [
+      "Mental and physical exhaustion from hard work",
+      "Insomnia, poor concentration, headaches",
+      "Mild depression",
+      "Hair loss prevention and strengthening follicles",
+      "Reduced sense of smell (anosmia) — post-infection",
+      "Nasal polyps, dizziness",
+      "Digestive problems: indigestion, hiccups",
+      "Gout and painful menstrual cycles (abdominal massage)",
+      "Upper respiratory infections (inhalation)"
+    ],
+    emotional: "Has effect of stimulating adrenal cortex — useful for states of exhaustion from heavy psychic and physical work.",
+    methods: [
+      "Massage oil for back, neck and abdomen",
+      "Inhalation: 1 tsp baking soda + 2 drops basil + 2 drops eucalyptus + 3 drops lemon in hot water, 3-5 min, 2x/day for anosmia",
+      "Activation: 2 drops basil + 2 drops fennel on one tissue, 1 drop mint on another — alternate inhaling",
+      "Hair: 10 drops basil + 10 drops rosemary + 5 drops mint in 50ml macadamia oil — 2x/week treatment"
+    ],
+    combinations: [
+      { oils: "Fennel", purpose: "Activation / energy boost (alternate inhalation from tissues)" },
+      { oils: "Rosemary, mint", purpose: "Hair loss treatment" },
+      { oils: "Eucalyptus, lemon", purpose: "Anosmia inhalation" },
+      { oils: "Lemongrass, mint, eucalyptus", purpose: "Leg cramp massage" }
+    ],
+    cautions: "Stimulates adrenal cortex — use purposefully."
+  },
+  {
+    name: "Helichrysum (Immortelle)",
+    botanical: "Helichrysum italicum",
+    categories: ["pain","skin","emotional"],
+    properties: ["analgesic","anti-hematoma","anti-inflammatory","antifungal","regenerating","anti-coagulant","anti-aging"],
+    uses: [
+      "Bruises, hematomas — immediately after injury",
+      "Varicose veins",
+      "Rosacea",
+      "Keloid scars, hypertrophic scars",
+      "Cold hands and feet, Raynaud's disease",
+      "Wrinkles and anti-aging",
+      "Sprains, tendon and muscle problems",
+      "Emotional shock"
+    ],
+    emotional: "Inhale directly from bottle for emotional shock.",
+    methods: [
+      "Apply 2 drops undiluted immediately after impact/injury to prevent bruise",
+      "Varicose veins/rosacea: a few drops undiluted or diluted in cream/carrier oil — 1-2x/day",
+      "Wrinkles: 5-20 drops in 30ml cream (add neroli and rose for enhanced effect)",
+      "Sprains: in avocado oil + lemon eucalyptus + mint, massage 3x/day for 3 days",
+      "Emotional shock: inhale directly from bottle"
+    ],
+    combinations: [
+      { oils: "Neroli, rose", purpose: "Anti-aging cream" },
+      { oils: "Lemon eucalyptus, mint", purpose: "Sprains and tendon problems (avocado oil base)" }
+    ],
+    cautions: "One of the few oils that can be used undiluted (2 drops) directly on bruises. Very gentle."
+  },
+  {
+    name: "Turmeric",
+    botanical: "Curcuma longa",
+    categories: ["pain","digestive","immune","skin"],
+    properties: ["liver protective","cholagogue","choleretic","anti-inflammatory","muscle relaxant","mucolytic","antiparasitic","anti-cancer","astringent"],
+    uses: [
+      "Hepatobiliary insufficiency, fatty liver",
+      "Digestive insufficiency with poor digestion and bloating",
+      "Muscle contracture and spasms",
+      "Intestinal worms and parasites",
+      "Atonic ulcers and pressure sores",
+      "Anti-cancer support (antimutagenic and anticancer properties)",
+      "Knee and joint pain"
+    ],
+    emotional: "Not specifically noted for emotional effects.",
+    methods: [
+      "Muscle stiffness blend: 3ml turmeric + 2ml copaiba + 1ml lavender + 1ml tulsi + 7ml almond oil, massage 2-3x/day",
+      "Anti-cancer blend: 3ml turmeric + 1ml oregano + 2ml frankincense + 2ml fir + 1ml Greenlandic moss in 6ml apricot kernel oil — 5 drops in bread, yogurt or honey 2x/day for 3-4 weeks",
+      "Knee pain: 6 drops tulsi + 6 drops copaiba + 4 drops lemon eucalyptus + 4 drops turmeric in 50ml jojoba"
+    ],
+    combinations: [
+      { oils: "Copaiba, lavender, tulsi", purpose: "Muscle stiffness and joint pain" },
+      { oils: "Oregano, frankincense, fir", purpose: "Anti-cancer support (Baudoux formula)" },
+      { oils: "Copaiba, lemon eucalyptus, tulsi", purpose: "Knee pain massage" }
+    ],
+    cautions: "Avoid in pregnancy, breastfeeding, infancy and for neurological patients.",
+    keyCompound: "Sesquiterpenes (35-40%) and sesquiterpenols (45-50%)"
+  },
+  {
+    name: "Palo Santo",
+    botanical: "Bursera graveolens",
+    categories: ["spiritual","emotional","energy"],
+    properties: ["uplifting","grounding","self-confidence enhancing","stress-reducing","calming","resilience building"],
+    uses: [
+      "Emotional lows and depression",
+      "Lack of self-confidence",
+      "Stress resilience",
+      "Spiritual practice and clearing energy"
+    ],
+    emotional: "Has a lifting effect — can lift us during emotional lows. Strengthens self-confidence and resilience for coping better with stress. The peace and comfort that Palo Santo conveys gives not only security, but also the strength needed to leave well-trodden paths and open new ones despite obstacles.",
+    methods: ["Diffuser","Topical (diluted)","Ritual space clearing"],
+    combinations: [],
+    cautions: "Sustainably sourced Palo Santo is important — only wood from naturally fallen trees. Generally very safe."
+  },
+  {
+    name: "Star Anise",
+    botanical: "Illicium verum",
+    categories: ["digestive","emotional","spiritual","sleep"],
+    properties: ["relaxing","antispasmodic","carminative","antiviral","calming","intuition enhancing"],
+    uses: [
+      "Bloating and digestive discomfort",
+      "General relaxation",
+      "Vivid dreaming and dream memory",
+      "Meditation and visualization",
+      "Opening crown chakra",
+      "Intuition enhancement"
+    ],
+    emotional: "Calming and relaxing. Placed on stone or tissue by the bed, helps with better dreaming and dream recall. Magical oil used in energy-cleansing baths and for opening crown chakra and aligning it with the third eye. Facilitates meditation and visualization of happiness and abundance.",
+    methods: [
+      "Diffuser or tissue by the bed for better dreams",
+      "Massage oil (in carrier oil) for digestive issues with warming compress",
+      "Energy-cleansing bath",
+      "Before sleep: apply to stone/paper towel near pillow with intention to remember dreams"
+    ],
+    combinations: [
+      { oils: "Cinnamon, sandalwood, jasmine", purpose: "Anti-anxiety personal blend" },
+      { oils: "Cardamom, fennel, coriander", purpose: "Digestive support" }
+    ],
+    cautions: "High trans-anethole content. Do not use in pregnancy, endometriosis, or hormone-dependent breast or prostate tumors."
+  },
+  {
+    name: "Damiana",
+    botanical: "Turnera diffusa",
+    categories: ["emotional","hormonal","digestive"],
+    properties: ["emotion balancing","relaxing","progesterone receptor affinity","antispasmodic","digestive"],
+    uses: [
+      "Emotional balance and relaxation (especially before sleep)",
+      "Menstrual cycle problems",
+      "Mild mental disturbances (hypochondria)",
+      "Digestive peristalsis improvement"
+    ],
+    emotional: "Balances emotions, promotes relaxation — especially in baths before sleep. Directs thinking toward positive flow.",
+    methods: [
+      "Bath before sleep",
+      "Massage oil for abdomen (clockwise) for digestive support"
+    ],
+    combinations: [],
+    cautions: "Contraindicated in low blood sugar (diabetes), two weeks before surgery (hypoglycemia risk), pregnancy, psychiatric disorders, and anemia."
+  },
+  {
+    name: "Melissa (Lemon Balm)",
+    botanical: "Melissa officinalis",
+    categories: ["emotional","sleep","immune","digestive"],
+    properties: ["antianxiety","antiviral","calming","antidepressant","antihypertensive","anti-herpes","sedative"],
+    uses: [
+      "Anxiety, stress, depression",
+      "Hysteria and insomnia",
+      "High blood pressure and palpitations",
+      "Herpes simplex (blocks infection of cells by up to 97%)",
+      "Digestive problems related to stress"
+    ],
+    emotional: "One of the best oils for anxiety, stress and depression. Calming effect on the central nervous system.",
+    methods: [
+      "Inhale from bottle at first sign of herpes",
+      "Herpes blend: mix with ravensara and tea tree",
+      "Diffuser for anxiety and sleep",
+      "Diluted topical for herpes lesions"
+    ],
+    combinations: [
+      { oils: "Ravensara, tea tree", purpose: "Herpes simplex treatment blend (equal parts, apply undiluted at first tingle; dilute 20 drops in 10ml carrier for ongoing treatment)" }
+    ],
+    cautions: "Use in small amounts. Avoid with very sensitive skin. True melissa is expensive and often adulterated — ensure purity."
+  },
+  {
+    name: "Bergamot",
+    botanical: "Citrus bergamia",
+    categories: ["emotional","energy","sleep","skin"],
+    properties: ["antidepressant","uplifting","relaxing","antiseptic","antibacterial","balancing"],
+    uses: [
+      "Anxiety, stress, depression",
+      "Nervous tension",
+      "Insomnia",
+      "Mood uplift",
+      "Lack of confidence and decisiveness",
+      "Hand disinfectant (with alcohol and glycerin)"
+    ],
+    emotional: "Called 'Nature's Prozac.' Excellent for relieving anxiety, stress and depression — simultaneously uplifting and relaxing. Increases self-love and improves sleep.",
+    methods: [
+      "Diffuser: with lemon and rosemary for mood and memory",
+      "Hand sanitizer: 20 drops in 100ml 70% alcohol + 20 drops glycerin",
+      "Roll-on for anxiety",
+      "Add to bath"
+    ],
+    combinations: [
+      { oils: "Lemon, rosemary", purpose: "Mood and memory diffuser blend" },
+      { oils: "Neroli, cedar", purpose: "Emotional stability (2 drops each in diffuser)" },
+      { oils: "Vetiver", purpose: "Self-confidence and better sleep" },
+      { oils: "Copaiba", purpose: "Stress and anxiety diffuser" },
+      { oils: "Frankincense, clary sage, jasmine, ylang-ylang", purpose: "Spring emotional release blend" }
+    ],
+    cautions: "Photosensitive — do not apply to skin before sun exposure. Take care with sensitive skin."
+  },
+  {
+    name: "Cedar",
+    botanical: "Cedrus atlantica / Juniperus virginiana",
+    categories: ["emotional","hair","sleep","spiritual"],
+    properties: ["grounding","strengthening","stabilizing","antiseptic","lymphatic","antifungal","sedative"],
+    uses: [
+      "Scalp and hair problems (dandruff, hair loss)",
+      "Anxiety — feeling lost or unable to persist",
+      "Sleep support",
+      "Skin conditions",
+      "Lymphatic support",
+      "Spiritual grounding and stability"
+    ],
+    emotional: "Gives strength, stability and security. Grounding like an ancient tree. Excellent for anxiety where you feel lost, cut off, unable to stay persistent and consistent.",
+    methods: [
+      "Add to shampoo for scalp and dandruff",
+      "Diffuser for grounding and sleep",
+      "Massage oil",
+      "Sleep bath: 3 drops clary sage + 2 drops cedar in liquid bath base"
+    ],
+    combinations: [
+      { oils: "Myrrh", purpose: "Anxiety with tendency to give up" },
+      { oils: "Neroli, bergamot", purpose: "Emotional stability diffuser blend" },
+      { oils: "Clary sage", purpose: "Sleep bath" },
+      { oils: "Tea tree, rosemary", purpose: "Scalp and dandruff treatment" },
+      { oils: "Vetiver, bergamot, grapefruit, orange, lemon", purpose: "Anti-anxiety personal blend" }
+    ],
+    cautions: "Generally safe. Use Atlas cedar (Cedrus atlantica) for therapeutic purposes."
+  },
+  {
+    name: "Thyme",
+    botanical: "Thymus vulgaris",
+    categories: ["immune","respiratory","digestive","energy","pain"],
+    properties: ["antibacterial","antifungal","antispasmodic","expectorant","diuretic","antianemic","stimulant","immunostimulant"],
+    uses: [
+      "Tonsillitis (gargling, inhalation, massage)",
+      "Bronchitis and respiratory infections",
+      "Reducing blood pressure (antispasmodic on arteries and veins)",
+      "Heart toning",
+      "Diuretic — weight, blood pressure, digestion",
+      "Mucus removal",
+      "Anemia — stimulates leukocyte production, removes fatigue",
+      "Appetite stimulation"
+    ],
+    emotional: "Stimulating, removes fatigue and apathy.",
+    methods: [
+      "Tonsillitis gargle: 2-3 drops in baking soda + 200ml warm water, 2-3x/day",
+      "Hot inhalation for tonsillitis: 3-4 drops in 200ml hot water, breathe through mouth 5-7 min",
+      "Throat massage: 2-3 drops in 1 tsp almond oil, apply to submandibular area 3-4x/day",
+      "Internal: 1 drop in olive oil after meals 2x/day for throat",
+      "Navel application for general health",
+      "Bath"
+    ],
+    combinations: [
+      { oils: "Tulsi, sage, oregano", purpose: "Tonsillitis treatment" },
+      { oils: "Black pepper, lemon", purpose: "Anemia support" }
+    ],
+    cautions: "Powerful compound. Do not use directly on skin without dilution — causes sensitivity and irritation. Dilute with carrier oil. Approved by German E-Commission for bronchitis and whooping cough."
+  },
+  {
+    name: "Ylang-Ylang",
+    botanical: "Cananga odorata",
+    categories: ["emotional","hormonal","hair","skin","sleep"],
+    properties: ["antidepressant","sedative","aphrodisiac","antispasmodic","hypotensive","euphoric","calming"],
+    uses: [
+      "Seborrheic dermatitis and oily scalp",
+      "Dandruff",
+      "Scalp dryness",
+      "Depression, lethargy, listlessness",
+      "Anxiety, nervous tension",
+      "Libido and sensuality",
+      "High blood pressure"
+    ],
+    emotional: "Helps with depression, lethargy and listlessness. Strongly euphoric. Encourages sensuality and sexuality.",
+    methods: [
+      "Massage oil for scalp",
+      "Add to conditioner",
+      "Diffuser",
+      "Bath"
+    ],
+    combinations: [
+      { oils: "Lavender, neroli, patchouli, rose, sandalwood, vetiver", purpose: "Depression and emotional support" },
+      { oils: "Neroli, clary sage, orange", purpose: "Aromatic bath for stress and anxiety" },
+      { oils: "Neroli, orange, lemongrass", purpose: "Relaxing massage blend" },
+      { oils: "Frankincense, bergamot, clary sage, jasmine", purpose: "Spring emotional release blend" }
+    ],
+    cautions: "Strong scent — use sparingly. Can cause headaches in large amounts."
+  },
+  {
+    name: "Patchouli",
+    botanical: "Pogostemon cablin",
+    categories: ["emotional","skin","energy"],
+    properties: ["grounding","antidepressant","anti-anxiety","astringent","antiseptic","anti-cellulite","appetite-reducing"],
+    uses: [
+      "Anxiety from fear of others' opinions",
+      "Losing authenticity, guilt",
+      "Depression",
+      "Skin care",
+      "Appetite reduction"
+    ],
+    emotional: "Specific for anxiety caused by fear of others' opinions, shaping oneself by others' desires, loss of authenticity and guilt.",
+    methods: ["Diffuser","Massage oil","Perfume"],
+    combinations: [
+      { oils: "Lavender, neroli, rose, sandalwood, vetiver, ylang-ylang", purpose: "Depression and emotional support blend" }
+    ],
+    cautions: "Generally safe. Very strong, earthy scent — use sparingly."
+  },
+  {
+    name: "Sweet Orange",
+    botanical: "Citrus sinensis",
+    categories: ["emotional","digestive","immune","sleep"],
+    properties: ["uplifting","warming","soothing","sedative","antidepressant","antianxiety","digestive","immunostimulant"],
+    uses: [
+      "Anxiety, stress, depression, nervous tension",
+      "Insomnia",
+      "Immune system support",
+      "Digestive problems",
+      "PMS nervous symptoms",
+      "Emotional warmth and comfort"
+    ],
+    emotional: "Cheery, warming, uplifting. Soothing for anxiety, stress, depression. Sedative properties helpful for insomnia.",
+    methods: [
+      "Diffuser: with lavender and rosemary/bergamot",
+      "Massage: with lavender in grapeseed oil",
+      "Bath: with clary sage and neroli",
+      "Roll-on"
+    ],
+    combinations: [
+      { oils: "Lavender", purpose: "Connecting massage blend; insomnia" },
+      { oils: "Neroli, clary sage", purpose: "Bath blend for stress" },
+      { oils: "Rosemary, lavender (evening)", purpose: "Cognitive function / sleep protocol (Rosemary+Lemon in morning, Lavender+Sweet Orange in evening)" }
+    ],
+    cautions: "Take care with sensitive skin. Do not apply before direct sun exposure."
+  },
+  {
+    name: "German Chamomile",
+    botanical: "Matricaria chamomilla",
+    categories: ["skin","pain","emotional","sleep"],
+    properties: ["anti-inflammatory","analgesic","antispasmodic","antiallergic","calming","healing","anti-itching"],
+    uses: [
+      "Dry scalp",
+      "Itching and inflammation",
+      "Eczema and skin rashes",
+      "Anti-anxiety and sleep"
+    ],
+    emotional: "Deeply calming.",
+    methods: ["Diluted in carrier oil for skin","Diffuser for sleep and anxiety"],
+    combinations: [
+      { oils: "Ylang-ylang", purpose: "Oily scalp (ylang) vs dry scalp (German chamomile) treatment in jojoba oil" },
+      { oils: "Lavender, patchouli, roman chamomile, tea tree", purpose: "Anti-itch blend" }
+    ],
+    cautions: "Safe. Rich in azulene (anti-inflammatory). Can stain textiles dark blue."
+  },
+  {
+    name: "Rosehip Seed Oil",
+    botanical: "Rosa canina (seed)",
+    categories: ["skin","pain"],
+    properties: ["regenerating","anti-aging","anti-scar","anti-stretch marks","anti-inflammatory","moisturizing","fortifying for blood vessels"],
+    uses: [
+      "Anti-aging face serum",
+      "Scars (acne, surgical, burns)",
+      "Stretch marks (pregnancy prevention and post-partum)",
+      "Rosacea — strengthens blood vessel walls",
+      "Eczema, dermatitis, psoriasis",
+      "Dry rough skin (elbows, knees)",
+      "Radiation burn healing",
+      "Dark age spots",
+      "Fragile nails",
+      "Post-weight-loss skin tightening"
+    ],
+    emotional: "Not primarily an emotional oil — but contributes to beauty and self-confidence.",
+    methods: [
+      "Face: use as serum — add a few drops of rose, jasmine, copaiba essential oils",
+      "Body: use directly on dry, rough areas or for scar/stretch mark treatment"
+    ],
+    combinations: [
+      { oils: "Rose, jasmine, copaiba", purpose: "Face serum enhancement" },
+      { oils: "Copaiba", purpose: "Skin lesion and scar healing" }
+    ],
+    cautions: "A carrier/vegetable oil, not a distilled essential oil. Used in larger amounts (drops to teaspoons) compared to essential oils."
+  },
+  {
+    name: "Neem Oil",
+    botanical: "Azadirachta indica",
+    categories: ["skin","immune"],
+    properties: ["fungicide","insecticide","antibacterial","pesticidal"],
+    uses: [
+      "Plant pest control (aphids, spider mites, whitefly, powdery mildew, black spot)",
+      "Stubborn blackheads and acne (navel application)",
+      "Disrupts all life stages of insects",
+      "Safe for food plants (degrades in sunlight)"
+    ],
+    emotional: "Not an emotional oil.",
+    methods: [
+      "Plant spray: 2 tsp neem oil + 1 tbsp liquid soap in 1-liter spray bottle filled with water. Shake well. Spray leaf tops and undersides.",
+      "For root pests: water the plant with the solution",
+      "Navel application for blackheads/acne",
+      "Apply early morning or late evening to protect pollinators"
+    ],
+    combinations: [],
+    cautions: "Strong garlic-like smell. Wait 24 hours before consuming food plants treated with neem. Rinse edible parts well under warm water. Spray houseplants weekly until infestation clears, then monthly for prevention."
+  },
+  {
+    name: "Juniper Berry",
+    botanical: "Juniperus communis",
+    categories: ["digestive","pain","skin","emotional","energy"],
+    properties: ["detoxifying","diuretic","antiseptic","antibacterial","antispasmodic","anti-rheumatic","astringent","cleansing","purifying"],
+    uses: [
+      "Urinary tract support and kidney cleansing",
+      "Gout and arthritis — removes uric acid",
+      "Cellulite and fluid retention",
+      "Skin conditions: acne, eczema, psoriasis, dermatitis",
+      "Digestive problems: bloating, slow digestion",
+      "Respiratory cleansing",
+      "Muscle and joint pain",
+      "Hangover and detox support",
+      "Clearing mental fog and negativity"
+    ],
+    emotional: "Oil of cleansing and purification. Clears mental and emotional toxins just as it clears physical ones. Helps release fear, anxiety and feelings of being overwhelmed. Supports those who feel emotionally drained by others.",
+    methods: [
+      "Massage oil (3%): diluted in carrier for joints and cellulite",
+      "Bath: 6-8 drops with bath salt for detox",
+      "Diffuser: for mental clarity and space cleansing",
+      "Compress on painful joints"
+    ],
+    combinations: [
+      { oils: "Lemon, grapefruit", purpose: "Detox and cellulite massage blend" },
+      { oils: "Black pepper, rosemary", purpose: "Warming muscle and joint blend" },
+      { oils: "Frankincense, cedarwood", purpose: "Spiritual cleansing and grounding" }
+    ],
+    cautions: "Avoid during pregnancy and with kidney disease (stimulates kidneys — not suitable if kidneys are inflamed). Do not use for extended periods. Avoid with children under 6."
+  },
+  {
+    name: "Sweet Marjoram",
+    botanical: "Origanum majorana",
+    categories: ["pain","emotional","respiratory","sleep","digestive"],
+    properties: ["analgesic","antispasmodic","sedative","warming","vasodilating","expectorant","antiseptic","carminative","hypotensive"],
+    uses: [
+      "Muscle pain, stiffness and tension",
+      "Headaches (especially tension headaches)",
+      "Menstrual pain and PMS",
+      "Insomnia — one of the most effective oils for sleep",
+      "High blood pressure",
+      "Colds, bronchitis, sinusitis",
+      "Digestive spasms and colic",
+      "Grief and loneliness"
+    ],
+    emotional: "Warming and comforting. Known as the 'herb of happiness.' Helps with grief, loneliness and loss. Calms obsessive thinking and overactive mind. One of the best oils for people who feel emotionally isolated.",
+    methods: [
+      "Massage oil: diluted in carrier for muscle pain, neck, temples for headache",
+      "Diffuser or pillow application: for insomnia",
+      "Bath: with lavender for deep relaxation",
+      "Warm compress on abdomen for menstrual pain"
+    ],
+    combinations: [
+      { oils: "Lavender", purpose: "Deep relaxation and sleep blend" },
+      { oils: "Roman chamomile, lavender", purpose: "Headache and tension relief" },
+      { oils: "Clary sage", purpose: "Menstrual pain massage" },
+      { oils: "Eucalyptus, rosemary", purpose: "Respiratory blend for colds" }
+    ],
+    cautions: "Avoid in pregnancy (can stimulate uterine contractions). Not for use when driving — strongly sedating. Avoid with very low blood pressure."
+  },
+  {
+    name: "Ginger",
+    botanical: "Zingiber officinale",
+    categories: ["digestive","pain","energy","immune","emotional"],
+    properties: ["warming","analgesic","anti-nausea","anti-inflammatory","digestive stimulant","circulatory","aphrodisiac","expectorant","antioxidant"],
+    uses: [
+      "Nausea, vomiting, motion sickness",
+      "Poor circulation and cold extremities",
+      "Muscle and joint pain, arthritis",
+      "Digestive complaints, indigestion, bloating",
+      "Colds and flu — warming and immune support",
+      "Fatigue and low energy",
+      "Lack of confidence and courage",
+      "Respiratory congestion"
+    ],
+    emotional: "Warming and empowering. The oil of empowerment — gives courage, will and determination to take action. Helps those who are withdrawn, lacking motivation or feeling powerless. Stimulates appetite for life.",
+    methods: [
+      "Massage oil: diluted in carrier for muscles and joints (warming)",
+      "Inhalation or diffuser for nausea",
+      "Foot bath for cold feet and circulation",
+      "1 drop in honey tea for nausea or colds",
+      "Navel application with mustard oil for digestive upset"
+    ],
+    combinations: [
+      { oils: "Black pepper, juniper", purpose: "Deep warming muscle and joint blend" },
+      { oils: "Lemon, eucalyptus", purpose: "Cold and flu immune blend" },
+      { oils: "Mustard oil", purpose: "Navel application for bloating and nausea" },
+      { oils: "Cardamom, fennel", purpose: "Digestive support blend" }
+    ],
+    cautions: "Can cause skin sensitization — always dilute. Avoid on broken or sensitive skin. Use in small amounts (1-2% dilution). May be blood-thinning — avoid if on anticoagulant medications."
+  },
+  {
+    name: "Cypress",
+    botanical: "Cupressus sempervirens",
+    categories: ["pain","emotional","respiratory","skin","hormonal"],
+    properties: ["astringent","vasoconstricting","antispasmodic","deodorant","diuretic","antiseptic","styptic","anti-perspiration","lymphatic tonic"],
+    uses: [
+      "Varicose veins and broken capillaries",
+      "Excessive sweating",
+      "Fluid retention and edema",
+      "Cellulite",
+      "Oily skin and enlarged pores",
+      "Muscle cramps and spasms",
+      "Coughs, bronchitis (antispasmodic)",
+      "Menopausal symptoms",
+      "Emotional transitions and grief"
+    ],
+    emotional: "Oil of transitions and change. Helps with major life changes, loss and grief. Supports those going through a transition — ending of a relationship, career change, bereavement. Brings acceptance of change as a natural part of life.",
+    methods: [
+      "Massage oil: diluted upward on legs for varicose veins and circulation",
+      "Cold compress on varicose veins",
+      "Deodorant: add to base lotion for excessive sweating",
+      "Diffuser for emotional support during change"
+    ],
+    combinations: [
+      { oils: "Geranium, lemon", purpose: "Varicose veins and circulation massage" },
+      { oils: "Frankincense, rose", purpose: "Grief and transition support blend" },
+      { oils: "Clary sage, geranium", purpose: "Menopausal support" },
+      { oils: "Juniper, grapefruit", purpose: "Anti-cellulite draining blend" }
+    ],
+    cautions: "Avoid in pregnancy. Avoid in cases of estrogen-dependent conditions. Generally very safe topically when diluted."
+  },
+  {
+    name: "Roman Chamomile",
+    botanical: "Anthemis nobilis",
+    categories: ["skin","emotional","sleep","pain","digestive"],
+    properties: ["anti-inflammatory","analgesic","antispasmodic","calming","antidepressant","antiallergic","digestive","healing"],
+    uses: [
+      "Children's complaints — safest calming oil for kids",
+      "Dry, sensitive and irritated skin",
+      "Eczema and rashes",
+      "Teething pain (diluted on jaw)",
+      "Insomnia — especially in children",
+      "Anxiety, irritability, anger",
+      "Digestive colic and IBS",
+      "Headaches and migraines",
+      "Hair — blonde hair brightening, dry scalp"
+    ],
+    emotional: "The gentlest oil for anger, frustration and impatience. Deeply calming for children and adults alike. Helps dissolve irritability and inner conflict. Excellent for oversensitive people who react strongly.",
+    methods: [
+      "Diluted in carrier for all skin and massage use",
+      "Bath (children): 1-2 drops with full-fat milk emulsifier",
+      "Diffuser for calming and sleep",
+      "Add to shampoo or conditioner for hair"
+    ],
+    combinations: [
+      { oils: "Lavender", purpose: "Children's calming and sleep blend" },
+      { oils: "German chamomile", purpose: "Anti-inflammatory skin blend" },
+      { oils: "Marjoram, lavender", purpose: "Tension headache blend" }
+    ],
+    cautions: "One of the safest oils available. Safe for babies, children and during pregnancy. Avoid if allergic to plants in the Asteraceae/daisy family."
+  },
+  {
+    name: "Palmarosa",
+    botanical: "Cymbopogon martinii",
+    categories: ["skin","emotional","immune","hair"],
+    properties: ["antibacterial","antifungal","antiviral","moisturizing","skin regenerating","cell stimulant","adaptogenic","uplifting"],
+    uses: [
+      "Dry, mature and sensitive skin — deeply moisturizing",
+      "Acne and oily skin — regulates sebum",
+      "Skin infections and wounds",
+      "Rosacea and redness",
+      "Digestive infections",
+      "Nervous exhaustion and stress",
+      "Hair health — adds shine and moisture",
+      "Fungal skin infections"
+    ],
+    emotional: "Uplifting and clarifying. Helps with nervous exhaustion from emotional stress. Promotes adaptability and flexibility — helps those who are rigid or resistant to change. Creates a sense of security and calm.",
+    methods: [
+      "Facial serum: add to rosehip or jojoba oil",
+      "Massage oil: diluted 2-3% in carrier",
+      "Add to unscented cream or lotion for skin care",
+      "Diffuser for stress and nervous exhaustion"
+    ],
+    combinations: [
+      { oils: "Rose, geranium", purpose: "Skin regenerating facial blend" },
+      { oils: "Lavender, frankincense", purpose: "Anti-aging and calming skin blend" },
+      { oils: "Tea tree, lavender", purpose: "Acne treatment blend" }
+    ],
+    cautions: "Generally very safe. Good choice for those with sensitive skin who react to stronger oils."
+  },
+  {
+    name: "Petitgrain",
+    botanical: "Citrus aurantium (leaves and twigs)",
+    categories: ["emotional","skin","sleep","energy"],
+    properties: ["antidepressant","antispasmodic","antiseptic","deodorant","calming","uplifting","balancing","tonic"],
+    uses: [
+      "Anxiety and nervous tension",
+      "Insomnia",
+      "Oily skin and acne (tones and cleanses)",
+      "Excessive sweating (natural deodorant)",
+      "Mental fatigue and burnout",
+      "Muscle spasms",
+      "Supporting transition from anxiety to calm"
+    ],
+    emotional: "The 'rescue' oil — bridges the gap between anxiety and calm. Soothes anger and panic and creates a sense of equilibrium. Excellent for those who feel overwhelmed, scattered or emotionally overloaded. Uplifting without being stimulating.",
+    methods: [
+      "Diffuser alone or with neroli and bergamot",
+      "Deodorant: add to unscented base",
+      "Skin toner: add to witch hazel or aloe vera gel",
+      "Massage oil for tension and spasms"
+    ],
+    combinations: [
+      { oils: "Neroli, bergamot", purpose: "Anxiety and overwhelm blend — the citrus blossom family" },
+      { oils: "Lavender, clary sage", purpose: "Night-time calming blend" },
+      { oils: "Cedarwood, frankincense", purpose: "Grounding and centering blend" }
+    ],
+    cautions: "Generally very safe. Non-phototoxic (unlike expressed citrus oils). Good alternative to neroli for those on a budget — similar emotional and skin benefits."
+  },
+  {
+    name: "Lime",
+    botanical: "Citrus aurantifolia",
+    categories: ["energy","emotional","immune","skin"],
+    properties: ["uplifting","refreshing","antibacterial","antiviral","antioxidant","astringent","immune stimulant","tonic"],
+    uses: [
+      "Mental fatigue and apathy",
+      "Lack of enthusiasm and motivation",
+      "Cold and flu support",
+      "Oily skin — tightens pores",
+      "Antioxidant support",
+      "Uplifting mood"
+    ],
+    emotional: "Sharp, refreshing uplift. More energizing than lemon — like a splash of cold water. Excellent for apathy, mental tiredness and lack of enthusiasm. Brings clarity and decisiveness.",
+    methods: [
+      "Diffuser for mood lift and air purification",
+      "Skin toner (expressed peel — avoid sun; steam distilled is safe)",
+      "Add to cleaning products"
+    ],
+    combinations: [
+      { oils: "Bergamot, grapefruit", purpose: "Uplifting citrus diffuser blend" },
+      { oils: "Mint, rosemary", purpose: "Morning focus and energy blend" }
+    ],
+    cautions: "Expressed (cold-pressed) lime is photosensitive — do not use on skin before sun exposure. Steam-distilled lime is safe in sun. Always dilute."
+  },
+  {
+    name: "Carrot Seed",
+    botanical: "Daucus carota",
+    categories: ["skin","digestive","emotional"],
+    properties: ["anti-aging","skin toning","liver tonic","diuretic","detoxifying","regenerating","antioxidant","grounding"],
+    uses: [
+      "Mature and aging skin — reduces wrinkles",
+      "Uneven skin tone, sun damage, scars",
+      "Liver and gallbladder support",
+      "Detox and diuretic",
+      "Skin conditions: eczema, psoriasis, rosacea",
+      "Fatigue and burnout"
+    ],
+    emotional: "Grounding and nourishing. Helps those who feel depleted, scattered or ungrounded. Supports a sense of security and rootedness.",
+    methods: [
+      "Facial blend: 3-5 drops in 30ml rosehip oil — anti-aging serum",
+      "Add to unscented cream for skin regeneration",
+      "Massage blend for liver support (right side of abdomen)"
+    ],
+    combinations: [
+      { oils: "Rosehip, frankincense, neroli", purpose: "Premium anti-aging face serum" },
+      { oils: "Geranium, lavender", purpose: "Skin toning and regenerating blend" }
+    ],
+    cautions: "Avoid in pregnancy. Do not confuse with carrot seed essential oil and carrot CO2 — both useful but different. Generally safe in normal dilutions."
+  },
+  {
+    name: "Scots Pine",
+    botanical: "Pinus sylvestris",
+    categories: ["respiratory","energy","pain","immune","emotional"],
+    properties: ["expectorant","antiseptic","anti-inflammatory","analgesic","adrenal supportive","decongestant","stimulant","deodorizing"],
+    uses: [
+      "Bronchitis, sinusitis, coughs and colds",
+      "Exhaustion and adrenal fatigue",
+      "Muscle and joint pain (rheumatism)",
+      "Urinary tract infections",
+      "Mental fatigue and lack of motivation",
+      "Clearing stale air and negative energies",
+      "Low blood pressure"
+    ],
+    emotional: "The forest in a bottle. Brings a sense of strength, resilience and vitality. Clears mental fog and restores energy after prolonged stress. Helps those who feel weighed down, sluggish or spiritually depleted. Stimulates adrenal glands.",
+    methods: [
+      "Diffuser: for respiratory support and air cleansing",
+      "Inhalation: 2-3 drops in hot water for sinus and bronchial congestion",
+      "Massage oil: diluted for muscles, joints and fatigue",
+      "Bath: invigorating — combined with eucalyptus and rosemary"
+    ],
+    combinations: [
+      { oils: "Eucalyptus, rosemary", purpose: "Energizing respiratory bath or diffuser" },
+      { oils: "Lavender, marjoram", purpose: "Muscle pain and tension blend" },
+      { oils: "Frankincense, cedarwood", purpose: "Forest grounding and revitalization blend" }
+    ],
+    cautions: "Avoid with kidney disease. Can cause skin sensitization — always dilute. Avoid in pregnancy. Use Scots pine (Pinus sylvestris) rather than other pine species for therapeutic use."
+  },
+  {
+    name: "Spikenard",
+    botanical: "Nardostachys jatamansi",
+    categories: ["sleep","emotional","spiritual","skin"],
+    properties: ["deeply sedative","calming","anti-aging","antibacterial","anti-inflammatory","grounding","regenerating"],
+    uses: [
+      "Severe insomnia — one of the most powerful sleep oils",
+      "Chronic anxiety and nervous exhaustion",
+      "Mature and aging skin",
+      "Eczema and inflammatory skin conditions",
+      "Deep spiritual practice and prayer",
+      "Recovering from trauma"
+    ],
+    emotional: "Ancient and sacred. Mentioned in the Bible (Mary anointed Jesus' feet with spikenard). Used across Eastern spiritual traditions for millennia. The deepest grounding oil — works on the root chakra. Helps those in profound anxiety, despair or spiritual crisis. Invites complete surrender and trust.",
+    methods: [
+      "Diffuser: tiny amounts — it is very strong",
+      "Apply 1 drop to soles of feet before sleep",
+      "Meditation: 1 drop on third eye or base of skull",
+      "Facial blend for mature skin (1-2 drops in 30ml carrier)"
+    ],
+    combinations: [
+      { oils: "Lavender, vetiver", purpose: "Deep sleep blend — the most powerful" },
+      { oils: "Frankincense, sandalwood", purpose: "Sacred meditation blend" },
+      { oils: "Rose, neroli", purpose: "Trauma recovery emotional blend" }
+    ],
+    cautions: "Use very sparingly — extremely potent sedative. Avoid in pregnancy. Do not drive or operate machinery after use."
+  },
+  {
+    name: "Bay Laurel",
+    botanical: "Laurus nobilis",
+    categories: ["immune","respiratory","pain","emotional","digestive"],
+    properties: ["antibacterial","antifungal","analgesic","anti-neuralgia","expectorant","lymphatic stimulant","warming","confidence building"],
+    uses: [
+      "Colds, flu, viral infections",
+      "Lymphatic congestion and swollen lymph nodes",
+      "Neuralgia and nerve pain",
+      "Scalp conditions — dandruff",
+      "Muscle and joint pain",
+      "Poor digestion",
+      "Building confidence and courage"
+    ],
+    emotional: "The laurel of victory and honor — ancient symbol of achievement. Helps build confidence and self-belief. Particularly useful for those who struggle with self-doubt or fear of failure. Said to enhance intuition and perception.",
+    methods: [
+      "Massage oil: diluted for lymphatic drainage and muscle pain",
+      "Add to shampoo for scalp and dandruff",
+      "Diffuser for confidence and immune support",
+      "Inhalation for respiratory infections"
+    ],
+    combinations: [
+      { oils: "Rosemary, eucalyptus", purpose: "Respiratory and immune blend" },
+      { oils: "Ravensara, tea tree", purpose: "Antiviral protection blend" },
+      { oils: "Cypress, geranium", purpose: "Lymphatic drainage massage blend" }
+    ],
+    cautions: "Moderately strong — dilute to 1-2% for skin application. Avoid in pregnancy. Can cause skin sensitization in some individuals. Avoid on broken skin."
+  },
+  {
+    name: "Mandarin",
+    botanical: "Citrus reticulata",
+    categories: ["emotional","sleep","digestive","skin"],
+    properties: ["calming","gentle","antispasmodic","tonic","antidepressant","sedative","digestive","anti-stretch marks"],
+    uses: [
+      "Children's nervousness and insomnia — very safe",
+      "Pregnancy: anxiety, stretch mark prevention",
+      "Digestive discomfort, hiccups, indigestion in children",
+      "Mild depression and sadness",
+      "Oily skin",
+      "Older adults — gentle uplifting and calming"
+    ],
+    emotional: "The most gentle of the citrus oils. Brings joy, warmth and childlike happiness. Safe and comforting for the very young, the elderly and during pregnancy. Dissolves tension without any harshness.",
+    methods: [
+      "Diffuser: safe for children's rooms at bedtime",
+      "Bath: 2-3 drops with milk for children",
+      "Pregnancy belly oil: diluted in sweet almond oil for stretch mark prevention",
+      "Massage for digestive issues in children (1% dilution)"
+    ],
+    combinations: [
+      { oils: "Lavender, roman chamomile", purpose: "Children's sleep and calm blend" },
+      { oils: "Neroli, rose", purpose: "Pregnancy stretch mark blend" },
+      { oils: "Sweet orange, bergamot", purpose: "Gentle mood lift blend" }
+    ],
+    cautions: "One of the safest essential oils. Safe for children, pregnancy and elderly. Mildly photosensitive — expressed peel: avoid sun for 6-8 hours. Steam-distilled is safe in sun."
+  },
+  {
+    name: "Valerian",
+    botanical: "Valeriana officinalis",
+    categories: ["sleep","emotional","pain"],
+    properties: ["deeply sedative","anxiolytic","antispasmodic","analgesic","hypnotic","nervine","calming"],
+    uses: [
+      "Severe insomnia — fastest-acting sleep oil",
+      "Anxiety and chronic stress",
+      "Nervous tension and muscle spasms",
+      "Nerve pain",
+      "Palpitations and overactive nervous system",
+      "Overcoming obsessive worry"
+    ],
+    emotional: "The oil of peace and deep rest. Strong, earthy, peculiar scent — not everyone loves it, but it is profoundly effective. Used medicinally since ancient Greece and Rome for calming the nervous system. Works quickly and powerfully.",
+    methods: [
+      "Diffuser: 1-2 drops only (strong scent — blend with lavender to soften)",
+      "Foot soles application: 1 drop in carrier oil before sleep",
+      "Bath: combined with lavender for bedtime routine"
+    ],
+    combinations: [
+      { oils: "Lavender, spikenard", purpose: "Powerful insomnia and anxiety blend" },
+      { oils: "Vetiver, sandalwood", purpose: "Grounding night blend for overthinking" }
+    ],
+    cautions: "Very strong sedative — do not drive after use. Avoid in pregnancy. Use sparingly — small amounts are sufficient. Strong, unusual smell — blend with lavender or cedarwood to make it more pleasant."
+  }
+];
+
+const blends = [
+  {
+    name: "Four Thieves",
+    oils: "Clove + Lemon + Eucalyptus + Cinnamon + Rosemary",
+    purpose: "Antiviral, antibacterial, antifungal, antiseptic protection blend. Based on a medieval legend of four thieves who robbed plague victims without getting sick. Confirmed antiviral, antiseptic and antibacterial properties.",
+    uses: ["Infection prevention","Immune support","Household disinfection","Respiratory protection"],
+    methods: "Diffuser: 6-15 drops. Space spray: 100 drops in 100ml alcohol + spray bottle. Cleaning spray: 1 cup vinegar + 100 drops Four Thieves in 1-liter spray bottle filled with water. Massage: 3-5% dilution. Bath: 6-12 drops with emulsifier."
+  },
+  {
+    name: "Anti-Anxiety Blend",
+    oils: "Geranium (20 drops) + Lavender (20 drops) + Vetiver (10 drops) + Sweet Almond Oil (50 drops)",
+    purpose: "General anxiety, constant worry, fears, insecurity. Apply to solar plexus 3x and wrists 3x daily for one month.",
+    uses: ["Anxiety","Chronic worry","Stress","Insecurity"],
+    methods: "Apply 4 drops to solar plexus and wrists. Inhale deeply and visualize peace."
+  },
+  {
+    name: "Panic Attack Blend",
+    oils: "Neroli + Rose + Geranium + Vetiver",
+    purpose: "Complete loss of emotional control. Inhale directly from bottle of neroli, rose, bergamot, geranium, vetiver, or cedar — 3-5 times through the LEFT nostril to activate left frontal lobe and balance overactive right hemisphere.",
+    uses: ["Panic attacks","Hysteria","Shock","Acute anxiety"],
+    methods: "Inhale directly from bottle through left nostril 3-5 times. Also apply to inner wrists."
+  },
+  {
+    name: "Emotional Release Blend (Spring / Allergy)",
+    oils: "Frankincense + Bergamot + Clary Sage + Jasmine + Ylang-Ylang",
+    purpose: "For releasing locked emotions — the emotional root of spring allergies. Apply every evening to the heart chakra area. May work through dreams to release trapped emotions.",
+    uses: ["Spring allergies (emotional component)","Emotional blockages","Grief","Unexpressed emotions"],
+    methods: "Apply to heart chakra area (center of chest) every evening."
+  },
+  {
+    name: "Herpes Simplex Treatment",
+    oils: "Ravensara (10 drops) + Tea Tree (10 drops) + Melissa (10 drops)",
+    purpose: "Stops herpes early. Apply undiluted blend at first sign of tingling. For ongoing treatment: dilute 20 drops of this blend in 10ml carrier oil and tap on affected area several times daily.",
+    uses: ["Herpes simplex HSV-1","Cold sores","Viral skin infections"],
+    methods: "Undiluted at first sign. Diluted for ongoing treatment."
+  },
+  {
+    name: "Confidence and Better Sleep",
+    oils: "Bergamot + Vetiver",
+    purpose: "Lack of self-confidence and decisiveness. More self-love and better sleep.",
+    uses: ["Low self-confidence","Indecisiveness","Poor sleep"],
+    methods: "Diffuser or diluted in carrier oil on wrists."
+  },
+  {
+    name: "Perseverance and Grounding",
+    oils: "Cedar + Myrrh",
+    purpose: "Anxiety with tendency to give up. Feeling lost. Applied to throat chakra to facilitate self-expression.",
+    uses: ["Tendency to give up","Feeling blocked","Difficulty expressing oneself"],
+    methods: "Apply diluted blend to throat chakra area."
+  },
+  {
+    name: "Knee Pain Oil",
+    oils: "Tulsi (6 drops) + Copaiba (6 drops) + Lemon Eucalyptus (4 drops) + Turmeric (4 drops) in 50ml Jojoba",
+    purpose: "Reduce inflammation and pain in knee joints.",
+    uses: ["Knee pain","Arthritis","Joint inflammation"],
+    methods: "Massage 2-3x daily."
+  },
+  {
+    name: "Muscle Stiffness Blend",
+    oils: "Turmeric (3ml) + Copaiba (2ml) + Lavender (1ml) + Tulsi (1ml) + Almond Oil (7ml)",
+    purpose: "Joint and muscle stiffness, contracture.",
+    uses: ["Muscle stiffness","Contracture","Post-exercise soreness"],
+    methods: "Massage 2-3x daily until improvement."
+  },
+  {
+    name: "Relaxing Massage Oil",
+    oils: "Neroli (10 drops) + Orange (5 drops) + Lemongrass (5 drops) + Ylang-Ylang (5 drops) in 50ml Sweet Almond Oil",
+    purpose: "Evening massage for tension relief and better sleep.",
+    uses: ["Tension relief","Neck and shoulder tension","Better sleep","Tired legs"],
+    methods: "Massage into feet, legs, neck and shoulders every evening."
+  },
+  {
+    name: "Hair Growth Treatment",
+    oils: "Basil (10 drops) + Rosemary (10 drops) + Mint (5 drops) in 50ml Macadamia Oil",
+    purpose: "Strengthen hair follicles and stimulate hair growth.",
+    uses: ["Hair loss","Weak follicles","Slow hair growth"],
+    methods: "Massage into dry hair, leave 1 hour, wash. 2x/week."
+  },
+  {
+    name: "Anti-Pigmentation Face Mask",
+    oils: "Lemon (5 drops) + Lavender (3 drops) + Neroli (2 drops) + 1 tsp honey + 1 tsp cornstarch + 1 tsp avocado oil",
+    purpose: "Reduce age spots, pigmentation and uneven skin tone.",
+    uses: ["Age spots","Pigmentation","Uneven skin tone","Dull skin"],
+    methods: "Apply to problematic areas for 15-20 min, rinse with warm water. Follow with tonic (5-7 drops lemon + 15ml water + 5ml 3% hydrogen peroxide). Use every other evening for 3 weeks. EVENINGS ONLY — photosensitive."
+  },
+  {
+    name: "Hand Disinfectant",
+    oils: "Bergamot (20 drops) + Glycerin (20 drops) in 100ml 70% Alcohol",
+    purpose: "Antibacterial hand sanitizer. Glycerin protects skin from drying effect of alcohol.",
+    uses: ["Infection prevention","Hospital visits","Travel","Immune protection"],
+    methods: "Spray hands several times daily."
+  },
+  {
+    name: "Nicotine Craving Relief",
+    oils: "Black Pepper (3 drops) + Grapefruit (3 drops) on tissue",
+    purpose: "Inhale deeply from tissue when nicotine craving appears. Black pepper better for reducing cough; angelica more effective for delaying next craving.",
+    uses: ["Smoking cessation","Nicotine cravings","Habit change"],
+    methods: "Inhale deeply from tissue when craving appears."
+  },
+  {
+    name: "Pre-Sleep Ritual Blend",
+    oils: "Bergamot + Lavender + Orange + Ylang-Ylang + Clary Sage",
+    purpose: "Difficulty falling asleep. Diffuse 30 min before bed. Can also add to Epsom salt bath (7 drops) or apply mixed with jojoba on soles, third eye, and back of neck.",
+    uses: ["Insomnia","Difficulty falling asleep","Restlessness before bed"],
+    methods: "Diffuser 30 min before bed. Optional: bath (7 drops in Epsom salt) or foot/temple application."
+  },
+  {
+    name: "Morning Cognitive Boost",
+    oils: "Rosemary + Lemon (morning), Lavender + Sweet Orange (evening)",
+    purpose: "Japanese research protocol: diffuse rosemary + lemon in morning, lavender + sweet orange in evening for one month. Showed significant improvement in personal orientation and cognitive functions.",
+    uses: ["Memory improvement","Cognitive function","Alzheimer's prevention","Mental clarity"],
+    methods: "Diffuse morning and evening as indicated for minimum one month."
+  },
+  {
+    name: "Anti-Cancer Support (Baudoux Formula)",
+    oils: "Turmeric (3ml) + Oregano (1ml) + Frankincense (2ml) + Fir (2ml) + Greenlandic Moss (1ml) in 6ml Apricot Kernel Oil",
+    purpose: "Adjunct support. Dominique Baudoux formula. 5 drops in bread ball, yogurt, or honey 2x/day, 3-4 weeks continuous.",
+    uses: ["Cancer support","Immune strength","Anti-tumor research context"],
+    methods: "5 drops orally 2x/day in bread/yogurt/honey for 3-4 weeks."
+  },
+  {
+    name: "Bladder Infection First Aid",
+    oils: "Eucalyptus (15 drops) in 1 tbsp carrier oil",
+    purpose: "Warm compress on lower abdomen below navel. Antispasmodic, analgesic, anti-inflammatory. Can substitute: tulsi, sandalwood, fragonija, tea tree.",
+    uses: ["UTI","Bladder infections","Urinary discomfort"],
+    methods: "Apply to lower abdomen, cover with plastic wrap, then towel, then heating pad."
+  },
+  {
+    name: "Herpes Zoster (Shingles) Skin Relief",
+    oils: "Ravensara (5 drops) + Melissa (5 drops) + Geranium (5 drops) + Copaiba (5 drops) + Eucalyptus (5 drops) in 50ml Hypericum (St. John's Wort) or Tamanu Oil",
+    purpose: "Tap gently into skin several times daily for shingles pain, itching and healing.",
+    uses: ["Shingles","Postherpetic neuralgia","Nerve pain","Blistering skin"],
+    methods: "Tap gently into skin several times daily. Use lavender hydrolat spray (with mint or eucalyptus drops) for itching relief."
+  }
+];
+
+// State
+let selectedCat = 'all';
+let selectedOil = null;
+let searchTerm = '';
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const filtered = oils.filter(oil => {
+    const matchCat = selectedCat === 'all' || oil.categories.includes(selectedCat);
+    const q = searchTerm.toLowerCase();
+    const matchSearch = !q ||
+      oil.name.toLowerCase().includes(q) ||
+      (oil.botanical && oil.botanical.toLowerCase().includes(q)) ||
+      oil.uses.some(u => u.toLowerCase().includes(q)) ||
+      oil.properties.some(p => p.toLowerCase().includes(q)) ||
+      (oil.emotional && oil.emotional.toLowerCase().includes(q));
+    return matchCat && matchSearch;
+  });
+
+  document.getElementById('result-count').textContent = `${filtered.length} oil${filtered.length !== 1 ? 's' : ''} found`;
+
+  grid.innerHTML = filtered.map(oil => `
+    <div class="card ${selectedOil === oil.name ? 'selected' : ''}" onclick="selectOil('${oil.name}')">
+      <div class="card-name">${oil.name}</div>
+      ${oil.botanical ? `<div class="card-botanical">${oil.botanical}</div>` : ''}
+      <div class="card-tags">
+        ${oil.categories.map(c => `<span class="tag ${c}">${c}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderBlends() {
+  const grid = document.getElementById('blends-grid');
+  const q = searchTerm.toLowerCase();
+  const filtered = blends.filter(b => !q ||
+    b.name.toLowerCase().includes(q) ||
+    b.purpose.toLowerCase().includes(q) ||
+    b.oils.toLowerCase().includes(q) ||
+    b.uses.some(u => u.toLowerCase().includes(q)));
+
+  grid.innerHTML = filtered.map(blend => `
+    <div class="blend-card">
+      <h3>${blend.name}</h3>
+      <div class="oils">${blend.oils}</div>
+      <div class="purpose">${blend.purpose}</div>
+      ${blend.methods ? `<div style="margin-top:6px;font-size:0.8rem;color:#8a7060"><strong>How to use:</strong> ${blend.methods}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+function selectOil(name) {
+  selectedOil = name;
+  const oil = oils.find(o => o.name === name);
+  renderGrid();
+
+  const panel = document.getElementById('detail');
+  panel.classList.add('open');
+
+  panel.innerHTML = `
+    <button class="close-btn" onclick="closeDetail()">✕</button>
+    <div class="detail-name">${oil.name}</div>
+    ${oil.botanical ? `<div class="detail-botanical">${oil.botanical}</div>` : ''}
+    <div class="card-tags" style="margin-bottom:12px">
+      ${oil.categories.map(c => `<span class="tag ${c}">${c}</span>`).join('')}
+    </div>
+
+    ${oil.keyCompound ? `
+      <div style="background:#e8f4fe;border-left:3px solid #2563a8;padding:8px 12px;border-radius:4px;font-size:0.82rem;color:#1a3a5a;margin-bottom:12px">
+        <strong>Key compound:</strong> ${oil.keyCompound}
+      </div>` : ''}
+
+    <div class="section-title">Properties</div>
+    <ul class="prop-list">${oil.properties.map(p => `<li>${p}</li>`).join('')}</ul>
+
+    <div class="section-title">Uses &amp; Benefits</div>
+    <ul class="prop-list">${oil.uses.map(u => `<li>${u}</li>`).join('')}</ul>
+
+    ${oil.emotional ? `
+      <div class="section-title">Emotional &amp; Mental</div>
+      <p style="font-size:0.83rem;color:#4a3a2a;line-height:1.5">${oil.emotional}</p>
+    ` : ''}
+
+    ${oil.methods && oil.methods.length ? `
+      <div class="section-title">How to Use</div>
+      <ul class="prop-list">${oil.methods.map(m => `<li>${m}</li>`).join('')}</ul>
+    ` : ''}
+
+    ${oil.combinations && oil.combinations.length ? `
+      <div class="section-title">Blends Well With</div>
+      ${oil.combinations.map(c => `
+        <div class="combo-item">
+          <strong>${c.oils}</strong>
+          <span>${c.purpose}</span>
+        </div>
+      `).join('')}
+    ` : ''}
+
+    ${oil.cautions ? `
+      <div class="section-title">Cautions</div>
+      <div class="caution">${oil.cautions}</div>
+    ` : ''}
+
+    ${oil.fiveElements ? `
+      <div class="section-title">Traditional Classification</div>
+      <p style="font-size:0.82rem;color:#6a5545">${oil.fiveElements}</p>
+    ` : ''}
+  `;
+}
+
+function closeDetail() {
+  selectedOil = null;
+  document.getElementById('detail').classList.remove('open');
+  document.getElementById('detail').innerHTML = `
+    <div class="empty">
+      <div class="icon">🌿</div>
+      <p>Select an oil to see details</p>
+    </div>
+  `;
+  renderGrid();
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  if (tab === 'oils') {
+    document.getElementById('oils-tab').style.display = 'block';
+    document.getElementById('combos-tab').style.display = 'none';
+  } else {
+    document.getElementById('oils-tab').style.display = 'none';
+    document.getElementById('combos-tab').style.display = 'block';
+    renderBlends();
+  }
+}
+
+// Filters
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    selectedCat = chip.dataset.cat;
+    renderGrid();
+  });
+});
+
+// Search
+document.getElementById('search').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  renderGrid();
+  if (document.getElementById('combos-tab').style.display === 'block') renderBlends();
+});
+
+// Init
+renderGrid();
+</script>
+</body>
+</html>
