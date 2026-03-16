@@ -64,6 +64,12 @@ header p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top:2px; }
 .detail-photo .photo-credit a { color:rgba(255,255,255,0.85); text-decoration:none; }
 .detail-photo .photo-credit a:hover { text-decoration:underline; }
 .detail-photo .photo-loading { display:flex; align-items:center; justify-content:center; height:100px; color:#7a9abd; font-size:0.78rem; }
+.where-to-buy { margin-top:14px; padding:11px 13px; background:#f4f8fe; border-radius:8px; border:1px solid #dce8f8; }
+.where-to-buy-title { font-size:0.69rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6a88aa; margin-bottom:8px; }
+.buy-links { display:flex; flex-wrap:wrap; gap:6px; }
+.buy-btn { display:inline-block; padding:5px 11px; border-radius:20px; font-size:0.74rem; font-weight:600; text-decoration:none; background:var(--accent,#2563a8); color:#fff; transition:opacity 0.15s; }
+.buy-btn:hover { opacity:0.82; }
+.buy-btn.secondary { background:#fff; color:var(--accent,#2563a8); border:1.5px solid var(--accent,#2563a8); }
 .detail-panel .empty .icon { font-size:2.5rem; margin-bottom:10px; }
 .detail-name { font-size:1.25rem; font-weight:700; color:#1a2a3a; line-height:1.3; }
 .detail-botanical { font-size:0.76rem; color:#6a88aa; font-style:italic; margin-top:2px; margin-bottom:11px; }
@@ -390,6 +396,43 @@ function renderCurrentGrid() {
   }).join('');
 }
 
+// ── AFFILIATE LINKS ──
+// Replace AFFILIATE_LINK_HERE with your actual affiliate URLs once you have them from Awin/ShareASale
+const affiliates = {
+  oils: [
+    { name: 'Mountain Rose Herbs', url: 'AFFILIATE_LINK_HERE', note: '10% commission' },
+    { name: 'Plant Therapy', url: 'AFFILIATE_LINK_HERE', note: '10% commission' },
+    { name: 'Rocky Mountain Oils', url: 'AFFILIATE_LINK_HERE', note: '10% commission' },
+  ],
+  herbs: [
+    { name: 'Mountain Rose Herbs', url: 'AFFILIATE_LINK_HERE', note: 'Bulk herbs & tinctures' },
+    { name: 'Banyan Botanicals', url: 'AFFILIATE_LINK_HERE', note: 'Ayurvedic herbs' },
+    { name: 'Starwest Botanicals', url: 'AFFILIATE_LINK_HERE', note: 'Organic herbs' },
+  ],
+  sacred: [
+    { name: 'Mountain Rose Herbs', url: 'AFFILIATE_LINK_HERE', note: 'Ethically sourced' },
+    { name: 'Anima Mundi', url: 'AFFILIATE_LINK_HERE', note: 'Sacred plant medicine' },
+  ],
+  crystals: [
+    { name: 'Energy Muse', url: 'AFFILIATE_LINK_HERE', note: 'Crystals & jewelry' },
+    { name: 'Healing Crystals', url: 'AFFILIATE_LINK_HERE', note: 'Wide selection' },
+    { name: 'Mystic Earth', url: 'AFFILIATE_LINK_HERE', note: 'Raw & tumbled stones' },
+  ]
+};
+
+function renderWhereToBuy(section) {
+  const links = affiliates[section];
+  if (!links) return '';
+  const activeLinks = links.filter(l => l.url !== 'AFFILIATE_LINK_HERE');
+  if (activeLinks.length === 0) return '';
+  return `<div class="where-to-buy">
+    <div class="where-to-buy-title">Where to Buy</div>
+    <div class="buy-links">
+      ${activeLinks.map((l,i) => `<a href="${l.url}" target="_blank" rel="noopener" class="buy-btn ${i>0?'secondary':''}">${l.name}</a>`).join('')}
+    </div>
+  </div>`;
+}
+
 // ── PEXELS PHOTO ──
 // Get your free API key at pexels.com/api — takes 2 minutes, free for non-commercial & commercial use
 const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY';
@@ -397,7 +440,7 @@ const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY';
 async function fetchAndShowPhoto(name, section) {
   const box = document.getElementById('detail-photo');
   if (!box) return;
-  if (!PEXELS_API_KEY || PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') {
+  if (!PEXELS_API_KEY || PEXELS_API_KEY.startsWith('YOUR_')) {
     box.innerHTML = '';
     return;
   }
@@ -471,7 +514,8 @@ function renderOilDetail(oil, panel) {
     ${oil.methods && oil.methods.length ? `${secTitle('How to Use')}${propList(oil.methods)}` : ''}
     ${oil.combinations && oil.combinations.length ? `${secTitle('Blends Well With')}${oil.combinations.map(c=>`<div class="combo-item"><strong>${c.oils}</strong><span>${c.purpose}</span></div>`).join('')}` : ''}
     ${caution(oil.cautions)}
-    ${oil.fiveElements ? `${secTitle('Traditional Classification')}<p class="prose">${oil.fiveElements}</p>` : ''}`;
+    ${oil.fiveElements ? `${secTitle('Traditional Classification')}<p class="prose">${oil.fiveElements}</p>` : ''}
+    ${renderWhereToBuy('oils')}`;
 }
 
 function renderHerbDetail(herb, panel) {
@@ -487,7 +531,8 @@ function renderHerbDetail(herb, panel) {
     ${secTitle('Uses & Benefits')}${propList(herb.healing||[])}
     ${secTitle('Preparation')}${propList(herb.preparation||[])}
     ${herb.combinations && herb.combinations.length ? `${secTitle('Combines Well With')}${herb.combinations.map(c=>`<div class="combo-item"><strong>${c.herb}</strong><span>${c.purpose}</span></div>`).join('')}` : ''}
-    ${caution(herb.caution)}`;
+    ${caution(herb.caution)}
+    ${renderWhereToBuy('herbs')}`;
 }
 
 function renderSacredDetail(plant, panel) {
@@ -504,7 +549,8 @@ function renderSacredDetail(plant, panel) {
     <p class="prose">${plant.symbolism}</p>
     ${plant.pairedWith && plant.pairedWith.length ? `${secTitle('Pairs With')}${propList(plant.pairedWith)}` : ''}
     ${plant.traditions_note ? `${secTitle('Cultural Context')}<div class="tradition-note">${plant.traditions_note}</div>` : ''}
-    ${caution(plant.caution)}`;
+    ${caution(plant.caution)}
+    ${renderWhereToBuy('sacred')}`;
 }
 
 function renderCrystalDetail(crystal, panel) {
@@ -524,7 +570,8 @@ function renderCrystalDetail(crystal, panel) {
     ${secTitle('Cleansing Methods')}${propList(crystal.cleansing||[])}
     ${secTitle('Traditions & History')}<p class="prose">${crystal.traditions}</p>
     ${crystal.pairedWith && crystal.pairedWith.length ? `${secTitle('Crystal Pairings')}${propList(crystal.pairedWith)}` : ''}
-    ${caution(crystal.caution)}`;
+    ${caution(crystal.caution)}
+    ${renderWhereToBuy('crystals')}`;
 }
 
 // ── Oils Blends Tab ────────────────────────────────────
