@@ -58,6 +58,12 @@ header p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top:2px; }
 .tag.abundance{background:#d8f0d8;color:#185818}
 .detail-panel { background:#fff; border-left:1px solid #cdd9ee; padding:20px; overflow-y:auto; position:sticky; top:60px; height:calc(100vh - 60px); }
 .detail-panel .empty { text-align:center; color:#7a9abd; margin-top:60px; font-size:0.88rem; }
+.detail-photo { width:100%; border-radius:8px; overflow:hidden; margin-bottom:14px; background:#eef2f8; min-height:0; position:relative; }
+.detail-photo img { width:100%; height:160px; object-fit:cover; display:block; }
+.detail-photo .photo-credit { position:absolute; bottom:4px; right:6px; font-size:0.6rem; color:rgba(255,255,255,0.85); background:rgba(0,0,0,0.45); padding:2px 6px; border-radius:3px; }
+.detail-photo .photo-credit a { color:rgba(255,255,255,0.85); text-decoration:none; }
+.detail-photo .photo-credit a:hover { text-decoration:underline; }
+.detail-photo .photo-loading { display:flex; align-items:center; justify-content:center; height:100px; color:#7a9abd; font-size:0.78rem; }
 .detail-panel .empty .icon { font-size:2.5rem; margin-bottom:10px; }
 .detail-name { font-size:1.25rem; font-weight:700; color:#1a2a3a; line-height:1.3; }
 .detail-botanical { font-size:0.76rem; color:#6a88aa; font-style:italic; margin-top:2px; margin-bottom:11px; }
@@ -384,6 +390,44 @@ function renderCurrentGrid() {
   }).join('');
 }
 
+// ── PEXELS PHOTO ──
+// Get your free API key at pexels.com/api — takes 2 minutes, free for non-commercial & commercial use
+const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY';
+
+async function fetchAndShowPhoto(name, section) {
+  const box = document.getElementById('detail-photo');
+  if (!box) return;
+  if (!PEXELS_API_KEY || PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') {
+    box.innerHTML = '';
+    return;
+  }
+  box.innerHTML = '<div class="photo-loading">Loading photo…</div>';
+  // Build section-specific search queries for accurate results
+  const queries = {
+    oils:    `${name} essential oil`,
+    herbs:   `${name} herb plant`,
+    sacred:  `${name} plant`,
+    crystals:`${name} crystal gemstone`
+  };
+  const searchTerm = queries[section] || name;
+  try {
+    const res = await fetch(
+      `https://api.pexels.com/v1/search?query=${encodeURIComponent(searchTerm)}&per_page=3&orientation=landscape`,
+      { headers: { Authorization: PEXELS_API_KEY } }
+    );
+    const data = await res.json();
+    if (data.photos && data.photos.length > 0) {
+      const p = data.photos[0];
+      box.innerHTML = `<img src="${p.src.medium}" alt="${name}" loading="lazy">
+        <div class="photo-credit">📷 <a href="${p.photographer_url}" target="_blank">${p.photographer}</a> / Pexels</div>`;
+    } else {
+      box.innerHTML = '';
+    }
+  } catch(e) {
+    box.innerHTML = '';
+  }
+}
+
 function selectItem(idx) {
   selectedItem = idx;
   const panel = document.getElementById('detail');
@@ -392,6 +436,12 @@ function selectItem(idx) {
   else if (currentSection === 'herbs') renderHerbDetail(herbs[idx], panel);
   else if (currentSection === 'sacred') renderSacredDetail(sacredPlants[idx], panel);
   else if (currentSection === 'crystals') renderCrystalDetail(crystals[idx], panel);
+  // Load photo with section-aware search query
+  const item = currentSection === 'oils' ? oils[idx]
+    : currentSection === 'herbs' ? herbs[idx]
+    : currentSection === 'sacred' ? sacredPlants[idx]
+    : crystals[idx];
+  fetchAndShowPhoto(item.name, currentSection);
 }
 
 function closeDetail() {
@@ -410,6 +460,7 @@ const closeBtn = `<button class="close-btn" onclick="closeDetail()">✕</button>
 
 function renderOilDetail(oil, panel) {
   panel.innerHTML = `${closeBtn}
+    <div id="detail-photo" class="detail-photo"></div>
     <div class="detail-name">${oil.name}</div>
     ${oil.botanical ? `<div class="detail-botanical">${oil.botanical}</div>` : ''}
     <div class="card-tags" style="margin-bottom:12px">${(oil.categories||[]).map(c=>`<span class="tag ${c}">${c}</span>`).join('')}</div>
@@ -425,6 +476,7 @@ function renderOilDetail(oil, panel) {
 
 function renderHerbDetail(herb, panel) {
   panel.innerHTML = `${closeBtn}
+    <div id="detail-photo" class="detail-photo"></div>
     <div class="detail-name">${herb.name}</div>
     <div class="detail-botanical">${herb.botanical}</div>
     <div class="card-tags" style="margin-bottom:12px">${(herb.categories||[]).map(c=>`<span class="tag ${c.replace(/[^a-z0-9]/g,'-')}">${c}</span>`).join('')}</div>
@@ -440,6 +492,7 @@ function renderHerbDetail(herb, panel) {
 
 function renderSacredDetail(plant, panel) {
   panel.innerHTML = `${closeBtn}
+    <div id="detail-photo" class="detail-photo"></div>
     <div class="detail-name">${plant.name}</div>
     <div class="detail-botanical">${plant.botanical}</div>
     <div class="card-tags" style="margin-bottom:12px">${(plant.categories||[]).map(c=>`<span class="tag ${c.replace(/[^a-z0-9]/g,'-')}">${c}</span>`).join('')}</div>
@@ -456,6 +509,7 @@ function renderSacredDetail(plant, panel) {
 
 function renderCrystalDetail(crystal, panel) {
   panel.innerHTML = `${closeBtn}
+    <div id="detail-photo" class="detail-photo"></div>
     <div class="detail-name">${crystal.name}</div>
     <div class="crystal-info-box">
       <span><strong>Type:</strong> ${crystal.type}</span>

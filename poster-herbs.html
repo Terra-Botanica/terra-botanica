@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terra Botanica — Medicinal Herbs Reference Poster</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 40px 20px; font-family: Georgia, 'Times New Roman', serif; }
+  .poster-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .print-note { color: #888; font-size: 13px; font-family: sans-serif; text-align: center; max-width: 700px; }
+  .print-note strong { color: #bbb; }
+  svg { display: block; max-width: 100%; height: auto; }
+  @media print { body { background: white; padding: 0; } .print-note { display: none; } svg { width: 100vw; height: auto; } }
+</style>
+</head>
+<body>
+<div class="poster-wrap">
+  <p class="print-note">
+    <strong>Printing:</strong> Browser Print → paper A2 or 18×24" → Scale to fit → No margins. Export to PDF for best quality.
+  </p>
+
+<svg viewBox="0 0 800 1130" width="800" height="1130" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e1f14"/>
+      <stop offset="50%" stop-color="#091808"/>
+      <stop offset="100%" stop-color="#0a1a0e"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8a6820"/>
+      <stop offset="30%" stop-color="#d4a853"/>
+      <stop offset="60%" stop-color="#f0d080"/>
+      <stop offset="80%" stop-color="#c9a040"/>
+      <stop offset="100%" stop-color="#8a6820"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#112218" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0a1810" stop-opacity="0.95"/>
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="50%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#1a4a20" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#091008" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="1130" fill="url(#bgGrad)"/>
+  <rect width="800" height="1130" fill="url(#centerGlow)"/>
+
+  <!-- Border -->
+  <rect x="14" y="14" width="772" height="1102" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" rx="2"/>
+  <rect x="20" y="20" width="760" height="1090" fill="none" stroke="url(#goldGrad)" stroke-width="0.6" rx="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Corners -->
+  <g stroke="url(#goldGrad)" fill="none" stroke-width="0.9">
+    <g transform="translate(35,35)"><path d="M0,25 Q0,0 25,0"/><path d="M5,25 Q5,5 25,5"/><circle cx="0" cy="0" r="3" fill="#d4a853" stroke="none"/><line x1="0" y1="10" x2="0" y2="22"/><line x1="10" y1="0" x2="22" y2="0"/></g>
+    <g transform="translate(765,35) scale(-1,1)"><path d="M0,25 Q0,0 25,0"/><path d="M5,25 Q5,5 25,5"/><circle cx="0" cy="0" r="3" fill="#d4a853" stroke="none"/><line x1="0" y1="10" x2="0" y2="22"/><line x1="10" y1="0" x2="22" y2="0"/></g>
+    <g transform="translate(35,1095) scale(1,-1)"><path d="M0,25 Q0,0 25,0"/><path d="M5,25 Q5,5 25,5"/><circle cx="0" cy="0" r="3" fill="#d4a853" stroke="none"/><line x1="0" y1="10" x2="0" y2="22"/><line x1="10" y1="0" x2="22" y2="0"/></g>
+    <g transform="translate(765,1095) scale(-1,-1)"><path d="M0,25 Q0,0 25,0"/><path d="M5,25 Q5,5 25,5"/><circle cx="0" cy="0" r="3" fill="#d4a853" stroke="none"/><line x1="0" y1="10" x2="0" y2="22"/><line x1="10" y1="0" x2="22" y2="0"/></g>
+  </g>
+
+  <!-- Top botanical illustration — spreading herb branches -->
+  <g transform="translate(400, 88)" stroke="#3a7a48" fill="none" stroke-width="0.9" opacity="0.75">
+    <path d="M-90,18 C-65,8 -35,3 0,0 C35,3 65,8 90,18"/>
+    <!-- Left side herbs -->
+    <path d="M-70,14 C-80,4 -78,-8 -65,-10 C-58,-4 -60,7 -70,14Z" fill="#1a4a28"/>
+    <path d="M-70,14 C-72,5 -68,-2 -65,-10" stroke="#5a9a5a" stroke-width="0.5"/>
+    <path d="M-50,9 C-58,0 -55,-10 -42,-11 C-37,-5 -40,5 -50,9Z" fill="#1a4a28"/>
+    <path d="M-30,4 C-36,-4 -32,-13 -20,-13 C-17,-7 -20,3 -30,4Z" fill="#224a28"/>
+    <path d="M-82,16 C-90,8 -88,-2 -82,-6" stroke="#4a8a48" stroke-width="0.7" fill="none"/>
+    <path d="M-88,-3 C-92,-6 -94,-10 -90,-14" stroke="#4a8a48" stroke-width="0.6" fill="none"/>
+    <!-- Right side (mirror) -->
+    <path d="M70,14 C80,4 78,-8 65,-10 C58,-4 60,7 70,14Z" fill="#1a4a28"/>
+    <path d="M50,9 C58,0 55,-10 42,-11 C37,-5 40,5 50,9Z" fill="#1a4a28"/>
+    <path d="M30,4 C36,-4 32,-13 20,-13 C17,-7 20,3 30,4Z" fill="#224a28"/>
+    <path d="M82,16 C90,8 88,-2 82,-6" stroke="#4a8a48" stroke-width="0.7" fill="none"/>
+    <!-- Small flowers -->
+    <circle cx="-90" cy="18" r="3" fill="#5a9a5a" stroke="#4a9a48" stroke-width="0.5"/>
+    <circle cx="90" cy="18" r="3" fill="#5a9a5a" stroke="#4a9a48" stroke-width="0.5"/>
+    <circle cx="0" cy="0" r="3.5" fill="#6aaa6a" stroke="#5aaa5a" stroke-width="0.5"/>
+    <!-- Tiny flowers on left/right tips -->
+    <g transform="translate(-90,18)"><line x1="0" y1="-5" x2="0" y2="-9"/><circle cx="0" cy="-10" r="1.5" fill="#d4a853"/></g>
+    <g transform="translate(90,18)"><line x1="0" y1="-5" x2="0" y2="-9"/><circle cx="0" cy="-10" r="1.5" fill="#d4a853"/></g>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="126" text-anchor="middle" font-family="Georgia, serif" font-size="11" letter-spacing="7" fill="#7a9a70" opacity="0.8">TERRA BOTANICA</text>
+  <line x1="80" y1="134" x2="720" y2="134" stroke="url(#goldGrad)" stroke-width="0.8"/>
+  <text x="400" y="165" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="url(#goldGrad)" letter-spacing="2">Medicinal Herbs</text>
+  <text x="400" y="192" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#c8b870" letter-spacing="5">HEALING PLANT REFERENCE</text>
+  <line x1="80" y1="202" x2="720" y2="202" stroke="url(#goldGrad)" stroke-width="0.8"/>
+  <text x="400" y="218" text-anchor="middle" font-family="Georgia, serif" font-size="8.5" fill="#6a9a70" letter-spacing="3" font-style="italic">Properties · Traditional Uses · Preparations · Healing Traditions</text>
+
+  <!-- ── CARDS ── -->
+  <!-- ROW 1 -->
+
+  <!-- 1: Chamomile -->
+  <g transform="translate(30,230)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Chamomile daisy -->
+    <g transform="translate(28,28)" stroke="#c8c860" fill="none" stroke-width="0.7">
+      <circle cx="0" cy="0" r="5" fill="#a07820" stroke="#d4a830"/>
+      <ellipse cx="0" cy="-11" rx="3" ry="5.5" fill="#e8e8d0"/>
+      <ellipse cx="0" cy="-11" rx="3" ry="5.5" fill="#e8e8d0" transform="rotate(45)"/>
+      <ellipse cx="0" cy="-11" rx="3" ry="5.5" fill="#e8e8d0" transform="rotate(90)"/>
+      <ellipse cx="0" cy="-11" rx="3" ry="5.5" fill="#e8e8d0" transform="rotate(135)"/>
+      <ellipse cx="0" cy="-11" rx="3" ry="5.5" fill="#e8e8d0" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-11" rx="3" ry="5.5" fill="#e8e8d0" transform="rotate(225)"/>
+      <ellipse cx="0" cy="-11" rx="3" ry="5.5" fill="#e8e8d0" transform="rotate(270)"/>
+      <ellipse cx="0" cy="-11" rx="3" ry="5.5" fill="#e8e8d0" transform="rotate(315)"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="15" fill="#d4a853">Chamomile</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Matricaria chamomilla</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Apigenin · Bisabolol</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">anti-inflammatory · antispasmodic</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">calming · carminative</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Anxiety · Insomnia · IBS</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Skin inflammation · Digestion</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">"Mother of the gut" — European herbalism</text>
+  </g>
+
+  <!-- 2: Echinacea -->
+  <g transform="translate(270,230)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Echinacea cone flower -->
+    <g transform="translate(28,28)" stroke="#c87890" fill="none" stroke-width="0.7">
+      <ellipse cx="0" cy="0" rx="6" ry="7" fill="#3a1820" stroke="#a04060"/>
+      <!-- Spiky dome -->
+      <line x1="0" y1="-7" x2="0" y2="-11" stroke="#804050"/><line x1="3" y1="-6" x2="5" y2="-10" stroke="#804050"/><line x1="-3" y1="-6" x2="-5" y2="-10" stroke="#804050"/><line x1="5" y1="-3" x2="8" y2="-6" stroke="#804050"/><line x1="-5" y1="-3" x2="-8" y2="-6" stroke="#804050"/>
+      <!-- Drooping petals -->
+      <path d="M-3,7 C-8,14 -9,18 -6,20" stroke="#c87890" stroke-width="0.8" fill="none"/>
+      <path d="M3,7 C8,14 9,18 6,20" stroke="#c87890" stroke-width="0.8" fill="none"/>
+      <path d="M-6,4 C-13,9 -14,14 -11,16" stroke="#b06878" stroke-width="0.7"/>
+      <path d="M6,4 C13,9 14,14 11,16" stroke="#b06878" stroke-width="0.7"/>
+      <line x1="0" y1="7" x2="0" y2="14" stroke="#4a6a3a" stroke-width="1.2"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="15" fill="#d4a853">Echinacea</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Echinacea purpurea</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Alkamides · Chicoric acid</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">immunostimulant · antiviral</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">anti-inflammatory · wound healing</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Cold &amp; flu prevention · Infections</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Wound healing · Immunity</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">Native American immune tonic</text>
+  </g>
+
+  <!-- 3: Valerian -->
+  <g transform="translate(510,230)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Valerian cluster flowers -->
+    <g transform="translate(28,28)" stroke="#d0b0d0" fill="none" stroke-width="0.7">
+      <line x1="0" y1="14" x2="0" y2="-2" stroke="#5a7a4a" stroke-width="1"/>
+      <line x1="0" y1="-2" x2="-8" y2="-8" stroke="#5a7a4a" stroke-width="0.8"/>
+      <line x1="0" y1="-2" x2="8" y2="-8" stroke="#5a7a4a" stroke-width="0.8"/>
+      <line x1="-8" y1="-8" x2="-13" y2="-13" stroke="#5a7a4a" stroke-width="0.7"/>
+      <line x1="-8" y1="-8" x2="-5" y2="-14" stroke="#5a7a4a" stroke-width="0.7"/>
+      <line x1="8" y1="-8" x2="13" y2="-13" stroke="#5a7a4a" stroke-width="0.7"/>
+      <line x1="8" y1="-8" x2="5" y2="-14" stroke="#5a7a4a" stroke-width="0.7"/>
+      <!-- Small pink flower heads -->
+      <circle cx="-13" cy="-13" r="2.5" fill="#2a1828" stroke="#c0a0c0"/>
+      <circle cx="-5" cy="-14" r="2.5" fill="#2a1828" stroke="#c0a0c0"/>
+      <circle cx="13" cy="-13" r="2.5" fill="#2a1828" stroke="#c0a0c0"/>
+      <circle cx="5" cy="-14" r="2.5" fill="#2a1828" stroke="#c0a0c0"/>
+      <circle cx="0" cy="-16" r="2" fill="#2a1828" stroke="#d0b0d0"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="15" fill="#d4a853">Valerian</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Valeriana officinalis</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Valerenic acid</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">sedative · anxiolytic</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">antispasmodic · nervine</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Insomnia · Anxiety · Cramps</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Nervous tension · Restlessness</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">"Heal-all" — medieval European medicine</text>
+  </g>
+
+  <!-- ROW 2 -->
+
+  <!-- 4: Turmeric -->
+  <g transform="translate(30,428)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Turmeric rhizome -->
+    <g transform="translate(28,28)" stroke="#d4a030" fill="none" stroke-width="0.8">
+      <path d="M-12,0 C-12,-6 -6,-10 0,-10 C6,-10 12,-6 12,0 C12,6 6,10 0,10 C-6,10 -12,6 -12,0Z" fill="#2a1808" stroke="#c08020"/>
+      <!-- Radial lines for cross-section -->
+      <line x1="0" y1="-10" x2="0" y2="10" stroke="#b07018" stroke-width="0.5"/>
+      <line x1="-10" y1="0" x2="10" y2="0" stroke="#b07018" stroke-width="0.5"/>
+      <line x1="-7" y1="-7" x2="7" y2="7" stroke="#906010" stroke-width="0.4"/>
+      <line x1="7" y1="-7" x2="-7" y2="7" stroke="#906010" stroke-width="0.4"/>
+      <circle cx="0" cy="0" r="3" fill="#1a0c04" stroke="#d4a030"/>
+      <!-- Finger lobes -->
+      <path d="M12,0 C14,-2 16,-2 16,0 C16,2 14,2 12,0" fill="#1a0c04" stroke="#c08020"/>
+      <path d="M-12,0 C-14,-2 -16,-2 -16,0 C-16,2 -14,2 -12,0" fill="#1a0c04" stroke="#c08020"/>
+      <path d="M0,-10 C-1,-12 0,-14 2,-14 C3,-12 2,-10 0,-10" fill="#1a0c04" stroke="#c08020"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="15" fill="#d4a853">Turmeric</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Curcuma longa</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Curcumin</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">anti-inflammatory · antioxidant</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">hepatoprotective · analgesic</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Arthritis · Liver support · Pain</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Digestive disorders · Immunity</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">Sacred in Ayurveda for 4,000 years</text>
+  </g>
+
+  <!-- 5: Ginger -->
+  <g transform="translate(270,428)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Ginger root -->
+    <g transform="translate(28,28)" stroke="#b07830" fill="none" stroke-width="0.8">
+      <path d="M-10,2 C-12,-2 -8,-8 -2,-8 C2,-8 6,-4 6,0 C6,4 2,8 -2,8 C-6,8 -10,6 -10,2Z" fill="#1a1008" stroke="#a06820"/>
+      <!-- Knobby protrusions -->
+      <path d="M6,0 C10,-2 13,-1 13,1 C13,3 10,4 6,2" fill="#181008" stroke="#a06820"/>
+      <path d="M-2,-8 C0,-12 3,-13 4,-11 C5,-9 3,-7 -2,-8" fill="#181008" stroke="#a06820"/>
+      <path d="M-2,8 C-1,12 2,13 4,11 C5,9 2,7 -2,8" fill="#181008" stroke="#a06820"/>
+      <path d="M-10,2 C-13,0 -14,-2 -13,-4 C-11,-5 -10,-3 -10,2" fill="#181008" stroke="#a06820"/>
+      <!-- Surface lines -->
+      <path d="M-8,-2 C-4,-4 2,-4 6,-2" stroke="#906018" stroke-width="0.4" fill="none"/>
+      <path d="M-8,2 C-4,4 2,4 6,2" stroke="#906018" stroke-width="0.4" fill="none"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="15" fill="#d4a853">Ginger</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Zingiber officinale</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Gingerol · Shogaol</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">anti-nausea · warming · digestive</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">circulatory · anti-inflammatory</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Nausea · Morning sickness · Flu</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Joint pain · Digestion · Circulation</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">Universal medicine — TCM &amp; Ayurveda</text>
+  </g>
+
+  <!-- 6: St. John's Wort -->
+  <g transform="translate(510,428)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- St John's Wort star flower -->
+    <g transform="translate(28,28)" stroke="#d4b020" fill="none" stroke-width="0.7">
+      <ellipse cx="0" cy="-10" rx="3.5" ry="6.5" fill="#2a1e04" stroke="#c8a820"/>
+      <ellipse cx="0" cy="-10" rx="3.5" ry="6.5" fill="#2a1e04" stroke="#c8a820" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-10" rx="3.5" ry="6.5" fill="#2a1e04" stroke="#c8a820" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-10" rx="3.5" ry="6.5" fill="#2a1e04" stroke="#c8a820" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-10" rx="3.5" ry="6.5" fill="#2a1e04" stroke="#c8a820" transform="rotate(288)"/>
+      <!-- Stamens + black oil gland dots -->
+      <circle cx="0" cy="0" r="3" fill="#1a1204" stroke="#d4c030"/>
+      <circle cx="-3" cy="-1" r="0.8" fill="#1a0808"/><circle cx="3" cy="-1" r="0.8" fill="#1a0808"/>
+      <circle cx="0" cy="-3" r="0.8" fill="#1a0808"/><circle cx="-2" cy="2" r="0.8" fill="#1a0808"/>
+      <circle cx="2" cy="2" r="0.8" fill="#1a0808"/>
+      <line x1="0" y1="3" x2="0" y2="14" stroke="#4a7a3a" stroke-width="1"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="13" fill="#d4a853">St. John's Wort</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Hypericum perforatum</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Hypericin · Hyperforin</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">antidepressant · antiviral</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">nervine · anti-inflammatory</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Mild-moderate depression</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Nerve pain · Wound healing</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">"Sunshine herb" — harvested midsummer</text>
+  </g>
+
+  <!-- ROW 3 -->
+
+  <!-- 7: Ashwagandha -->
+  <g transform="translate(30,626)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Ashwagandha berry cluster (physalis-style) -->
+    <g transform="translate(28,28)" stroke="#d06040" fill="none" stroke-width="0.7">
+      <line x1="0" y1="14" x2="0" y2="0" stroke="#5a7a3a" stroke-width="1"/>
+      <line x1="0" y1="4" x2="-7" y2="-2" stroke="#5a7a3a" stroke-width="0.8"/>
+      <line x1="0" y1="4" x2="7" y2="-2" stroke="#5a7a3a" stroke-width="0.8"/>
+      <!-- Papery lantern husks with berry inside -->
+      <path d="M-7,-2 C-12,-4 -14,-10 -9,-13 C-6,-15 -2,-12 -3,-8 C-4,-5 -7,-4 -7,-2" fill="#2a1008" stroke="#c05030"/>
+      <circle cx="-8" cy="-9" r="3" fill="#3a1010" stroke="#e06040"/>
+      <path d="M7,-2 C12,-4 14,-10 9,-13 C6,-15 2,-12 3,-8 C4,-5 7,-4 7,-2" fill="#2a1008" stroke="#c05030"/>
+      <circle cx="8" cy="-9" r="3" fill="#3a1010" stroke="#e06040"/>
+      <!-- Top berry -->
+      <path d="M0,0 C-4,-3 -3,-9 0,-11 C3,-9 4,-3 0,0" fill="#2a1008" stroke="#c05030"/>
+      <circle cx="0" cy="-8" r="2.5" fill="#3a0808" stroke="#e06040"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="13" fill="#d4a853">Ashwagandha</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Withania somnifera</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Withanolides</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">adaptogen · anxiolytic</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">immunomodulant · thyroid tonic</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Stress · Fatigue · Adrenal burnout</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Hormonal balance · Sleep</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">Rasayana — Ayurvedic rejuvenating tonic</text>
+  </g>
+
+  <!-- 8: Milk Thistle -->
+  <g transform="translate(270,626)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Milk thistle spiky leaf with purple flower -->
+    <g transform="translate(28,28)" stroke="#8070a0" fill="none" stroke-width="0.7">
+      <!-- Spiky leaf -->
+      <path d="M-3,14 C-5,6 -10,0 -8,-8 C-5,-12 2,-12 4,-8 C8,0 7,6 5,14Z" fill="#122010" stroke="#4a7a3a"/>
+      <!-- White vein -->
+      <path d="M1,14 C0,6 -2,0 -1,-8" stroke="#c8d8b8" stroke-width="0.6" fill="none"/>
+      <path d="M-2,4 C-5,1 -8,0 -8,-2" stroke="#c8d8b8" stroke-width="0.4" fill="none"/>
+      <path d="M2,4 C5,1 8,0 8,-2" stroke="#c8d8b8" stroke-width="0.4" fill="none"/>
+      <!-- Spines on leaf edge -->
+      <line x1="-10" y1="-4" x2="-13" y2="-6"/><line x1="-9" y1="-8" x2="-12" y2="-10"/>
+      <line x1="10" y1="-4" x2="13" y2="-6"/><line x1="9" y1="-8" x2="12" y2="-10"/>
+      <!-- Purple flower head at top -->
+      <circle cx="0" cy="-14" r="5" fill="#2a1030" stroke="#8060a0"/>
+      <path d="M-3,-9 C-2,-7 2,-7 3,-9" stroke="#c080c0" stroke-width="0.6" fill="none"/>
+      <!-- Fluffy purple petals -->
+      <line x1="0" y1="-9" x2="0" y2="-7"/><line x1="-2" y1="-9" x2="-3" y2="-7"/><line x1="2" y1="-9" x2="3" y2="-7"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="14" fill="#d4a853">Milk Thistle</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Silybum marianum</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Silymarin</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">hepatoprotective · antioxidant</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">anti-inflammatory · liver regenerating</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Liver detox · Cirrhosis support</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Toxin exposure · Hangover</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">European liver herb since ancient Greece</text>
+  </g>
+
+  <!-- 9: Elderberry -->
+  <g transform="translate(510,626)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Elderberry cluster -->
+    <g transform="translate(28,28)" stroke="#3a1a60" fill="none" stroke-width="0.7">
+      <line x1="0" y1="14" x2="0" y2="4" stroke="#5a6a3a" stroke-width="1"/>
+      <line x1="0" y1="4" x2="-8" y2="-2" stroke="#5a6a3a" stroke-width="0.8"/>
+      <line x1="0" y1="4" x2="8" y2="-2" stroke="#5a6a3a" stroke-width="0.8"/>
+      <line x1="0" y1="4" x2="0" y2="-4" stroke="#5a6a3a" stroke-width="0.8"/>
+      <line x1="-8" y1="-2" x2="-13" y2="-8" stroke="#4a5a2a" stroke-width="0.7"/>
+      <line x1="-8" y1="-2" x2="-6" y2="-9" stroke="#4a5a2a" stroke-width="0.7"/>
+      <line x1="8" y1="-2" x2="13" y2="-8" stroke="#4a5a2a" stroke-width="0.7"/>
+      <line x1="8" y1="-2" x2="6" y2="-9" stroke="#4a5a2a" stroke-width="0.7"/>
+      <line x1="0" y1="-4" x2="-4" y2="-11" stroke="#4a5a2a" stroke-width="0.7"/>
+      <line x1="0" y1="-4" x2="4" y2="-11" stroke="#4a5a2a" stroke-width="0.7"/>
+      <!-- Dark berries -->
+      <circle cx="-13" cy="-8" r="2.5" fill="#280a40" stroke="#5a2a80"/>
+      <circle cx="-6" cy="-9" r="2.5" fill="#280a40" stroke="#5a2a80"/>
+      <circle cx="13" cy="-8" r="2.5" fill="#280a40" stroke="#5a2a80"/>
+      <circle cx="6" cy="-9" r="2.5" fill="#280a40" stroke="#5a2a80"/>
+      <circle cx="-4" cy="-11" r="2.5" fill="#280a40" stroke="#5a2a80"/>
+      <circle cx="4" cy="-11" r="2.5" fill="#280a40" stroke="#5a2a80"/>
+      <circle cx="0" cy="-13" r="2" fill="#300848" stroke="#6a3090"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="15" fill="#d4a853">Elderberry</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Sambucus nigra</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Anthocyanins · Flavonoids</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">antiviral · immunostimulant</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">anti-inflammatory · antioxidant</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Cold &amp; flu · Fever reduction</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Immune support · Sore throat</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">"Elder medicine chest" — European folk</text>
+  </g>
+
+  <!-- ROW 4 -->
+
+  <!-- 10: Nettle -->
+  <g transform="translate(30,824)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Nettle serrated leaf -->
+    <g transform="translate(28,28)" stroke="#6aaa5a" fill="none" stroke-width="0.8">
+      <path d="M0,14 C-3,8 -10,4 -12,-2 C-13,-8 -9,-14 0,-14 C9,-14 13,-8 12,-2 C10,4 3,8 0,14Z" fill="#132010"/>
+      <!-- Serrated edge teeth -->
+      <path d="M0,-14 C-2,-16 -4,-14 -6,-16 C-8,-14 -10,-16 -12,-12" stroke="#7aba6a" stroke-width="0.5" fill="none"/>
+      <path d="M12,-2 C14,-4 12,-7 14,-9 C12,-11 13,-14 12,-14" stroke="#7aba6a" stroke-width="0.5" fill="none"/>
+      <!-- Main vein -->
+      <line x1="0" y1="-14" x2="0" y2="14" stroke="#4a9a4a" stroke-width="0.6"/>
+      <line x1="-8" y1="-4" x2="8" y2="-4" stroke="#3a8a3a" stroke-width="0.4"/>
+      <line x1="-9" y1="2" x2="9" y2="2" stroke="#3a8a3a" stroke-width="0.4"/>
+      <!-- Stinging hair tips -->
+      <line x1="-11" y1="-1" x2="-13" y2="-3"/><line x1="11" y1="-1" x2="13" y2="-3"/>
+      <line x1="-10" y1="4" x2="-12" y2="2"/><line x1="10" y1="4" x2="12" y2="2"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="15" fill="#d4a853">Nettle</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Urtica dioica</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Chlorophyll · Iron · Silica</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">nutritive · diuretic · antihistamine</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">anti-inflammatory · kidney support</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Allergies · Anemia · Joint pain</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Kidney support · Iron deficiency</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">Spring tonic — all European traditions</text>
+  </g>
+
+  <!-- 11: Holy Basil / Tulsi -->
+  <g transform="translate(270,824)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Tulsi leaf with veins and small flower spike -->
+    <g transform="translate(28,28)" stroke="#7aaa7a" fill="none" stroke-width="0.8">
+      <path d="M0,13 C-8,6 -10,-2 -6,-9 C-3,-14 3,-14 6,-9 C10,-2 8,6 0,13Z" fill="#132010"/>
+      <!-- Main vein -->
+      <line x1="0" y1="-12" x2="0" y2="13" stroke="#5a9a5a" stroke-width="0.6"/>
+      <!-- Side veins -->
+      <line x1="0" y1="-6" x2="-6" y2="-3" stroke="#4a8a4a" stroke-width="0.4"/>
+      <line x1="0" y1="-6" x2="6" y2="-3" stroke="#4a8a4a" stroke-width="0.4"/>
+      <line x1="0" y1="0" x2="-7" y2="2" stroke="#4a8a4a" stroke-width="0.4"/>
+      <line x1="0" y1="0" x2="7" y2="2" stroke="#4a8a4a" stroke-width="0.4"/>
+      <line x1="0" y1="5" x2="-6" y2="7" stroke="#4a8a4a" stroke-width="0.4"/>
+      <line x1="0" y1="5" x2="6" y2="7" stroke="#4a8a4a" stroke-width="0.4"/>
+      <!-- Small purple flower spike -->
+      <line x1="0" y1="-12" x2="0" y2="-18" stroke="#5a7a5a" stroke-width="0.8"/>
+      <circle cx="-2" cy="-16" r="1.5" fill="#2a1030" stroke="#9060a0"/>
+      <circle cx="2" cy="-17" r="1.5" fill="#2a1030" stroke="#9060a0"/>
+      <circle cx="0" cy="-19" r="1.5" fill="#2a1030" stroke="#a070b0"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="13" fill="#d4a853">Holy Basil / Tulsi</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Ocimum tenuiflorum</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Eugenol · Rosmarinic acid</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">adaptogen · antibacterial</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">anti-inflammatory · stress-protective</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Stress · Respiratory infections</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Blood sugar · Immunity</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">Sacred "Queen of Herbs" — Hindu tradition</text>
+  </g>
+
+  <!-- 12: Lavender (herb form) -->
+  <g transform="translate(510,824)">
+    <rect width="230" height="188" rx="4" fill="url(#cardGrad)" stroke="#2a5a32" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="18" fill="#0a1a0e" stroke="#3a6a3a" stroke-width="0.8"/>
+    <!-- Lavender spike with whorled florets -->
+    <g transform="translate(28,28)">
+      <line x1="0" y1="14" x2="0" y2="-4" stroke="#6a7a5a" stroke-width="1.2"/>
+      <!-- Grey-green leaves -->
+      <path d="M0,8 C-6,5 -8,2 -6,0" stroke="#7a8a68" fill="none" stroke-width="0.7"/>
+      <path d="M0,8 C6,5 8,2 6,0" stroke="#7a8a68" fill="none" stroke-width="0.7"/>
+      <path d="M0,4 C-5,1 -7,-2 -5,-4" stroke="#7a8a68" fill="none" stroke-width="0.6"/>
+      <path d="M0,4 C5,1 7,-2 5,-4" stroke="#7a8a68" fill="none" stroke-width="0.6"/>
+      <!-- Whorled purple florets -->
+      <ellipse cx="-4" cy="-5" rx="3" ry="4" fill="#2a1840" stroke="#9070c0" stroke-width="0.6"/>
+      <ellipse cx="4" cy="-5" rx="3" ry="4" fill="#2a1840" stroke="#9070c0" stroke-width="0.6"/>
+      <ellipse cx="-3" cy="-9" rx="2.5" ry="3.5" fill="#2a1840" stroke="#a080c8" stroke-width="0.6"/>
+      <ellipse cx="3" cy="-9" rx="2.5" ry="3.5" fill="#2a1840" stroke="#a080c8" stroke-width="0.6"/>
+      <ellipse cx="0" cy="-13" rx="2.5" ry="4" fill="#301a48" stroke="#b090d0" stroke-width="0.6"/>
+    </g>
+    <text x="54" y="22" font-family="Georgia, serif" font-size="15" fill="#d4a853">Lavender</text>
+    <text x="54" y="34" font-family="Georgia, serif" font-size="7.5" fill="#6a8a70" font-style="italic">Lavandula angustifolia</text>
+    <line x1="10" y1="50" x2="220" y2="50" stroke="#2a5a32" stroke-width="0.5"/>
+    <text x="10" y="63" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">KEY COMPOUND</text>
+    <text x="10" y="75" font-family="Georgia, serif" font-size="8" fill="#c8b060" font-style="italic">Linalool · Rosmarinic acid</text>
+    <text x="10" y="90" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PROPERTIES</text>
+    <text x="10" y="102" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">nervine · calming · antiseptic</text>
+    <text x="10" y="113" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">antispasmodic · vulnerary</text>
+    <text x="10" y="128" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">PRIMARY USES</text>
+    <text x="10" y="140" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Anxiety · Headaches · Burns</text>
+    <text x="10" y="151" font-family="Georgia, serif" font-size="8" fill="#d0cdb8">Sleep · Digestive spasm · Skin</text>
+    <text x="10" y="166" font-family="Georgia, serif" font-size="7" fill="#7aaa78" letter-spacing="1.5">TRADITION</text>
+    <text x="10" y="178" font-family="Georgia, serif" font-size="7.5" fill="#9ab898" font-style="italic">Roman baths · medieval hospital wards</text>
+  </g>
+
+  <!-- Section divider diamond -->
+  <g fill="#d4a853" opacity="0.5">
+    <polygon points="400,224 404,228 400,232 396,228"/>
+    <line x1="100" y1="228" x2="390" y2="228" stroke="#d4a853" stroke-width="0.5" opacity="0.4"/>
+    <line x1="410" y1="228" x2="700" y2="228" stroke="#d4a853" stroke-width="0.5" opacity="0.4"/>
+  </g>
+
+  <!-- Preparation Methods Legend -->
+  <rect x="30" y="1024" width="740" height="60" rx="4" fill="#0a1810" stroke="#1a4a20" stroke-width="0.7"/>
+  <text x="400" y="1040" text-anchor="middle" font-family="Georgia, serif" font-size="7.5" fill="#7aaa78" letter-spacing="2.5">PREPARATION METHODS</text>
+  <line x1="50" y1="1045" x2="340" y2="1045" stroke="#2a5a32" stroke-width="0.5"/>
+  <line x1="460" y1="1045" x2="750" y2="1045" stroke="#2a5a32" stroke-width="0.5"/>
+
+  <!-- Infusion (tea cup) -->
+  <g transform="translate(75,1062)">
+    <path d="M-9,2 L-9,8 Q-9,10 -6,10 L6,10 Q9,10 9,8 L9,2Z" fill="none" stroke="#5a8a5a" stroke-width="0.8"/>
+    <line x1="-9" y1="2" x2="9" y2="2" stroke="#5a8a5a" stroke-width="0.8"/>
+    <path d="M9,4 C12,4 12,8 9,8" fill="none" stroke="#5a8a5a" stroke-width="0.7"/>
+    <path d="M-5,-3 C-4,-6 -2,-6 -1,-3" fill="none" stroke="#7aaa7a" stroke-width="0.6"/>
+    <path d="M1,-3 C2,-6 4,-6 5,-3" fill="none" stroke="#7aaa7a" stroke-width="0.6"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia, serif" font-size="7" fill="#8aaa8a">Infusion</text>
+  </g>
+  <!-- Tincture (dropper bottle) -->
+  <g transform="translate(190,1062)">
+    <rect x="-5" y="-2" width="10" height="10" rx="2" fill="none" stroke="#5a8a5a" stroke-width="0.8"/>
+    <rect x="-2" y="-6" width="4" height="4" rx="1" fill="none" stroke="#5a8a5a" stroke-width="0.7"/>
+    <line x1="0" y1="-6" x2="0" y2="-10" stroke="#5a8a5a" stroke-width="0.8"/>
+    <circle cx="0" cy="-11" r="1.5" fill="#2a4a2a" stroke="#7aaa7a" stroke-width="0.5"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia, serif" font-size="7" fill="#8aaa8a">Tincture</text>
+  </g>
+  <!-- Capsule -->
+  <g transform="translate(305,1062)">
+    <path d="M-8,0 C-8,-5 8,-5 8,0 C8,5 -8,5 -8,0Z" fill="none" stroke="#5a8a5a" stroke-width="0.8"/>
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#5a8a5a" stroke-width="0.6"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia, serif" font-size="7" fill="#8aaa8a">Capsule</text>
+  </g>
+  <!-- Compress -->
+  <g transform="translate(420,1062)">
+    <rect x="-10" y="-4" width="20" height="8" rx="2" fill="none" stroke="#5a8a5a" stroke-width="0.8"/>
+    <line x1="-7" y1="-1" x2="7" y2="-1" stroke="#7aaa7a" stroke-width="0.5"/>
+    <line x1="-7" y1="2" x2="7" y2="2" stroke="#7aaa7a" stroke-width="0.5"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia, serif" font-size="7" fill="#8aaa8a">Compress</text>
+  </g>
+  <!-- Poultice -->
+  <g transform="translate(535,1062)">
+    <path d="M-10,5 C-10,-2 -5,-7 0,-7 C5,-7 10,-2 10,5Z" fill="none" stroke="#5a8a5a" stroke-width="0.8"/>
+    <path d="M-6,-2 C-3,-5 3,-5 6,-2" stroke="#7aaa7a" stroke-width="0.6" fill="none"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia, serif" font-size="7" fill="#8aaa8a">Poultice</text>
+  </g>
+  <!-- Decoction -->
+  <g transform="translate(650,1062)">
+    <path d="M-8,6 L-10,-2 Q-10,-5 -7,-5 L7,-5 Q10,-5 10,-2 L8,6Z" fill="none" stroke="#5a8a5a" stroke-width="0.8"/>
+    <path d="M-4,-8 C-3,-11 3,-11 4,-8" fill="none" stroke="#7aaa7a" stroke-width="0.6"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia, serif" font-size="7" fill="#8aaa8a">Decoction</text>
+  </g>
+
+  <!-- Disclaimer -->
+  <text x="400" y="1098" text-anchor="middle" font-family="Georgia, serif" font-size="6.5" fill="#4a6a4a">
+    For educational purposes only. Consult a qualified herbalist or healthcare provider before using herbs therapeutically, especially during pregnancy, nursing, or with medications.
+  </text>
+
+  <!-- Bottom botanical (mirror) -->
+  <g transform="translate(400,1014)" stroke="#3a7a48" fill="none" stroke-width="0.9" opacity="0.6">
+    <path d="M-90,-18 C-65,-8 -35,-3 0,0 C35,-3 65,-8 90,-18"/>
+    <path d="M-70,-14 C-80,-4 -78,8 -65,10 C-58,4 -60,-7 -70,-14Z" fill="#1a4a28"/>
+    <path d="M-50,-9 C-58,0 -55,10 -42,11 C-37,5 -40,-5 -50,-9Z" fill="#1a4a28"/>
+    <path d="M70,-14 C80,-4 78,8 65,10 C58,4 60,-7 70,-14Z" fill="#1a4a28"/>
+    <path d="M50,-9 C58,0 55,10 42,11 C37,5 40,-5 50,-9Z" fill="#1a4a28"/>
+    <circle cx="-90" cy="-18" r="3" fill="#5a9a5a"/>
+    <circle cx="90" cy="-18" r="3" fill="#5a9a5a"/>
+    <circle cx="0" cy="0" r="3.5" fill="#6aaa6a"/>
+  </g>
+
+</svg>
+
+  <p class="print-note" style="margin-top:10px; font-size:11px; color:#666;">
+    SVG poster — scales to any print size without quality loss. Recommended print: 18×24" or A2 on matte paper.
+  </p>
+</div>
+</body>
+</html>
