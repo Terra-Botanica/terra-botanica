@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terra Botanica — Medicinal Herbs Reference Poster</title>
+<title>Terra Botanica — Medicinal Herbs Reference Poster (Light)</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #111; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 40px 20px; font-family: Georgia, 'Times New Roman', serif; }
+  body { background: #f0f5f0; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 40px 20px; font-family: Georgia, 'Times New Roman', serif; }
   .poster-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-  .print-note { color: #888; font-size: 13px; font-family: sans-serif; text-align: center; max-width: 700px; }
-  .print-note strong { color: #bbb; }
+  .print-note { color: #555; font-size: 13px; font-family: sans-serif; text-align: center; max-width: 700px; }
+  .print-note strong { color: #333; }
   svg { display: block; max-width: 100%; height: auto; }
   @media print { body { background: white; padding: 0; } .print-note { display: none; } svg { width: 100vw; height: auto; } }
 </style>
@@ -23,9 +23,9 @@
 <svg viewBox="0 0 800 1130" width="800" height="1130" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0e1f14"/>
-      <stop offset="50%" stop-color="#091808"/>
-      <stop offset="100%" stop-color="#0a1a0e"/>
+      <stop offset="0%" stop-color="#edfaf2"/>
+      <stop offset="50%" stop-color="#e4f5ea"/>
+      <stop offset="100%" stop-color="#edfaf2"/>
     </linearGradient>
     <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#8a6820"/>
@@ -35,12 +35,12 @@
       <stop offset="100%" stop-color="#8a6820"/>
     </linearGradient>
     <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#112218" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#0a1810" stop-opacity="0.95"/>
+      <stop offset="0%" stop-color="#d8f0e0" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e2f5e8" stop-opacity="1"/>
     </linearGradient>
     <radialGradient id="centerGlow" cx="50%" cy="25%" r="55%">
-      <stop offset="0%" stop-color="#1a4a20" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#091008" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#80c890" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#e4f5ea" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
@@ -60,24 +60,24 @@
   </g>
 
   <!-- Top botanical illustration — spreading herb branches -->
-  <g transform="translate(400, 88)" stroke="#3a7a48" fill="none" stroke-width="0.9" opacity="0.75">
+  <g transform="translate(400, 88)" stroke="#2a6a38" fill="none" stroke-width="0.9" opacity="0.75">
     <path d="M-90,18 C-65,8 -35,3 0,0 C35,3 65,8 90,18"/>
     <!-- Left side herbs -->
-    <path d="M-70,14 C-80,4 -78,-8 -65,-10 C-58,-4 -60,7 -70,14Z" fill="#1a4a28"/>
-    <path d="M-70,14 C-72,5 -68,-2 -65,-10" stroke="#5a9a5a" stroke-width="0.5"/>
-    <path d="M-50,9 C-58,0 -55,-10 -42,-11 C-37,-5 -40,5 -50,9Z" fill="#1a4a28"/>
-    <path d="M-30,4 C-36,-4 -32,-13 -20,-13 C-17,-7 -20,3 -30,4Z" fill="#224a28"/>
-    <path d="M-82,16 C-90,8 -88,-2 -82,-6" stroke="#4a8a48" stroke-width="0.7" fill="none"/>
-    <path d="M-88,-3 C-92,-6 -94,-10 -90,-14" stroke="#4a8a48" stroke-width="0.6" fill="none"/>
+    <path d="M-70,14 C-80,4 -78,-8 -65,-10 C-58,-4 -60,7 -70,14Z" fill="#2a7a40"/>
+    <path d="M-70,14 C-72,5 -68,-2 -65,-10" stroke="#2a7038" stroke-width="0.5"/>
+    <path d="M-50,9 C-58,0 -55,-10 -42,-11 C-37,-5 -40,5 -50,9Z" fill="#2a7a40"/>
+    <path d="M-30,4 C-36,-4 -32,-13 -20,-13 C-17,-7 -20,3 -30,4Z" fill="#2a7a40"/>
+    <path d="M-82,16 C-90,8 -88,-2 -82,-6" stroke="#2a6a38" stroke-width="0.7" fill="none"/>
+    <path d="M-88,-3 C-92,-6 -94,-10 -90,-14" stroke="#2a6a38" stroke-width="0.6" fill="none"/>
     <!-- Right side (mirror) -->
-    <path d="M70,14 C80,4 78,-8 65,-10 C58,-4 60,7 70,14Z" fill="#1a4a28"/>
-    <path d="M50,9 C58,0 55,-10 42,-11 C37,-5 40,5 50,9Z" fill="#1a4a28"/>
-    <path d="M30,4 C36,-4 32,-13 20,-13 C17,-7 20,3 30,4Z" fill="#224a28"/>
-    <path d="M82,16 C90,8 88,-2 82,-6" stroke="#4a8a48" stroke-width="0.7" fill="none"/>
+    <path d="M70,14 C80,4 78,-8 65,-10 C58,-4 60,7 70,14Z" fill="#2a7a40"/>
+    <path d="M50,9 C58,0 55,-10 42,-11 C37,-5 40,5 50,9Z" fill="#2a7a40"/>
+    <path d="M30,4 C36,-4 32,-13 20,-13 C17,-7 20,3 30,4Z" fill="#2a7a40"/>
+    <path d="M82,16 C90,8 88,-2 82,-6" stroke="#2a6a38" stroke-width="0.7" fill="none"/>
     <!-- Small flowers -->
-    <circle cx="-90" cy="18" r="3" fill="#5a9a5a" stroke="#4a9a48" stroke-width="0.5"/>
-    <circle cx="90" cy="18" r="3" fill="#5a9a5a" stroke="#4a9a48" stroke-width="0.5"/>
-    <circle cx="0" cy="0" r="3.5" fill="#6aaa6a" stroke="#5aaa5a" stroke-width="0.5"/>
+    <circle cx="-90" cy="18" r="3" fill="#3a8a50" stroke="#2a7038" stroke-width="0.5"/>
+    <circle cx="90" cy="18" r="3" fill="#3a8a50" stroke="#2a7038" stroke-width="0.5"/>
+    <circle cx="0" cy="0" r="3.5" fill="#3a9a58" stroke="#2a7038" stroke-width="0.5"/>
     <!-- Tiny flowers on left/right tips -->
     <g transform="translate(-90,18)"><line x1="0" y1="-5" x2="0" y2="-9"/><circle cx="0" cy="-10" r="1.5" fill="#d4a853"/></g>
     <g transform="translate(90,18)"><line x1="0" y1="-5" x2="0" y2="-9"/><circle cx="0" cy="-10" r="1.5" fill="#d4a853"/></g>
@@ -444,7 +444,7 @@
     <g transform="translate(28,28)" stroke="#7aaa7a" fill="none" stroke-width="0.8">
       <path d="M0,13 C-8,6 -10,-2 -6,-9 C-3,-14 3,-14 6,-9 C10,-2 8,6 0,13Z" fill="#132010"/>
       <!-- Main vein -->
-      <line x1="0" y1="-12" x2="0" y2="13" stroke="#5a9a5a" stroke-width="0.6"/>
+      <line x1="0" y1="-12" x2="0" y2="13" stroke="#2a7038" stroke-width="0.6"/>
       <!-- Side veins -->
       <line x1="0" y1="-6" x2="-6" y2="-3" stroke="#4a8a4a" stroke-width="0.4"/>
       <line x1="0" y1="-6" x2="6" y2="-3" stroke="#4a8a4a" stroke-width="0.4"/>
@@ -564,10 +564,9 @@
   </g>
 
   <!-- Disclaimer -->
-  <text x="400" y="1098" text-anchor="middle" font-family="Georgia, serif" font-size="6.5" fill="#4a6a4a">
+  <text x="400" y="1098" text-anchor="middle" font-family="Georgia, serif" font-size="6.5" fill="#1a4020">
     For educational purposes only. Consult a qualified herbalist or healthcare provider before using herbs therapeutically, especially during pregnancy, nursing, or with medications.
   </text>
-
 
 </svg>
 

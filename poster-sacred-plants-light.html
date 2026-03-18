@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sacred &amp; Ceremonial Plants (Light)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #f8f0e8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  .poster-container {
+    width: 800px;
+    min-width: 800px;
+  }
+</style>
+</head>
+<body>
+<div class="poster-container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1130" width="800" height="1130">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff8f0"/>
+      <stop offset="100%" stop-color="#fef5ec"/>
+    </linearGradient>
+
+    <!-- Card gradient -->
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdf0e0"/>
+      <stop offset="100%" stop-color="#fae8d8"/>
+    </linearGradient>
+
+    <!-- Border gradient (amber) -->
+    <linearGradient id="borderGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c8903a"/>
+      <stop offset="50%" stop-color="#e8b060"/>
+      <stop offset="100%" stop-color="#c8903a"/>
+    </linearGradient>
+
+    <!-- Title underline gradient -->
+    <linearGradient id="titleLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fff8f0"/>
+      <stop offset="20%" stop-color="#c8903a"/>
+      <stop offset="50%" stop-color="#e8b060"/>
+      <stop offset="80%" stop-color="#c8903a"/>
+      <stop offset="100%" stop-color="#fff8f0"/>
+    </linearGradient>
+
+    <!-- Glow filter for title -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle glow for icons -->
+    <filter id="iconGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ═══ BACKGROUND ═══ -->
+  <rect width="800" height="1130" fill="url(#bgGrad)"/>
+
+  <!-- ═══ OUTER DOUBLE BORDER ═══ -->
+  <!-- Outer border -->
+  <rect x="8" y="8" width="784" height="1114" rx="4" ry="4"
+        fill="none" stroke="url(#borderGrad)" stroke-width="1.5"/>
+  <!-- Inner border -->
+  <rect x="14" y="14" width="772" height="1102" rx="3" ry="3"
+        fill="none" stroke="#8a5020" stroke-width="0.8"/>
+  <!-- Inner inner border -->
+  <rect x="18" y="18" width="764" height="1094" rx="2" ry="2"
+        fill="none" stroke="#3a1a08" stroke-width="0.5"/>
+
+  <!-- ═══ CORNER ORNAMENTS ═══ -->
+  <!-- Top-left -->
+  <g transform="translate(22,22)" fill="none" stroke="#c8903a" stroke-width="1.2">
+    <path d="M0,30 L0,0 L30,0"/>
+    <path d="M5,25 L5,5 L25,5"/>
+    <circle cx="12" cy="12" r="3" fill="#c8903a" stroke="none"/>
+    <path d="M12,5 L12,9 M12,15 L12,19 M5,12 L9,12 M15,12 L19,12" stroke="#7a3808" stroke-width="0.8"/>
+  </g>
+  <!-- Top-right -->
+  <g transform="translate(778,22) scale(-1,1)" fill="none" stroke="#c8903a" stroke-width="1.2">
+    <path d="M0,30 L0,0 L30,0"/>
+    <path d="M5,25 L5,5 L25,5"/>
+    <circle cx="12" cy="12" r="3" fill="#c8903a" stroke="none"/>
+    <path d="M12,5 L12,9 M12,15 L12,19 M5,12 L9,12 M15,12 L19,12" stroke="#7a3808" stroke-width="0.8"/>
+  </g>
+  <!-- Bottom-left -->
+  <g transform="translate(22,1108) scale(1,-1)" fill="none" stroke="#c8903a" stroke-width="1.2">
+    <path d="M0,30 L0,0 L30,0"/>
+    <path d="M5,25 L5,5 L25,5"/>
+    <circle cx="12" cy="12" r="3" fill="#c8903a" stroke="none"/>
+    <path d="M12,5 L12,9 M12,15 L12,19 M5,12 L9,12 M15,12 L19,12" stroke="#7a3808" stroke-width="0.8"/>
+  </g>
+  <!-- Bottom-right -->
+  <g transform="translate(778,1108) scale(-1,-1)" fill="none" stroke="#c8903a" stroke-width="1.2">
+    <path d="M0,30 L0,0 L30,0"/>
+    <path d="M5,25 L5,5 L25,5"/>
+    <circle cx="12" cy="12" r="3" fill="#c8903a" stroke="none"/>
+    <path d="M12,5 L12,9 M12,15 L12,19 M5,12 L9,12 M15,12 L19,12" stroke="#7a3808" stroke-width="0.8"/>
+  </g>
+
+  <!-- ═══ TOP BOTANICAL / FLAME MOTIF ═══ -->
+  <!-- Rising smoke / sacred flame lines — top center -->
+  <g transform="translate(400, 38)" fill="none" stroke="#7a3808" stroke-linecap="round" opacity="0.7">
+    <!-- central flame -->
+    <path d="M0,22 C0,14 -3,8 0,2 C3,8 0,14 0,22" stroke-width="1.2" fill="#c87840" fill-opacity="0.15"/>
+    <!-- left flames -->
+    <path d="M-12,24 C-11,17 -14,10 -11,4 C-9,10 -12,17 -12,24" stroke-width="1"/>
+    <path d="M-22,26 C-21,20 -24,14 -21,9 C-19,14 -22,20 -22,26" stroke-width="0.8" opacity="0.6"/>
+    <!-- right flames -->
+    <path d="M12,24 C11,17 14,10 11,4 C9,10 12,17 12,24" stroke-width="1"/>
+    <path d="M22,26 C21,20 24,14 21,9 C19,14 22,20 22,26" stroke-width="0.8" opacity="0.6"/>
+    <!-- smoke wisps rising -->
+    <path d="M0,2 C2,-4 -2,-10 1,-18" stroke-width="0.7" opacity="0.4"/>
+    <path d="M-11,4 C-9,-2 -13,-7 -10,-14" stroke-width="0.6" opacity="0.3"/>
+    <path d="M11,4 C9,-2 13,-7 10,-14" stroke-width="0.6" opacity="0.3"/>
+    <!-- horizontal ornament lines -->
+    <line x1="-80" y1="28" x2="-30" y2="28" stroke-width="0.8" opacity="0.5"/>
+    <line x1="30" y1="28" x2="80" y2="28" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="-85" cy="28" r="1.5" fill="#c87840" stroke="none" opacity="0.5"/>
+    <circle cx="85" cy="28" r="1.5" fill="#c87840" stroke="none" opacity="0.5"/>
+  </g>
+
+  <!-- ═══ TITLE SECTION ═══ -->
+  <text x="400" y="95" text-anchor="middle"
+        font-family="Georgia, serif" font-size="9" font-weight="normal"
+        letter-spacing="5" fill="#a06030" opacity="0.9">✦ BOTANICAL REFERENCE GUIDE ✦</text>
+
+  <text x="400" y="128" text-anchor="middle"
+        font-family="Georgia, serif" font-size="30" font-weight="bold"
+        letter-spacing="2" fill="#8a5010" filter="url(#glow)">Sacred &amp; Ceremonial</text>
+
+  <text x="400" y="156" text-anchor="middle"
+        font-family="Georgia, serif" font-size="36" font-weight="bold"
+        letter-spacing="3" fill="#8a5010" filter="url(#glow)">PLANTS</text>
+
+  <!-- Title decorative line -->
+  <rect x="80" y="165" width="640" height="1.5" fill="url(#titleLine)" rx="1"/>
+  <rect x="140" y="169" width="520" height="0.8" fill="url(#titleLine)" rx="0.5" opacity="0.5"/>
+
+  <text x="400" y="184" text-anchor="middle"
+        font-family="Georgia, serif" font-size="8.5" font-weight="normal"
+        letter-spacing="5" fill="#7a4010" opacity="0.85">PLANTS OF HEALING TRADITIONS</text>
+
+  <!-- ═══ GRID OF 12 PLANT CARDS ═══ -->
+  <!-- Grid: 3 columns × 4 rows, cards 240px wide × 218px tall -->
+  <!-- col x: 28, 282, 536   row y: 196, 420, 644, 868 -->
+
+  <!-- ────────────────────────────────────────────────
+       CARD MACRO — repeated 12 times
+       Each card: rx=6, border #5a3018
+       Layout inside card (relative to card top-left):
+         circle icon: cx=34, cy=34, r=26 (with border #5a3018)
+         plant name: x=70, y=18
+         botanical: x=70, y=30
+         divider: y≈42
+         TRADITION label + text
+         CEREMONY label + text
+         PROPERTIES label + text
+         SPIRITUAL label + text (italic)
+  ──────────────────────────────────────────────────── -->
+
+  <!-- ══════ ROW 1 ══════ -->
+
+  <!-- CARD 1: White Sage -->
+  <g transform="translate(28, 196)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <!-- Icon circle -->
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Sage bundle icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- bundle body -->
+      <ellipse cx="0" cy="4" rx="6" ry="10" fill="#e8d0b0" stroke="#8a4810" stroke-width="1"/>
+      <!-- wrapped cord lines -->
+      <path d="M-6,2 C-3,4 3,4 6,2" stroke="#d4a853" stroke-width="0.8"/>
+      <path d="M-6,5 C-3,7 3,7 6,5" stroke="#d4a853" stroke-width="0.8"/>
+      <!-- leaf sprigs emerging from top -->
+      <path d="M0,-6 C-2,-12 -5,-16 -4,-20" stroke="#7a3808" stroke-width="1.2"/>
+      <path d="M0,-6 C2,-12 5,-16 4,-20" stroke="#7a3808" stroke-width="1.2"/>
+      <path d="M0,-6 C0,-13 0,-18 0,-22" stroke="#8a4810" stroke-width="1.2"/>
+      <path d="M-4,-14 C-8,-14 -9,-11 -7,-10" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M4,-14 C8,-14 9,-11 7,-10" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M-2,-18 C-5,-18 -6,-15 -4,-14" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M2,-18 C5,-18 6,-15 4,-14" stroke="#7a3808" stroke-width="0.8"/>
+      <!-- smoke wisps -->
+      <path d="M-2,-22 C-3,-26 -1,-29 -2,-33" stroke="#c89040" stroke-width="0.6" opacity="0.6"/>
+      <path d="M2,-22 C3,-26 1,-29 2,-33" stroke="#c89040" stroke-width="0.6" opacity="0.6"/>
+    </g>
+    <!-- Text content -->
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">White Sage</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Salvia apiana</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Lakota, Chumash, SW Native American</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Smudging, space clearing,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">purification rituals</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Antimicrobial (clears airborne bacteria),</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">mood-elevating</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Carries prayers to spirit world; cleanses</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">negative energy</text>
+  </g>
+
+  <!-- CARD 2: Palo Santo -->
+  <g transform="translate(281, 196)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Palo Santo stick with smoke icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- stick -->
+      <rect x="-4" y="-18" width="8" height="32" rx="3" fill="#e8d0b0" stroke="#8a4810" stroke-width="1"/>
+      <!-- wood grain lines -->
+      <path d="M-2,-14 L-2,10" stroke="#a06030" stroke-width="0.6"/>
+      <path d="M1,-16 L1,12" stroke="#a06030" stroke-width="0.5"/>
+      <!-- glowing ember tip -->
+      <circle cx="0" cy="-20" r="3" fill="#c87840" opacity="0.8"/>
+      <circle cx="0" cy="-20" r="1.5" fill="#e8a840" opacity="0.9"/>
+      <!-- smoke wisps curling upward -->
+      <path d="M0,-23 C3,-28 -3,-33 2,-40" stroke="#c89040" stroke-width="0.8" opacity="0.7"/>
+      <path d="M2,-25 C5,-30 0,-35 3,-42" stroke="#c89040" stroke-width="0.7" opacity="0.5"/>
+      <path d="M-2,-24 C-5,-30 1,-36 -2,-43" stroke="#c89040" stroke-width="0.6" opacity="0.4"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Palo Santo</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Bursera graveolens</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Inca, Andean cultures</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Smoke cleansing, spiritual protection,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">healing rituals</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Antidepressant, analgesic,</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">anti-inflammatory</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">"Holy wood" — elevates energy,</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">invites in the sacred</text>
+  </g>
+
+  <!-- CARD 3: Copal -->
+  <g transform="translate(534, 196)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Copal resin drops icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- large central resin drop -->
+      <path d="M0,-22 C-5,-14 -7,-6 -6,0 C-5,7 5,7 6,0 C7,-6 5,-14 0,-22 Z"
+            fill="#e8d0b0" stroke="#8a4810" stroke-width="1.2"/>
+      <!-- amber glow inside drop -->
+      <path d="M0,-18 C-3,-12 -4,-6 -3,0 C-2,4 2,4 3,0 C4,-6 3,-12 0,-18 Z"
+            fill="#c87840" opacity="0.3" stroke="none"/>
+      <!-- small resin drops -->
+      <path d="M-12,-8 C-14,-4 -15,0 -14,3 C-13,6 -11,6 -10,3 C-9,0 -10,-4 -12,-8 Z"
+            fill="#e8d0b0" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M12,-8 C14,-4 15,0 14,3 C13,6 11,6 10,3 C9,0 10,-4 12,-8 Z"
+            fill="#e8d0b0" stroke="#7a3808" stroke-width="0.9"/>
+      <!-- smoke wisps from resin burning -->
+      <path d="M0,-23 C-2,-28 1,-32 -1,-38" stroke="#c89040" stroke-width="0.7" opacity="0.6"/>
+      <path d="M2,-23 C4,-28 2,-33 4,-39" stroke="#c89040" stroke-width="0.6" opacity="0.4"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Copal</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Bursera bipinnata</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Maya, Aztec</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Offerings to gods, funerary rites,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">healing ceremonies</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Antibacterial,</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">anti-inflammatory</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Bridge between worlds; "blood of trees"</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">in Nahuatl cosmology</text>
+  </g>
+
+  <!-- ══════ ROW 2 ══════ -->
+
+  <!-- CARD 4: Ayahuasca -->
+  <g transform="translate(28, 400)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Ayahuasca vine spiral icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- spiral vine -->
+      <path d="M0,14 C8,10 12,4 10,-4 C8,-12 0,-16 -6,-12 C-12,-8 -12,0 -6,6 C0,12 8,10 10,2 C12,-6 6,-16 0,-20"
+            stroke="#8a4810" stroke-width="1.5" fill="none"/>
+      <!-- small leaves on vine -->
+      <path d="M10,-4 C14,-4 16,-1 13,1" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M-6,-12 C-10,-14 -13,-11 -10,-8" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M-6,6 C-10,8 -11,12 -8,12" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M4,-18 C4,-22 7,-24 8,-21" stroke="#7a3808" stroke-width="0.8"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Ayahuasca</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Banisteriopsis caapi</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Amazonian shamanic traditions</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Healing dieta, vision quests,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">deep psychological work</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">MAOI (harmala alkaloids),</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">visionary</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">"Vine of the soul" — access to ancestral</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">knowledge and healing</text>
+  </g>
+
+  <!-- CARD 5: Peyote -->
+  <g transform="translate(281, 400)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Peyote cactus top-view icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- outer cactus button shape (top view, segmented) -->
+      <circle cx="0" cy="0" r="16" fill="#f0dcc0" stroke="#8a4810" stroke-width="1.2"/>
+      <!-- segments radiating like a star -->
+      <path d="M0,0 L0,-15" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,0 L13,-7" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,0 L13,7" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,0 L0,15" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,0 L-13,7" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,0 L-13,-7" stroke="#7a3808" stroke-width="0.8"/>
+      <!-- curved segment outlines -->
+      <path d="M0,-15 C5,-12 10,-7 13,-7" stroke="#8a4810" stroke-width="0.8"/>
+      <path d="M13,-7 C14,0 14,6 13,7" stroke="#8a4810" stroke-width="0.8"/>
+      <path d="M13,7 C8,12 4,14 0,15" stroke="#8a4810" stroke-width="0.8"/>
+      <path d="M0,15 C-5,12 -10,7 -13,7" stroke="#8a4810" stroke-width="0.8"/>
+      <path d="M-13,7 C-14,0 -14,-6 -13,-7" stroke="#8a4810" stroke-width="0.8"/>
+      <path d="M-13,-7 C-8,-12 -4,-14 0,-15" stroke="#8a4810" stroke-width="0.8"/>
+      <!-- central tuft -->
+      <circle cx="0" cy="0" r="4" fill="#e8d0b0" stroke="#d4a853" stroke-width="0.8"/>
+      <path d="M0,-3 C-1,-5 0,-7 1,-5 C2,-3 0,-1 0,-3" fill="#c87840" stroke="none" opacity="0.8"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Peyote</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Lophophora williamsii</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Huichol, Native American Church</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Vision quests, healing circles,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">coming-of-age ceremonies</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Mescaline — visionary, anti-anxiety,</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">analgesic</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Grandfather cactus — teacher plant,</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">divine communication</text>
+  </g>
+
+  <!-- CARD 6: Cannabis -->
+  <g transform="translate(534, 400)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Cannabis leaf icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- central stem -->
+      <line x1="0" y1="16" x2="0" y2="-22" stroke="#8a4810" stroke-width="1.2"/>
+      <!-- main central leaflet -->
+      <path d="M0,-8 C-4,-14 -5,-20 0,-24 C5,-20 4,-14 0,-8" fill="#1a0c04" stroke="#8a4810" stroke-width="1"/>
+      <!-- side leaflet pairs -->
+      <path d="M0,-4 C-7,-6 -12,-10 -14,-16 C-8,-14 -4,-9 0,-4" fill="#1a0c04" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M0,-4 C7,-6 12,-10 14,-16 C8,-14 4,-9 0,-4" fill="#1a0c04" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M0,2 C-8,0 -14,-4 -17,-10 C-10,-8 -5,-3 0,2" fill="#1a0c04" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,2 C8,0 14,-4 17,-10 C10,-8 5,-3 0,2" fill="#1a0c04" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,8 C-7,7 -13,4 -16,-2 C-9,1 -4,5 0,8" fill="#1a0c04" stroke="#8a5020" stroke-width="0.7"/>
+      <path d="M0,8 C7,7 13,4 16,-2 C9,1 4,5 0,8" fill="#1a0c04" stroke="#8a5020" stroke-width="0.7"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Cannabis</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Cannabis sativa</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Hindu, Rastafari, Scythian, ancient China</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Meditation, devotional offerings,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">healing</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">THC/CBD — analgesic, anti-anxiety,</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">visionary</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Sacred to Shiva; sacrament in multiple</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">living traditions</text>
+  </g>
+
+  <!-- ══════ ROW 3 ══════ -->
+
+  <!-- CARD 7: Tobacco -->
+  <g transform="translate(28, 604)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Tobacco flower icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- trumpet-shaped flower petals (5 petals) -->
+      <path d="M0,-6 C-2,-12 -6,-18 -4,-22 C-1,-18 0,-12 0,-6" fill="#1a0c04" stroke="#8a4810" stroke-width="1"/>
+      <path d="M0,-6 C4,-10 10,-14 12,-18 C8,-13 4,-8 0,-6" fill="#1a0c04" stroke="#8a4810" stroke-width="1"/>
+      <path d="M0,-6 C6,-2 12,2 14,6 C9,2 4,0 0,-6" fill="#1a0c04" stroke="#8a4810" stroke-width="0.9"/>
+      <path d="M0,-6 C-4,2 -6,8 -4,14 C-3,8 -2,2 0,-6" fill="#1a0c04" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M0,-6 C-8,-4 -14,0 -14,6 C-9,1 -4,-2 0,-6" fill="#1a0c04" stroke="#7a3808" stroke-width="0.9"/>
+      <!-- flower center -->
+      <circle cx="0" cy="-6" r="4" fill="#e8d0b0" stroke="#d4a853" stroke-width="0.8"/>
+      <!-- stem -->
+      <line x1="0" y1="-2" x2="0" y2="18" stroke="#8a4810" stroke-width="1.2"/>
+      <!-- small leaf on stem -->
+      <path d="M0,8 C4,6 6,3 4,1" stroke="#7a3808" stroke-width="0.8"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Tobacco</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Nicotiana rustica / tabacum</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Pan-indigenous Americas</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Prayer offerings, healing,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">treaty sealing</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Nicotine — stimulant,</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">emetic in high doses</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Messenger plant — carries intention;</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">"first medicine" in many traditions</text>
+  </g>
+
+  <!-- CARD 8: Blue Lotus -->
+  <g transform="translate(281, 604)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Lotus blossom icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- outer petals -->
+      <path d="M0,6 C-3,-2 -4,-12 0,-18 C4,-12 3,-2 0,6" fill="#1a1028" stroke="#8a4810" stroke-width="1"/>
+      <path d="M0,6 C5,0 12,-6 16,-10 C13,-4 7,2 0,6" fill="#1a1028" stroke="#8a4810" stroke-width="1"/>
+      <path d="M0,6 C-5,0 -12,-6 -16,-10 C-13,-4 -7,2 0,6" fill="#1a1028" stroke="#8a4810" stroke-width="1"/>
+      <!-- middle petals -->
+      <path d="M0,6 C2,-2 2,-10 0,-16 C-2,-10 -2,-2 0,6" fill="#221428" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M0,6 C6,2 10,-4 12,-10 C7,-2 3,3 0,6" fill="#221428" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M0,6 C-6,2 -10,-4 -12,-10 C-7,-2 -3,3 0,6" fill="#221428" stroke="#7a3808" stroke-width="0.9"/>
+      <!-- center pistil -->
+      <circle cx="0" cy="4" r="4" fill="#e8d0b0" stroke="#d4a853" stroke-width="1"/>
+      <circle cx="0" cy="4" r="2" fill="#c87840" stroke="none" opacity="0.6"/>
+      <!-- water line -->
+      <path d="M-16,14 C-8,12 8,12 16,14" stroke="#8a5020" stroke-width="0.8"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Blue Lotus</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Nymphaea caerulea</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Ancient Egypt</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Funeral rites, festivals,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">visionary states</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Aporphine, nuciferine — calming,</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">mildly psychoactive</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Symbol of creation and the sun;</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">the flower of Osiris</text>
+  </g>
+
+  <!-- CARD 9: Fly Agaric -->
+  <g transform="translate(534, 604)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Mushroom cap with spots icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- mushroom cap -->
+      <path d="M-16,4 C-18,-4 -14,-16 0,-20 C14,-16 18,-4 16,4 Z"
+            fill="#2a0a04" stroke="#8a4810" stroke-width="1.2"/>
+      <!-- cap highlight curve -->
+      <path d="M-10,-12 C-4,-18 4,-18 10,-12" stroke="#7a3808" stroke-width="0.8" opacity="0.6"/>
+      <!-- spots on cap -->
+      <circle cx="0" cy="-12" r="2.5" fill="#c87840" opacity="0.7" stroke="none"/>
+      <circle cx="-8" cy="-4" r="1.8" fill="#c87840" opacity="0.6" stroke="none"/>
+      <circle cx="8" cy="-4" r="1.8" fill="#c87840" opacity="0.6" stroke="none"/>
+      <circle cx="-4" cy="-18" r="1.2" fill="#c87840" opacity="0.5" stroke="none"/>
+      <circle cx="6" cy="-16" r="1.2" fill="#c87840" opacity="0.5" stroke="none"/>
+      <!-- stem -->
+      <rect x="-5" y="4" width="10" height="16" rx="2" fill="#f0dcc0" stroke="#7a3808" stroke-width="1"/>
+      <!-- stem ring (annulus) -->
+      <path d="M-7,12 C-5,14 5,14 7,12" stroke="#8a4810" stroke-width="0.9"/>
+      <!-- ground line -->
+      <path d="M-14,20 C-6,18 6,18 14,20" stroke="#8a5020" stroke-width="0.8"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Fly Agaric</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Amanita muscaria</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Siberian shamanism, Norse, Vedic</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Shamanic journeying,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">vision seeking</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Muscimol — dissociative,</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">visionary</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Doorway to spirit world; possible</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">source of Soma in Rigveda</text>
+  </g>
+
+  <!-- ══════ ROW 4 ══════ -->
+
+  <!-- CARD 10: Damiana -->
+  <g transform="translate(28, 808)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Damiana small flower icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- 5 small petals -->
+      <path d="M0,-4 C-1,-8 -3,-14 0,-18 C3,-14 1,-8 0,-4" fill="#1a0c04" stroke="#8a4810" stroke-width="1"/>
+      <path d="M0,-4 C4,-6 10,-8 13,-6 C10,-2 5,0 0,-4" fill="#1a0c04" stroke="#8a4810" stroke-width="1"/>
+      <path d="M0,-4 C4,2 8,6 8,10 C4,8 1,4 0,-4" fill="#1a0c04" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M0,-4 C-4,2 -8,6 -8,10 C-4,8 -1,4 0,-4" fill="#1a0c04" stroke="#7a3808" stroke-width="0.9"/>
+      <path d="M0,-4 C-5,-6 -11,-7 -13,-6 C-10,-2 -5,0 0,-4" fill="#1a0c04" stroke="#7a3808" stroke-width="0.9"/>
+      <!-- center -->
+      <circle cx="0" cy="-4" r="3" fill="#c87840" opacity="0.7" stroke="#d4a853" stroke-width="0.7"/>
+      <!-- stem -->
+      <line x1="0" y1="-1" x2="0" y2="16" stroke="#8a4810" stroke-width="1.2"/>
+      <!-- small leaves -->
+      <path d="M0,6 C4,4 7,6 5,8" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,10 C-4,8 -7,10 -5,12" stroke="#7a3808" stroke-width="0.8"/>
+      <!-- crescent moon (sacred to Ixchel) -->
+      <path d="M-14,-18 C-10,-22 -4,-20 -6,-16 C-10,-18 -14,-18 -14,-18" fill="none" stroke="#d4a853" stroke-width="0.7" opacity="0.6"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Damiana</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Turnera diffusa</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Maya, Mexican traditional medicine</text>
+    <text x="8" y="103" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="113" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Love magic, Venus ceremonies,</text>
+    <text x="8" y="123" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">sensual ritual</text>
+    <text x="8" y="135" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="145" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Flavonoids — mild aphrodisiac,</text>
+    <text x="8" y="155" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">nervine, mood-lifting</text>
+    <text x="8" y="167" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="178" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Sacred to Ixchel (Maya moon goddess);</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">opens the heart</text>
+  </g>
+
+  <!-- CARD 11: Mugwort -->
+  <g transform="translate(281, 808)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Mugwort feathery sprig icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- main stem -->
+      <line x1="0" y1="16" x2="0" y2="-22" stroke="#8a4810" stroke-width="1.2"/>
+      <!-- feathery pinnate leaves — pairs of deeply cut leaflets -->
+      <!-- top -->
+      <path d="M0,-16 C-3,-16 -6,-14 -7,-12" stroke="#8a4810" stroke-width="0.9"/>
+      <path d="M-7,-12 C-8,-10 -7,-8 -5,-9" stroke="#7a3808" stroke-width="0.7"/>
+      <path d="M0,-16 C3,-16 6,-14 7,-12" stroke="#8a4810" stroke-width="0.9"/>
+      <path d="M7,-12 C8,-10 7,-8 5,-9" stroke="#7a3808" stroke-width="0.7"/>
+      <!-- mid-upper -->
+      <path d="M0,-10 C-4,-9 -8,-7 -10,-4" stroke="#8a4810" stroke-width="0.9"/>
+      <path d="M-10,-4 C-12,-2 -11,0 -9,-1" stroke="#7a3808" stroke-width="0.7"/>
+      <path d="M0,-10 C4,-9 8,-7 10,-4" stroke="#8a4810" stroke-width="0.9"/>
+      <path d="M10,-4 C12,-2 11,0 9,-1" stroke="#7a3808" stroke-width="0.7"/>
+      <!-- mid -->
+      <path d="M0,-4 C-4,-2 -9,0 -11,4" stroke="#8a4810" stroke-width="0.9"/>
+      <path d="M-11,4 C-12,7 -10,9 -8,7" stroke="#7a3808" stroke-width="0.7"/>
+      <path d="M0,-4 C4,-2 9,0 11,4" stroke="#8a4810" stroke-width="0.9"/>
+      <path d="M11,4 C12,7 10,9 8,7" stroke="#7a3808" stroke-width="0.7"/>
+      <!-- lower -->
+      <path d="M0,4 C-4,5 -8,7 -9,11" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,4 C4,5 8,7 9,11" stroke="#7a3808" stroke-width="0.8"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Mugwort</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Artemisia vulgaris</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">European witchcraft, East Asian,</text>
+    <text x="8" y="100" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Native American</text>
+    <text x="8" y="112" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="122" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Dream work, divination, protection,</text>
+    <text x="8" y="132" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">moxibustion</text>
+    <text x="8" y="144" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="154" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Thujone — nervine, emmenagogue,</text>
+    <text x="8" y="164" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">dream-intensifying</text>
+    <text x="8" y="176" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="187" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Sacred to Artemis; the dreamer's herb,</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">opens the veil</text>
+  </g>
+
+  <!-- CARD 12: Kava -->
+  <g transform="translate(534, 808)">
+    <rect width="238" height="196" rx="6" fill="url(#cardGrad)" stroke="#8a5020" stroke-width="1"/>
+    <circle cx="34" cy="36" r="27" fill="#f0e0c8" stroke="#8a5020" stroke-width="1.2"/>
+    <!-- Kava root cross-section icon -->
+    <g transform="translate(34,36)" fill="none" stroke="#7a3808" stroke-linecap="round">
+      <!-- main root cross-section (circular cut) -->
+      <circle cx="0" cy="2" r="14" fill="#f0dcc0" stroke="#8a4810" stroke-width="1.2"/>
+      <!-- growth rings -->
+      <circle cx="0" cy="2" r="10" stroke="#a06030" stroke-width="0.6"/>
+      <circle cx="0" cy="2" r="6" stroke="#a06030" stroke-width="0.6"/>
+      <circle cx="0" cy="2" r="3" fill="#e8d0b0" stroke="#7a3808" stroke-width="0.7"/>
+      <!-- radial lines (medullary rays) -->
+      <line x1="0" y1="2" x2="0" y2="-12" stroke="#a06030" stroke-width="0.5"/>
+      <line x1="0" y1="2" x2="12" y2="2" stroke="#a06030" stroke-width="0.5"/>
+      <line x1="0" y1="2" x2="0" y2="16" stroke="#a06030" stroke-width="0.5"/>
+      <line x1="0" y1="2" x2="-12" y2="2" stroke="#a06030" stroke-width="0.5"/>
+      <line x1="0" y1="2" x2="8" y2="-8" stroke="#a06030" stroke-width="0.4"/>
+      <line x1="0" y1="2" x2="8" y2="12" stroke="#a06030" stroke-width="0.4"/>
+      <line x1="0" y1="2" x2="-8" y2="12" stroke="#a06030" stroke-width="0.4"/>
+      <line x1="0" y1="2" x2="-8" y2="-8" stroke="#a06030" stroke-width="0.4"/>
+      <!-- root tendrils extending from sides -->
+      <path d="M-14,2 C-18,-2 -20,-8 -18,-14" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M14,2 C18,-2 20,-8 18,-14" stroke="#7a3808" stroke-width="0.8"/>
+      <path d="M0,16 C-2,20 -1,24 2,22" stroke="#7a3808" stroke-width="0.7"/>
+    </g>
+    <text x="70" y="20" font-family="Georgia,serif" font-size="11.5" font-weight="bold" fill="#8a5010">Kava</text>
+    <text x="70" y="31" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#5a3010">Piper methysticum</text>
+    <line x1="8" y1="70" x2="230" y2="70" stroke="#8a5020" stroke-width="0.7"/>
+    <text x="8" y="81" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">TRADITION</text>
+    <text x="8" y="91" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Pacific Islands — Melanesia, Polynesia,</text>
+    <text x="8" y="100" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Micronesia</text>
+    <text x="8" y="112" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">CEREMONY / USE</text>
+    <text x="8" y="122" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Welcoming ceremonies, conflict</text>
+    <text x="8" y="132" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">resolution, healing</text>
+    <text x="8" y="144" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">PROPERTIES</text>
+    <text x="8" y="154" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">Kavalactones — anxiolytic,</text>
+    <text x="8" y="164" font-family="Georgia,serif" font-size="7.5" fill="#2a1808">muscle relaxant, euphoric</text>
+    <text x="8" y="176" font-family="Georgia,serif" font-size="6.5" font-weight="bold" letter-spacing="1.5" fill="#7a4010">SPIRITUAL SIGNIFICANCE</text>
+    <text x="8" y="187" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">Gift of the gods; unites community</text>
+    <text x="8" y="188" font-family="Georgia,serif" font-size="7" font-style="italic" fill="#5a3010">and dispels hostility</text>
+  </g>
+
+  <!-- ═══ DIVIDER BEFORE LEGEND ═══ -->
+  <rect x="28" y="1012" width="744" height="0.8" fill="url(#titleLine)" rx="0.5" opacity="0.6"/>
+
+  <!-- ═══ FORMS OF USE LEGEND ═══ -->
+  <text x="400" y="1022" text-anchor="middle"
+        font-family="Georgia,serif" font-size="7" font-weight="bold"
+        letter-spacing="4" fill="#7a4010">FORMS OF USE</text>
+
+  <!-- Legend icons — 6 items spaced across -->
+  <!-- 1: Smoke/Smudge -->
+  <g transform="translate(60, 1028)">
+    <circle cx="0" cy="8" r="9" fill="#f0e0c8" stroke="#8a5020" stroke-width="0.8"/>
+    <g fill="none" stroke="#8a4810" stroke-linecap="round">
+      <path d="M0,14 C0,10 -2,6 0,4 C2,6 0,10 0,14" stroke-width="0.9"/>
+      <path d="M0,4 C-2,0 1,-4 -1,-8" stroke-width="0.7" opacity="0.6"/>
+      <path d="M1,4 C3,0 1,-3 2,-7" stroke-width="0.6" opacity="0.4"/>
+    </g>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Smoke/</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Smudge</text>
+  </g>
+
+  <!-- 2: Brew/Tea -->
+  <g transform="translate(185, 1028)">
+    <circle cx="0" cy="8" r="9" fill="#f0e0c8" stroke="#8a5020" stroke-width="0.8"/>
+    <g fill="none" stroke="#8a4810" stroke-linecap="round">
+      <!-- cup -->
+      <path d="M-5,14 L-4,4 L4,4 L5,14 Z" stroke-width="0.9"/>
+      <path d="M-5,14 L5,14" stroke-width="0.9"/>
+      <path d="M5,8 C8,8 8,12 5,12" stroke-width="0.8"/>
+      <!-- steam -->
+      <path d="M-2,3 C-3,0 -1,-3 -2,-6" stroke-width="0.7" opacity="0.7"/>
+      <path d="M2,3 C3,0 1,-3 2,-6" stroke-width="0.7" opacity="0.7"/>
+    </g>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Brew /</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Tea</text>
+  </g>
+
+  <!-- 3: Resin -->
+  <g transform="translate(310, 1028)">
+    <circle cx="0" cy="8" r="9" fill="#f0e0c8" stroke="#8a5020" stroke-width="0.8"/>
+    <g fill="none" stroke="#8a4810" stroke-linecap="round">
+      <!-- resin drop -->
+      <path d="M0,-2 C-3,2 -4,6 -3,9 C-2,12 2,12 3,9 C4,6 3,2 0,-2 Z"
+            fill="#e8d0b0" stroke="#8a4810" stroke-width="0.9"/>
+      <path d="M0,0 C-1,3 -2,6 -1,9" stroke="#d4a853" stroke-width="0.5" opacity="0.5"/>
+    </g>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Resin</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Burning</text>
+  </g>
+
+  <!-- 4: Ingestion -->
+  <g transform="translate(435, 1028)">
+    <circle cx="0" cy="8" r="9" fill="#f0e0c8" stroke="#8a5020" stroke-width="0.8"/>
+    <g fill="none" stroke="#8a4810" stroke-linecap="round">
+      <!-- pill/tablet -->
+      <ellipse cx="0" cy="8" rx="5" ry="7" fill="#f0dcc0" stroke="#8a4810" stroke-width="0.9"/>
+      <line x1="0" y1="1" x2="0" y2="15" stroke="#7a3808" stroke-width="0.7"/>
+    </g>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Ingest /</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Consume</text>
+  </g>
+
+  <!-- 5: Anointing -->
+  <g transform="translate(560, 1028)">
+    <circle cx="0" cy="8" r="9" fill="#f0e0c8" stroke="#8a5020" stroke-width="0.8"/>
+    <g fill="none" stroke="#8a4810" stroke-linecap="round">
+      <!-- hand with drop -->
+      <path d="M-4,14 C-5,10 -4,6 0,5 C4,6 5,10 4,14" stroke-width="0.9"/>
+      <path d="M0,5 C-1,2 0,-1 0,-1" stroke-width="0.8"/>
+      <path d="M0,-1 C-1,-4 0,-7 0,-7" stroke-width="0.7"/>
+      <circle cx="0" cy="-8" r="2" fill="#c87840" opacity="0.6" stroke="#d4a853" stroke-width="0.7"/>
+    </g>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Anointing</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">/ Oil</text>
+  </g>
+
+  <!-- 6: Offering -->
+  <g transform="translate(685, 1028)">
+    <circle cx="0" cy="8" r="9" fill="#f0e0c8" stroke="#8a5020" stroke-width="0.8"/>
+    <g fill="none" stroke="#8a4810" stroke-linecap="round">
+      <!-- bowl/offering vessel -->
+      <path d="M-6,12 C-6,6 6,6 6,12" stroke-width="0.9"/>
+      <line x1="-7" y1="12" x2="7" y2="12" stroke-width="0.9"/>
+      <!-- star/offering symbol above -->
+      <path d="M0,4 L1,1 L3,3 L1,2 L3,0 L0,1 L-3,0 L-1,2 L-3,3 L-1,1 Z"
+            fill="#c87840" opacity="0.7" stroke="none"/>
+    </g>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Offering /</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5a3010">Ritual</text>
+  </g>
+
+  <!-- ═══ BOTTOM BOTANICAL / FLAME MOTIF ═══ -->
+  <g transform="translate(400, 1078)" fill="none" stroke="#7a3808" stroke-linecap="round" opacity="0.55">
+    <path d="M0,-6 C0,-10 -2,-14 0,-18 C2,-14 0,-10 0,-6" stroke-width="1"/>
+    <path d="M-10,-4 C-10,-8 -12,-11 -10,-15 C-8,-11 -10,-8 -10,-4" stroke-width="0.8"/>
+    <path d="M10,-4 C10,-8 12,-11 10,-15 C8,-11 10,-8 10,-4" stroke-width="0.8"/>
+    <path d="M-20,-2 C-20,-5 -22,-8 -20,-12 C-18,-8 -20,-5 -20,-2" stroke-width="0.7" opacity="0.6"/>
+    <path d="M20,-2 C20,-5 22,-8 20,-12 C18,-8 20,-5 20,-2" stroke-width="0.7" opacity="0.6"/>
+    <line x1="-70" y1="0" x2="-25" y2="0" stroke-width="0.7" opacity="0.4"/>
+    <line x1="25" y1="0" x2="70" y2="0" stroke-width="0.7" opacity="0.4"/>
+    <circle cx="-74" cy="0" r="1.2" fill="#c87840" stroke="none" opacity="0.4"/>
+    <circle cx="74" cy="0" r="1.2" fill="#c87840" stroke="none" opacity="0.4"/>
+  </g>
+
+  <!-- ═══ FOOTER DISCLAIMER ═══ -->
+  <text x="400" y="1095" text-anchor="middle"
+        font-family="Georgia,serif" font-size="6" fill="#3a2010" opacity="0.85">
+    Several plants featured are sacred to living indigenous cultures — approach with respect, reverence, and cultural humility.
+  </text>
+  <text x="400" y="1106" text-anchor="middle"
+        font-family="Georgia,serif" font-size="6" fill="#3a2010" opacity="0.85">
+    Some are controlled substances in various jurisdictions — research local laws before any use or possession.
+  </text>
+  <text x="400" y="1119" text-anchor="middle"
+        font-family="Georgia,serif" font-size="5.5" fill="#2a1808" opacity="0.7">
+    For educational reference only · Not medical or legal advice
+  </text>
+
+</svg>
+</div>
+</body>
+</html>
