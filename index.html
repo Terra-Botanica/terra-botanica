@@ -433,30 +433,37 @@ function renderWhereToBuy(section) {
   </div>`;
 }
 
-// ── PEXELS PHOTO ──
-// Get your free API key at pexels.com/api — takes 2 minutes, free for non-commercial & commercial use
-const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY';
+// ── PHOTOS via Wikipedia ──
+// Uses Wikipedia's free REST API — no key needed, accurate species photos
 
 async function fetchAndShowPhoto(name, section, botanical) {
   const box = document.getElementById('detail-photo');
   if (!box) return;
-  if (!PEXELS_API_KEY || PEXELS_API_KEY.startsWith('YOUR_')) {
-    box.innerHTML = '';
-    return;
-  }
   box.innerHTML = '<div class="photo-loading">Loading photo…</div>';
-  // Use botanical name for plants (gives accurate species photos, not generic bottle shots)
-  // Clean botanical name — strip parenthetical notes like "(flowers)", "(seed)", "(leaves and twigs)"
+
+  // Clean botanical name: strip parentheticals, take first name before "/"
   const botanicalClean = botanical ? botanical.replace(/\s*\([^)]*\)/g, '').split('/')[0].trim() : null;
-  let searchTerm;
-  if (section === 'crystals') {
-    searchTerm = `${name} crystal mineral raw stone`;
-  } else if (botanicalClean) {
-    searchTerm = `${botanicalClean} plant`;
-  } else {
-    searchTerm = `${name} plant botanical`;
-  }
+
+  // Wikipedia lookup title: use botanical name for plants, common name for crystals
+  const wikiTitle = (section === 'crystals' || !botanicalClean) ? name : botanicalClean;
+  const wikiTitleEncoded = encodeURIComponent(wikiTitle.replace(/\s+/g, '_'));
+
   try {
+    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${wikiTitleEncoded}`);
+    const data = await res.json();
+    if (data.thumbnail && data.thumbnail.source) {
+      const pageUrl = data.content_urls && data.content_urls.desktop ? data.content_urls.desktop.page : `https://en.wikipedia.org/wiki/${wikiTitleEncoded}`;
+      box.innerHTML = `<img src="${data.thumbnail.source}" alt="${name}" loading="lazy">
+        <div class="photo-credit">📷 <a href="${pageUrl}" target="_blank">Wikipedia</a></div>`;
+      return;
+    }
+  } catch(e) {}
+
+  // Fallback: Pexels (for items with no Wikipedia image, e.g. Fragonia)
+  const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY';
+  if (!PEXELS_API_KEY || PEXELS_API_KEY.startsWith('YOUR_')) { box.innerHTML = ''; return; }
+  try {
+    const searchTerm = section === 'crystals' ? `${name} crystal mineral` : botanicalClean ? `${botanicalClean} plant` : `${name} plant`;
     const res = await fetch(
       `https://api.pexels.com/v1/search?query=${encodeURIComponent(searchTerm)}&per_page=3&orientation=landscape`,
       { headers: { Authorization: PEXELS_API_KEY } }
