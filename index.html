@@ -125,6 +125,40 @@ footer strong { color:#ccd8e8; }
   .detail-panel.open{display:block}
   .close-btn{display:inline-block}
 }
+/* Symptoms section */
+.snav-btn.active.symptoms { color:#4a1030; }
+.symptom-panel { padding:4px 0; }
+.symptom-intro { font-size:0.85rem; color:#5a4a5a; margin-bottom:14px; line-height:1.5; }
+.sym-card { background:#fff; border-radius:12px; margin-bottom:10px; border:2px solid #e8c8d8; box-shadow:0 2px 6px rgba(0,0,0,0.06); overflow:hidden; }
+.sym-card-header { padding:14px 16px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; }
+.sym-card-header:hover { background:#fdf5f8; }
+.sym-icon { font-size:1.5rem; margin-right:11px; flex-shrink:0; }
+.sym-title { font-size:0.97rem; font-weight:700; color:#4a1030; }
+.sym-tagline { font-size:0.76rem; color:#7a5060; margin-top:2px; }
+.sym-arrow { font-size:0.85rem; color:#c04070; transition:transform 0.2s; flex-shrink:0; }
+.sym-card.open .sym-arrow { transform:rotate(180deg); }
+.sym-body { display:none; padding:0 16px 16px; border-top:1px solid #f0d8e0; }
+.sym-card.open .sym-body { display:block; }
+.sym-desc { font-size:0.79rem; color:#5a4050; margin:11px 0 13px; line-height:1.55; }
+.sym-cols { display:grid; grid-template-columns:1fr 1fr 1fr; gap:11px; }
+@media(max-width:768px){ .sym-cols{grid-template-columns:1fr} }
+.sym-col-title { font-size:0.67rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#a04060; margin-bottom:7px; }
+.sym-item { margin-bottom:8px; }
+.sym-item-name { font-size:0.81rem; font-weight:700; color:#3a1a2a; }
+.sym-item-use { font-size:0.75rem; color:#5a4050; margin-top:2px; line-height:1.4; }
+.sym-cta { margin-top:14px; padding-top:12px; border-top:1px solid #f0d8e0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+.sym-cta-text { font-size:0.76rem; color:#7a5060; }
+.sym-buy-btn { display:inline-block; padding:8px 16px; background:#a03060; color:#fff; border-radius:20px; font-size:0.78rem; font-weight:700; text-decoration:none; transition:opacity 0.15s; }
+.sym-buy-btn:hover { opacity:0.85; }
+.sym-buy-btn.coming { background:#c0a0b0; pointer-events:none; }
+.email-capture { background:linear-gradient(135deg,#4a1030,#902850); color:#fff; padding:18px 20px; margin-bottom:14px; border-radius:12px; }
+.email-capture h3 { font-size:0.97rem; font-weight:700; margin-bottom:3px; }
+.email-capture p { font-size:0.78rem; opacity:0.88; margin-bottom:12px; line-height:1.4; }
+.email-form { display:flex; gap:7px; flex-wrap:wrap; }
+.email-input { flex:1; min-width:180px; padding:8px 13px; border-radius:20px; border:none; font-size:0.86rem; }
+.email-submit { padding:8px 18px; background:#fff; color:#a03060; font-weight:700; border:none; border-radius:20px; cursor:pointer; font-size:0.83rem; white-space:nowrap; }
+.email-submit:hover { background:#fdf0f5; }
+.email-note { font-size:0.67rem; opacity:0.7; margin-top:7px; }
 </style>
 </head>
 <body>
@@ -139,6 +173,7 @@ footer strong { color:#ccd8e8; }
     <button class="snav-btn mushrooms" data-section="mushrooms" onclick="switchSection('mushrooms')">Medicinal Mushrooms</button>
     <button class="snav-btn acupressure" data-section="acupressure" onclick="switchSection('acupressure')">Acupressure Protocols</button>
     <button class="snav-btn meridians" data-section="meridians" onclick="switchSection('meridians')">TCM Meridians</button>
+    <button class="snav-btn symptoms" data-section="symptoms" onclick="switchSection('symptoms')">By Symptom</button>
   </div>
 </header>
 <div class="controls">
@@ -156,6 +191,7 @@ footer strong { color:#ccd8e8; }
       <div class="grid" id="grid"></div>
     </div>
     <div id="blends-tab-panel" style="display:none"><div id="blends-grid"></div></div>
+    <div id="symptom-panel" style="display:none"></div>
   </div>
   <div class="detail-panel" id="detail">
     <div class="empty"><div class="icon">🌿</div><p>Select an item to see details</p></div>
@@ -400,7 +436,8 @@ const sectionFilters = {
   crystals:['all','crown','third-eye','throat','heart','solar-plexus','sacral','root','protection','love','abundance'],
   mushrooms: ['all','immune','adaptogen','nervous-system','cognitive','anti-tumor','energy','digestive','skin','sleep','longevity','respiratory'],
   acupressure:['all','menopause','women-health','pain','emotional','digestive','immune','energy','sleep','nervous-system'],
-  meridians:  ['all','wood','fire','earth','metal','water','vessel','women-health','digestive','immune','nervous-system','respiratory','pain','energy','emotional']
+  meridians:  ['all','wood','fire','earth','metal','water','vessel','women-health','digestive','immune','nervous-system','respiratory','pain','energy','emotional'],
+  symptoms: []
 };
 
 const sectionThemes = {
@@ -410,7 +447,8 @@ const sectionThemes = {
   crystals:{a:'#2d1a5e',b:'#6040b0',accent:'#6040b0',glow:'rgba(96,64,176,0.12)',hover:'#a080e0',sel:'#f4f0fc'},
   mushrooms: {a:'#2a1a08',b:'#7a5020',accent:'#7a5020',glow:'rgba(122,80,32,0.12)',hover:'#c09050',sel:'#fdf6ee'},
   acupressure:{a:'#5a1a2e',b:'#c04020',accent:'#c04020',glow:'rgba(192,64,32,0.12)',hover:'#e08060',sel:'#fff4ee'},
-  meridians:  {a:'#0a3028',b:'#1a8060',accent:'#1a8060',glow:'rgba(26,128,96,0.12)',hover:'#50c090',sel:'#f0faf5'}
+  meridians:  {a:'#0a3028',b:'#1a8060',accent:'#1a8060',glow:'rgba(26,128,96,0.12)',hover:'#50c090',sel:'#f0faf5'},
+  symptoms:   {a:'#4a1030',b:'#a03060',accent:'#a03060',glow:'rgba(160,48,96,0.12)',hover:'#d080a0',sel:'#fdf0f5'}
 };
 
 function applyTheme(section) {
@@ -441,7 +479,13 @@ function switchSection(section) {
   const tabBar = document.getElementById('tab-bar');
   tabBar.style.display = section === 'oils' ? 'flex' : 'none';
   document.getElementById('blends-tab-panel').style.display = 'none';
-  document.getElementById('main-grid-panel').style.display = 'block';
+  // Symptoms section — full-width custom layout, hide standard grid + detail + search
+  const isSymptoms = section === 'symptoms';
+  document.getElementById('symptom-panel').style.display = isSymptoms ? 'block' : 'none';
+  document.getElementById('main-grid-panel').style.display = isSymptoms ? 'none' : 'block';
+  document.querySelector('.detail-panel').style.display = isSymptoms ? 'none' : '';
+  document.querySelector('.controls').style.display = isSymptoms ? 'none' : '';
+  if (isSymptoms) { renderSymptoms(); return; }
 }
 
 function renderFilters() {
@@ -466,6 +510,7 @@ function getCurrentData() {
   if (currentSection === 'acupressure') return acupressureProtocols;
   if (currentSection === 'mushrooms') return mushrooms;
   if (currentSection === 'meridians') return meridians;
+  if (currentSection === 'symptoms') return [];
   return [];
 }
 
@@ -810,6 +855,186 @@ document.getElementById('search').addEventListener('input', e => {
   renderCurrentGrid();
   if (document.getElementById('blends-tab-panel').style.display === 'block') renderBlends();
 });
+
+// ── Symptom Protocols ──────────────────────────────────
+const symptoms = [
+  {
+    id:'hot-flashes',name:'Hot Flashes',icon:'🌡',
+    tagline:'Reduce heat surges and night sweats with plant medicine',
+    desc:'Hot flashes arise from oestrogen fluctuation disrupting the hypothalamic thermostat. In TCM this is Kidney Yin deficiency allowing Yang heat to rise unchecked.',
+    oils:[
+      {name:'Clary Sage',use:'Phytoestrogen-like action. 2 drops on inner wrists morning and evening, diluted in jojoba.'},
+      {name:'Peppermint',use:'Instant cooling. 1 drop on back of neck during a flash. Keep away from eyes.'},
+      {name:'Geranium',use:'Oestrogen balancer. 2 drops behind ears daily, or 3 drops in an evening bath.'},
+    ],
+    herbs:[
+      {name:'Sage',use:'Reduces sweating and flash frequency. 1 cup of tea (1 tsp dried leaf) twice daily or tincture 3×/day.'},
+      {name:'Black Cohosh',use:'Binds oestrogen receptors. Standardised extract (20mg, 2.5% triterpenes) twice daily for 3 months.'},
+      {name:'Maca',use:'Adaptogen for hormonal resilience. 1 tsp powder in morning smoothie or capsule with breakfast.'},
+    ],
+    acu:[
+      {code:'KD1',name:'Bubbling Spring',loc:'Deep centre of sole, front third of foot',how:'Press firmly with thumb 2 min each foot. Draws rising heat downward — the most grounding point.'},
+      {code:'KD7',name:'Recovering Flow',loc:'2 cun above KD3, on the inside of the ankle',how:'Tonifies Kidney Yin and reduces night sweats. 2–3 min each side.'},
+      {code:'SP6',name:'Three Yin Meeting',loc:'4 finger-widths above the inner ankle bone',how:'Nourishes Yin of Kidney, Liver, and Spleen. 2 min each side. Avoid in pregnancy.'},
+      {code:'PC6',name:'Inner Gate',loc:'3 finger-widths above wrist crease, inner forearm',how:'Calms heat in the Heart. Reduces palpitations that accompany flashes. 1–2 min each side.'},
+    ],
+    buy:{label:'Hot Flash Relief Protocol — €19',url:'https://YOUR-STORE.lemonsqueezy.com/checkout/buy/YOUR_PRODUCT_ID',live:false},
+  },
+  {
+    id:'sleep',name:'Sleep',icon:'🌙',
+    tagline:'Fall asleep faster and stay asleep through the night',
+    desc:'Poor sleep during perimenopause links to oestrogen decline, raised night cortisol, and Shen (spirit) disturbance in TCM — the Heart cannot hold the mind still after dark.',
+    oils:[
+      {name:'Lavender',use:'Most-studied sleep oil. 2 drops on pillow or 4 drops diffused 30 min before bed.'},
+      {name:'Vetiver',use:'Deep, earthy grounding. 1 drop on soles of feet before sleep. Quiets racing thoughts.'},
+      {name:'Roman Chamomile',use:'Gentle nervous system sedative. 2 drops in 1 tsp jojoba, massage temples and wrists.'},
+    ],
+    herbs:[
+      {name:'Valerian',use:'Reduces time to sleep onset. 300–600mg capsule 30–45 min before bed. Allow 2 weeks for effect.'},
+      {name:'Passionflower',use:'Quiets mind-chatter. Tea (2 tsp dried herb) or tincture 40 drops in water, 1h before bed.'},
+      {name:'Ashwagandha',use:'Lowers evening cortisol. 300mg KSM-66 extract at dinner time. 8-week protocol.'},
+    ],
+    acu:[
+      {code:'HT7',name:'Spirit Gate',loc:'Wrist crease, little-finger side, beside pisiform bone',how:'Primary point for insomnia and anxiety. Press 2–3 min each side before bed.'},
+      {code:'PC6',name:'Inner Gate',loc:'3 finger-widths above wrist crease, inner forearm',how:'Calms the Heart Shen. 2 min each side. Combine with HT7 for best effect.'},
+      {code:'SP6',name:'Three Yin Meeting',loc:'4 finger-widths above inner ankle',how:'Nourishes Yin and calms the mind. 2 min each side. Avoid in pregnancy.'},
+      {code:'KD6',name:'Shining Sea',loc:'1 cun below the centre of the inner ankle',how:'Opens the Yin Qiao channel — regulates the sleep-wake cycle. 1–2 min each side.'},
+    ],
+    buy:{label:'Get the 3-Day Sleep Reset — FREE',url:'#email-capture-block',live:true},
+  },
+  {
+    id:'anxiety',name:'Anxiety & Stress',icon:'🌊',
+    tagline:'Calm the nervous system and release tension held in the body',
+    desc:'Anxiety during hormonal transitions involves elevated cortisol and reduced GABA tone. In TCM: Liver Qi stagnation traps emotions; Heart Shen becomes unsettled and cannot rest.',
+    oils:[
+      {name:'Lavender',use:'Clinical evidence for anxiety reduction. Diffuse or 2 drops on inner wrists and inhale.'},
+      {name:'Bergamot',use:'Uplifting and calming together. 3 drops diffused. Do not apply to skin before sun exposure.'},
+      {name:'Frankincense',use:'Slows and deepens breathing. 2 drops on chest or diffused during breathwork or meditation.'},
+    ],
+    herbs:[
+      {name:'Ashwagandha',use:'Reduces cortisol 27% in clinical trials. 300mg KSM-66 twice daily with food.'},
+      {name:'Passionflower',use:'Acts on GABA receptors. Tea twice daily or tincture 40 drops three times daily.'},
+      {name:'Lemon Balm',use:'Mild anxiolytic and cooling. Tea 2–3× daily. Safe for long-term use.'},
+    ],
+    acu:[
+      {code:'PC6',name:'Inner Gate',loc:'3 finger-widths above wrist crease, inner forearm',how:'Most powerful point for anxiety and chest tightness. 2–3 min each side.'},
+      {code:'HT7',name:'Spirit Gate',loc:'Wrist crease, little-finger side',how:'Calms Heart Shen — addresses fear, overthinking, palpitations. 2 min each side.'},
+      {code:'LR3',name:'Great Surge',loc:'Web between 1st and 2nd toe, 2 cun back on dorsum',how:'Moves stagnant Liver Qi, releases held emotion. 2–3 min each side.'},
+      {code:'GV20',name:'Hundred Convergences',loc:'Top of head, midpoint between ear apices',how:'Calms the mind and lifts Shen. Light circular pressure 1–2 min.'},
+    ],
+    buy:{label:'Anxiety & Nervous System Protocol — €19',url:'https://YOUR-STORE.lemonsqueezy.com/checkout/buy/YOUR_PRODUCT_ID',live:false},
+  },
+  {
+    id:'fatigue',name:'Fatigue & Low Energy',icon:'⚡',
+    tagline:'Restore vitality when you feel depleted and exhausted',
+    desc:'Hormonal fatigue is cellular depletion, not ordinary tiredness. TCM sees it as Kidney Yang or Qi deficiency, or a weak Spleen failing to transform food into usable energy.',
+    oils:[
+      {name:'Rosemary',use:'Stimulates nervous system and circulation. 2 drops on temples or 3 drops diffused in the morning.'},
+      {name:'Peppermint',use:'Rapid alertness. 1 drop on wrists, inhale deeply. Avoid use after 3pm.'},
+      {name:'Frankincense',use:'Deep cellular support. 1 drop on lower back daily — tonifies Kidney Yang in TCM.'},
+    ],
+    herbs:[
+      {name:'Ashwagandha',use:'Reduces fatigue and raises stamina. 300mg KSM-66 twice daily with food. 8-week minimum.'},
+      {name:'Rhodiola',use:'Adaptogen for physical and mental exhaustion. 200–400mg in the morning; not after 2pm.'},
+      {name:'Maca',use:'Andean energy tonic. 1–2 tsp powder in morning smoothie. Sustained effect over 2–4 weeks.'},
+    ],
+    acu:[
+      {code:'ST36',name:'Leg Three Miles',loc:'4 finger-widths below kneecap, one finger lateral to shin',how:'Master energy point. Tonifies Qi and Blood. 3 min each leg — can rub vigorously to warm.'},
+      {code:'CV6',name:'Sea of Qi',loc:'1.5 cun below navel, midline',how:'Builds fundamental energy reserves. Warm circular massage 3 min, or apply warm compress.'},
+      {code:'SP6',name:'Three Yin Meeting',loc:'4 finger-widths above inner ankle',how:'Tonifies Spleen Qi — improves energy from food. 2 min each side.'},
+      {code:'KD3',name:'Great Mountain Stream',loc:'Midpoint between inner ankle and Achilles tendon',how:'Tonifies Kidney Yang — the root of all energy. 2 min each side.'},
+    ],
+    buy:{label:'Energy & Vitality Protocol — €19',url:'https://YOUR-STORE.lemonsqueezy.com/checkout/buy/YOUR_PRODUCT_ID',live:false},
+  },
+  {
+    id:'hormonal-balance',name:'Hormonal Balance',icon:'⚖',
+    tagline:'Support your endocrine system through perimenopause',
+    desc:'Balance is not about restoring old hormone levels but adapting to a new equilibrium. Plant allies modulate receptors, support the liver\'s hormone metabolism, and calm the HPA stress axis.',
+    oils:[
+      {name:'Clary Sage',use:'Phytoestrogenic. Balances oestrogen-progesterone ratio. 2 drops on lower abdomen daily.'},
+      {name:'Geranium',use:'Supports adrenal cortex — balances cortisol alongside sex hormones. Diffuse or dilute and apply.'},
+      {name:'Rosemary',use:'Liver detox support — aids the clearance of excess hormones. 1 drop on lower right rib cage daily.'},
+    ],
+    herbs:[
+      {name:'Vitex (Chaste Tree)',use:'Raises progesterone relative to oestrogen. 20mg standardised extract, morning, minimum 3 months. Do not combine with hormonal contraceptives.'},
+      {name:'Maca',use:'Adaptogen for the whole endocrine system. Powder or capsule in the morning. Cycle 2 months on, 2 weeks off.'},
+      {name:'Dandelion Root',use:'Liver support for hormone clearance. Tea 2× daily or tincture. Best as a spring cure.'},
+    ],
+    acu:[
+      {code:'CV4',name:'Origin Pass',loc:'3 cun below navel, midline',how:'Nourishes fundamental Yin — the root of reproductive and hormonal function. Warm circular pressure 3 min.'},
+      {code:'SP6',name:'Three Yin Meeting',loc:'4 finger-widths above inner ankle',how:'Regulates all three Yin meridians including reproductive channels. 2–3 min each side.'},
+      {code:'LR3',name:'Great Surge',loc:'Web between 1st and 2nd toe, 2 cun back',how:'Smooths Liver Qi and supports hormone metabolism. 2 min each side.'},
+      {code:'ST36',name:'Leg Three Miles',loc:'4 finger-widths below kneecap, lateral to shin',how:'Strengthens digestive and endocrine system. 3 min each side.'},
+    ],
+    buy:{label:'Hormonal Balance Protocol — €29',url:'https://YOUR-STORE.lemonsqueezy.com/checkout/buy/YOUR_PRODUCT_ID',live:false},
+  },
+];
+
+function renderSymptoms() {
+  const panel = document.getElementById('symptom-panel');
+  panel.innerHTML = `
+    <p class="symptom-intro">Choose a symptom to see a complete protocol — essential oils, medicinal herbs, and acupressure points working together.</p>
+    <div id="email-capture-block" class="email-capture">
+      <h3>Free: 3-Day Sleep Reset</h3>
+      <p>A simple evening protocol — oils, herbs, and 3 acupressure points — that you can start tonight. Sent to your inbox as a PDF.</p>
+      <form class="email-form" onsubmit="handleEmailSignup(event)">
+        <input class="email-input" type="email" id="signup-email" placeholder="Your email address" required>
+        <button class="email-submit" type="submit">Send me the PDF</button>
+      </form>
+      <p class="email-note">No spam. Unsubscribe any time. GDPR compliant.</p>
+    </div>
+    ${symptoms.map(s => `
+    <div class="sym-card" id="sym-${s.id}">
+      <div class="sym-card-header" onclick="toggleSym('${s.id}')">
+        <div style="display:flex;align-items:center;flex:1;min-width:0;">
+          <span class="sym-icon">${s.icon}</span>
+          <div><div class="sym-title">${s.name}</div><div class="sym-tagline">${s.tagline}</div></div>
+        </div>
+        <span class="sym-arrow">▼</span>
+      </div>
+      <div class="sym-body">
+        <p class="sym-desc">${s.desc}</p>
+        <div class="sym-cols">
+          <div>
+            <div class="sym-col-title">Essential Oils</div>
+            ${s.oils.map(o=>`<div class="sym-item"><div class="sym-item-name">${o.name}</div><div class="sym-item-use">${o.use}</div></div>`).join('')}
+          </div>
+          <div>
+            <div class="sym-col-title">Medicinal Herbs</div>
+            ${s.herbs.map(h=>`<div class="sym-item"><div class="sym-item-name">${h.name}</div><div class="sym-item-use">${h.use}</div></div>`).join('')}
+          </div>
+          <div>
+            <div class="sym-col-title">Acupressure</div>
+            ${s.acu.map(a=>`<div class="sym-item"><div class="sym-item-name">${a.code} — ${a.name}</div><div class="sym-item-use"><em>${a.loc}</em><br>${a.how}</div></div>`).join('')}
+          </div>
+        </div>
+        <div class="sym-cta">
+          <span class="sym-cta-text">Full protocol with dosage schedule and timing</span>
+          <a href="${s.buy.url}" class="sym-buy-btn${s.buy.live ? '' : ' coming'}"${s.buy.live ? ' onclick="scrollToEmail(event)"' : ''}>${s.buy.label}</a>
+        </div>
+      </div>
+    </div>`).join('')}
+  `;
+}
+
+function toggleSym(id) {
+  document.getElementById('sym-' + id).classList.toggle('open');
+}
+
+function scrollToEmail(e) {
+  e.preventDefault();
+  document.getElementById('email-capture-block').scrollIntoView({behavior:'smooth'});
+}
+
+function handleEmailSignup(e) {
+  e.preventDefault();
+  const email = document.getElementById('signup-email').value;
+  // TODO: Replace with your ConvertKit form submission
+  // Form action: https://app.kit.com/forms/YOUR_FORM_ID/subscriptions
+  // For now, show a thank-you message
+  const block = document.getElementById('email-capture-block');
+  block.innerHTML = '<h3>Thank you!</h3><p style="opacity:0.9;font-size:0.85rem;">Your 3-Day Sleep Reset PDF is on its way. Check your inbox.</p>';
+}
 
 // ── Init ───────────────────────────────────────────────
 switchSection('oils');
