@@ -179,6 +179,7 @@ footer strong { color:#ccd8e8; }
     <button class="snav-btn acupressure" data-section="acupressure" onclick="switchSection('acupressure')">Acupressure Protocols</button>
     <button class="snav-btn meridians" data-section="meridians" onclick="switchSection('meridians')">TCM Meridians</button>
     <button class="snav-btn symptoms" data-section="symptoms" onclick="switchSection('symptoms')">By Symptom</button>
+    <button class="snav-btn" style="background:rgba(255,255,255,0.1);" onclick="toggleContact()">Contact</button>
   </div>
 </header>
 <div class="controls">
@@ -200,6 +201,21 @@ footer strong { color:#ccd8e8; }
   </div>
   <div class="detail-panel" id="detail">
     <div class="empty"><div class="icon">🌿</div><p>Select an item to see details</p></div>
+  </div>
+</div>
+<div id="contact-section" style="background:#1a2a3a;padding:32px 24px;display:none;">
+  <div style="max-width:520px;margin:0 auto;">
+    <h2 style="color:#e8f0fc;font-size:1.1rem;margin-bottom:6px;">Get in touch</h2>
+    <p style="color:rgba(255,255,255,0.6);font-size:0.82rem;margin-bottom:18px;">Questions about plant medicine, the protocols, or working together — write to us.</p>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:10px;">
+      <input type="hidden" name="form-name" value="contact">
+      <input type="text" name="bot-field" style="display:none">
+      <input type="text" name="name" placeholder="Your name" required style="padding:10px 14px;border-radius:8px;border:1px solid #3a5a7a;background:#1a3a5a;color:#e8f0fc;font-size:0.88rem;">
+      <input type="email" name="email" placeholder="Your email" required style="padding:10px 14px;border-radius:8px;border:1px solid #3a5a7a;background:#1a3a5a;color:#e8f0fc;font-size:0.88rem;">
+      <textarea name="message" placeholder="Your message" rows="4" required style="padding:10px 14px;border-radius:8px;border:1px solid #3a5a7a;background:#1a3a5a;color:#e8f0fc;font-size:0.88rem;resize:vertical;"></textarea>
+      <button type="submit" style="padding:11px;background:#a03060;color:#fff;border:none;border-radius:8px;font-size:0.88rem;font-weight:700;cursor:pointer;">Send message</button>
+    </form>
+    <p style="color:rgba(255,255,255,0.4);font-size:0.72rem;margin-top:12px;">Or email directly: <a href="mailto:hello@mirishi.com" style="color:rgba(255,255,255,0.6);">hello@mirishi.com</a></p>
   </div>
 </div>
 <footer><strong>⚠ Educational purposes only.</strong> This information does not constitute medical advice and is not intended to diagnose, treat, cure, or prevent any disease or condition. Consult a qualified healthcare provider before using any herb or supplement, especially if pregnant, nursing, taking medications, or managing a health condition. Crystal and plant information draws from diverse cultural traditions and is shared with respect. Some sacred plants belong to living cultures — approach with cultural sensitivity and respect.</footer>
@@ -1029,6 +1045,12 @@ function toggleSym(id) {
 function scrollToEmail(e) {
   e.preventDefault();
   document.getElementById('email-capture-block').scrollIntoView({behavior:'smooth'});
+}
+
+function toggleContact() {
+  const s = document.getElementById('contact-section');
+  s.style.display = s.style.display === 'none' ? 'block' : 'none';
+  if (s.style.display === 'block') s.scrollIntoView({behavior:'smooth'});
 }
 
 function handleEmailSignup(e) {

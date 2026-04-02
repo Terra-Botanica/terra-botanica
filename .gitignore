@@ -1,0 +1,22 @@
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Office temp files
+~$*
+
+# Documents (keep locally, don't push to GitHub)
+*.docx
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Exceptions — allow poster HTML files
+!poster-*.html
+!index.html
+!*.md
+!*.js
+!*.json
