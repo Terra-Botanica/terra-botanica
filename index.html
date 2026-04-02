@@ -132,6 +132,17 @@ footer strong { color:#ccd8e8; }
 }
 /* Symptoms section */
 .snav-btn.active.symptoms { color:#4a1030; }
+.snav-btn.active.guides { color:#1a3a50; }
+.guide-card { background:#fff; border-radius:12px; margin-bottom:14px; border:1px solid #b8d0e0; overflow:hidden; display:flex; flex-direction:column; }
+.guide-card-body { padding:18px 20px; flex:1; }
+.guide-card-tag { font-size:0.67rem; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:#2a6080; margin-bottom:8px; }
+.guide-card-title { font-size:1.05rem; font-weight:700; color:#1a2a3a; margin-bottom:8px; }
+.guide-card-desc { font-size:0.82rem; color:#3a5060; line-height:1.55; margin-bottom:14px; }
+.guide-card-topics { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px; }
+.guide-card-topic { font-size:0.71rem; background:#e8f4f8; color:#1a5070; padding:3px 9px; border-radius:10px; }
+.guide-read-btn { display:inline-block; padding:9px 20px; background:#1a5070; color:#fff; border-radius:20px; font-size:0.82rem; font-weight:700; text-decoration:none; transition:opacity 0.15s; }
+.guide-read-btn:hover { opacity:0.85; }
+.guides-intro { font-size:0.85rem; color:#3a5060; margin-bottom:18px; line-height:1.5; padding:4px 0; }
 .symptom-panel { padding:4px 0; }
 .symptom-intro { font-size:0.85rem; color:#5a4a5a; margin-bottom:14px; line-height:1.5; }
 .sym-card { background:#fff; border-radius:12px; margin-bottom:10px; border:2px solid #e8c8d8; box-shadow:0 2px 6px rgba(0,0,0,0.06); overflow:hidden; }
@@ -179,6 +190,7 @@ footer strong { color:#ccd8e8; }
     <button class="snav-btn acupressure" data-section="acupressure" onclick="switchSection('acupressure')">Acupressure Protocols</button>
     <button class="snav-btn meridians" data-section="meridians" onclick="switchSection('meridians')">TCM Meridians</button>
     <button class="snav-btn symptoms" data-section="symptoms" onclick="switchSection('symptoms')">By Symptom</button>
+    <button class="snav-btn guides" data-section="guides" onclick="switchSection('guides')">Guides</button>
     <button class="snav-btn" style="background:rgba(255,255,255,0.1);" onclick="toggleContact()">Contact</button>
   </div>
 </header>
@@ -198,6 +210,7 @@ footer strong { color:#ccd8e8; }
     </div>
     <div id="blends-tab-panel" style="display:none"><div id="blends-grid"></div></div>
     <div id="symptom-panel" style="display:none"></div>
+    <div id="guides-panel" style="display:none"></div>
   </div>
   <div class="detail-panel" id="detail">
     <div class="empty"><div class="icon">🌿</div><p>Select an item to see details</p></div>
@@ -458,7 +471,8 @@ const sectionFilters = {
   mushrooms: ['all','immune','adaptogen','nervous-system','cognitive','anti-tumor','energy','digestive','skin','sleep','longevity','respiratory'],
   acupressure:['all','menopause','women-health','pain','emotional','digestive','immune','energy','sleep','nervous-system'],
   meridians:  ['all','wood','fire','earth','metal','water','vessel','women-health','digestive','immune','nervous-system','respiratory','pain','energy','emotional'],
-  symptoms: []
+  symptoms: [],
+  guides: []
 };
 
 const sectionThemes = {
@@ -469,7 +483,8 @@ const sectionThemes = {
   mushrooms: {a:'#2a1a08',b:'#7a5020',accent:'#7a5020',glow:'rgba(122,80,32,0.12)',hover:'#c09050',sel:'#fdf6ee'},
   acupressure:{a:'#5a1a2e',b:'#c04020',accent:'#c04020',glow:'rgba(192,64,32,0.12)',hover:'#e08060',sel:'#fff4ee'},
   meridians:  {a:'#0a3028',b:'#1a8060',accent:'#1a8060',glow:'rgba(26,128,96,0.12)',hover:'#50c090',sel:'#f0faf5'},
-  symptoms:   {a:'#4a1030',b:'#a03060',accent:'#a03060',glow:'rgba(160,48,96,0.12)',hover:'#d080a0',sel:'#fdf0f5'}
+  symptoms:   {a:'#4a1030',b:'#a03060',accent:'#a03060',glow:'rgba(160,48,96,0.12)',hover:'#d080a0',sel:'#fdf0f5'},
+  guides:     {a:'#1a2a40',b:'#1a5070',accent:'#1a5070',glow:'rgba(26,80,112,0.12)',hover:'#60a0c0',sel:'#f0f8fc'}
 };
 
 function applyTheme(section) {
@@ -502,11 +517,15 @@ function switchSection(section) {
   document.getElementById('blends-tab-panel').style.display = 'none';
   // Symptoms section — full-width custom layout, hide standard grid + detail + search
   const isSymptoms = section === 'symptoms';
+  const isGuides = section === 'guides';
+  const isCustom = isSymptoms || isGuides;
   document.getElementById('symptom-panel').style.display = isSymptoms ? 'block' : 'none';
-  document.getElementById('main-grid-panel').style.display = isSymptoms ? 'none' : 'block';
-  document.querySelector('.detail-panel').style.display = isSymptoms ? 'none' : '';
-  document.querySelector('.controls').style.display = isSymptoms ? 'none' : '';
+  document.getElementById('guides-panel').style.display = isGuides ? 'block' : 'none';
+  document.getElementById('main-grid-panel').style.display = isCustom ? 'none' : 'block';
+  document.querySelector('.detail-panel').style.display = isCustom ? 'none' : '';
+  document.querySelector('.controls').style.display = isCustom ? 'none' : '';
   if (isSymptoms) { renderSymptoms(); return; }
+  if (isGuides) { renderGuides(); return; }
 }
 
 function renderFilters() {
@@ -532,6 +551,7 @@ function getCurrentData() {
   if (currentSection === 'mushrooms') return mushrooms;
   if (currentSection === 'meridians') return meridians;
   if (currentSection === 'symptoms') return [];
+  if (currentSection === 'guides') return [];
   return [];
 }
 
@@ -899,7 +919,7 @@ const symptoms = [
       {code:'SP6',name:'Three Yin Meeting',loc:'4 finger-widths above the inner ankle bone',how:'Nourishes Yin of Kidney, Liver, and Spleen. 2 min each side. Avoid in pregnancy.'},
       {code:'PC6',name:'Inner Gate',loc:'3 finger-widths above wrist crease, inner forearm',how:'Calms heat in the Heart. Reduces palpitations that accompany flashes. 1–2 min each side.'},
     ],
-    buy:{label:'Hot Flash Relief Protocol — €19',url:'https://YOUR-STORE.lemonsqueezy.com/checkout/buy/YOUR_PRODUCT_ID',live:false},
+    buy:{label:'Hot Flash Relief Protocol — €19',url:'https://YOUR-STORE.lemonsqueezy.com/checkout/buy/YOUR_PRODUCT_ID',live:false},guide:'hot-flashes.html',
   },
   {
     id:'sleep',name:'Sleep',icon:'🌙',
@@ -921,7 +941,7 @@ const symptoms = [
       {code:'SP6',name:'Three Yin Meeting',loc:'4 finger-widths above inner ankle',how:'Nourishes Yin and calms the mind. 2 min each side. Avoid in pregnancy.'},
       {code:'KD6',name:'Shining Sea',loc:'1 cun below the centre of the inner ankle',how:'Opens the Yin Qiao channel — regulates the sleep-wake cycle. 1–2 min each side.'},
     ],
-    buy:{label:'Get the 3-Day Sleep Reset — FREE',url:'#email-capture-block',live:true},
+    buy:{label:'Get the 3-Day Sleep Reset — FREE',url:'#email-capture-block',live:true},guide:'sleep.html',
   },
   {
     id:'anxiety',name:'Anxiety & Stress',icon:'🌊',
@@ -943,7 +963,7 @@ const symptoms = [
       {code:'LR3',name:'Great Surge',loc:'Web between 1st and 2nd toe, 2 cun back on dorsum',how:'Moves stagnant Liver Qi, releases held emotion. 2–3 min each side.'},
       {code:'GV20',name:'Hundred Convergences',loc:'Top of head, midpoint between ear apices',how:'Calms the mind and lifts Shen. Light circular pressure 1–2 min.'},
     ],
-    buy:{label:'Anxiety & Nervous System Protocol — €19',url:'https://YOUR-STORE.lemonsqueezy.com/checkout/buy/YOUR_PRODUCT_ID',live:false},
+    buy:{label:'Anxiety & Nervous System Protocol — €19',url:'https://YOUR-STORE.lemonsqueezy.com/checkout/buy/YOUR_PRODUCT_ID',live:false},guide:'anxiety.html',
   },
   {
     id:'fatigue',name:'Fatigue & Low Energy',icon:'⚡',
@@ -1030,7 +1050,7 @@ function renderSymptoms() {
           </div>
         </div>
         <div class="sym-cta">
-          <span class="sym-cta-text">Full protocol with dosage schedule and timing</span>
+          ${s.guide ? `<a href="${s.guide}" style="font-size:0.78rem;color:#a03060;font-weight:600;text-decoration:none;">Read full guide →</a>` : '<span class="sym-cta-text">Full protocol with dosage schedule and timing</span>'}
           <a href="${s.buy.url}" class="sym-buy-btn${s.buy.live ? '' : ' coming'}"${s.buy.live ? ' onclick="scrollToEmail(event)"' : ''}>${s.buy.label}</a>
         </div>
       </div>
@@ -1045,6 +1065,49 @@ function toggleSym(id) {
 function scrollToEmail(e) {
   e.preventDefault();
   document.getElementById('email-capture-block').scrollIntoView({behavior:'smooth'});
+}
+
+const guides = [
+  {
+    tag:'Sleep · Menopause · TCM',
+    title:'Acupressure and Herbs for Sleep During Menopause',
+    desc:'Why sleep changes during perimenopause, and a complete evening protocol — 4 acupressure points, 3 medicinal herbs, and 3 essential oils with exact dosages and timing.',
+    topics:['HT7 Spirit Gate','PC6 Inner Gate','SP6 Three Yin Meeting','Valerian','Passionflower','Ashwagandha','Lavender','Vetiver'],
+    url:'sleep.html',
+    color:'#1a3060'
+  },
+  {
+    tag:'Hot Flashes · Night Sweats · TCM',
+    title:'Natural Remedies for Hot Flashes — Oils, Herbs & Acupressure',
+    desc:'A complete protocol for reducing hot flash frequency and intensity. Covers the physiology, the TCM Kidney Yin theory, and exactly what to press, take, and inhale.',
+    topics:['KD1 Bubbling Spring','KD7 Recovering Flow','SP6','Sage','Black Cohosh','Maca','Peppermint','Clary Sage'],
+    url:'hot-flashes.html',
+    color:'#701020'
+  },
+  {
+    tag:'Anxiety · Stress · Nervous System',
+    title:'Natural Anxiety Relief for Women — A Complete Guide',
+    desc:'Anxiety during hormonal change explained from both physiological and TCM perspectives, with a full daily protocol using acupressure, adaptogens, and aromatherapy.',
+    topics:['PC6 Inner Gate','LR3 Great Surge','GV20','Ashwagandha','Passionflower','Lemon Balm','Lavender','Frankincense'],
+    url:'anxiety.html',
+    color:'#1a3a60'
+  },
+];
+
+function renderGuides() {
+  document.getElementById('guides-panel').innerHTML = `
+    <p class="guides-intro">In-depth guides combining Traditional Chinese Medicine, medicinal herbs, and essential oils — written to be useful, not vague.</p>
+    ${guides.map(g => `
+    <div class="guide-card">
+      <div class="guide-card-body">
+        <div class="guide-card-tag" style="color:${g.color}">${g.tag}</div>
+        <div class="guide-card-title">${g.title}</div>
+        <div class="guide-card-desc">${g.desc}</div>
+        <div class="guide-card-topics">${g.topics.map(t=>`<span class="guide-card-topic">${t}</span>`).join('')}</div>
+        <a href="${g.url}" class="guide-read-btn" style="background:${g.color}">Read full guide →</a>
+      </div>
+    </div>`).join('')}
+  `;
 }
 
 function toggleContact() {
