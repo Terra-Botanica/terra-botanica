@@ -1038,8 +1038,8 @@ function renderSymptoms() {
   panel.innerHTML = `
     <p class="symptom-intro">Choose a symptom to see a complete protocol — essential oils, medicinal herbs, and acupressure points working together.</p>
     <div id="email-capture-block" class="email-capture">
-      <h3>Free: 3-Day Sleep Reset</h3>
-      <p>A simple evening protocol — oils, herbs, and 3 acupressure points — that you can start tonight. Sent to your inbox as a PDF.</p>
+      <h3>Free: Hot Flash First Aid</h3>
+      <p>3 things to do in the next 5 minutes when a hot flash hits — KD1 acupressure, peppermint oil, SP6. Free PDF, sent to your inbox.</p>
       <form class="email-form" onsubmit="handleEmailSignup(event)">
         <input class="email-input" type="email" id="signup-email" placeholder="Your email address" required>
         <button class="email-submit" type="submit">Send me the PDF</button>
@@ -1149,11 +1149,26 @@ function toggleContact() {
 function handleEmailSignup(e) {
   e.preventDefault();
   const email = document.getElementById('signup-email').value;
-  // TODO: Replace with your ConvertKit form submission
-  // Form action: https://app.kit.com/forms/YOUR_FORM_ID/subscriptions
-  // For now, show a thank-you message
-  const block = document.getElementById('email-capture-block');
-  block.innerHTML = '<h3>Thank you!</h3><p style="opacity:0.9;font-size:0.85rem;">Your 3-Day Sleep Reset PDF is on its way. Check your inbox.</p>';
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  const data = new FormData();
+  data.append('fields[email]', email);
+  data.append('ml-submit', '1');
+  data.append('anticsrf', 'true');
+  fetch('https://assets.mailerlite.com/jsonp/2242838/forms/183753108131677326/subscribe', {
+    method: 'POST',
+    body: data
+  })
+  .then(() => {
+    const block = document.getElementById('email-capture-block');
+    block.innerHTML = '<h3>Thank you!</h3><p style="opacity:0.9;font-size:0.85rem;">Your free Hot Flash First Aid guide is on its way — check your inbox.</p>';
+  })
+  .catch(() => {
+    btn.textContent = 'Send me the PDF';
+    btn.disabled = false;
+    alert('Something went wrong. Please try again.');
+  });
 }
 
 // ── Init ───────────────────────────────────────────────
