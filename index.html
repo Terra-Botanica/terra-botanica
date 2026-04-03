@@ -49,6 +49,14 @@ header p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top:2px; }
 .acu-tip strong { color:#1a5a10; }
 .acu-svg-wrap { float:right; margin:0 0 8px 10px; background:#fff; border-radius:8px; padding:4px; border:1px solid #e8c4a0; }
 .acu-svg-wrap svg { width:75px; height:75px; display:block; }
+.acu-photo-wrap { float:right; margin:0 0 8px 10px; background:#fff; border-radius:8px; padding:3px; border:1px solid #e8c4a0; cursor:pointer; }
+.acu-photo-wrap img { width:90px; height:90px; object-fit:cover; display:block; border-radius:6px; }
+.acu-photo-hint { font-size:0.6rem; color:#a08060; text-align:center; margin-top:2px; }
+#lightbox-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center; flex-direction:column; }
+#lightbox-overlay.open { display:flex; }
+#lightbox-overlay img { max-width:90vw; max-height:82vh; border-radius:10px; display:block; }
+#lightbox-caption { color:rgba(255,255,255,0.8); font-size:0.82rem; margin-top:10px; font-style:italic; }
+#lightbox-close { position:absolute; top:16px; right:20px; color:#fff; font-size:1.8rem; cursor:pointer; line-height:1; }
 .tag.menopause{background:#f8d8e8;color:#781848}.tag.cooling{background:#d8f0f8;color:#185878}.tag.women-health{background:#f8d8ee;color:#781848}.tag.nervous-system{background:#e0d8f0;color:#2a1a60}.tag.acupressure{background:#f8e8d0;color:#8a4010}
 .controls { background:#fff; border-bottom:1px solid #cdd9ee; padding:12px 24px; position:sticky; top:0; z-index:100; }
 .search-row { display:flex; gap:10px; align-items:center; }
@@ -808,9 +816,23 @@ const acuSVGs = {
 'KD27':`<svg viewBox="0 0 88 78" xmlns="http://www.w3.org/2000/svg"><path d="M44,5Q62,5,68,16Q74,26,72,40Q66,48,56,52L32,52Q22,48,16,40Q14,26,20,16Q26,5,44,5Z" fill="#fdf0e8" stroke="#8b5a3a" stroke-width="1.5"/><path d="M10,22Q24,16,44,16Q64,16,78,22" fill="none" stroke="#8b5a3a" stroke-width="1.2"/><circle cx="29" cy="28" r="5" fill="#c04020"/><circle cx="59" cy="28" r="5" fill="#c04020"/><text x="44" y="66" text-anchor="middle" font-size="8" fill="#5a2a0a" font-family="sans-serif">below collarbone</text></svg>`
 };
 
+// Hand-drawn illustrations by Gotza Gotza — replace SVG for these points
+const acuPhotos = {
+  'KD1': 'drawings body parts/kd1.JPG',
+  'KD3': 'drawings body parts/kd3.JPG',
+  'LI4': 'drawings body parts/LI4.JPG',
+  'SP6': 'drawings body parts/sp6.JPG'
+};
+
 function renderAcupressureDetail(protocol, panel) {
   const pointsHtml = (protocol.points || []).map(p => {
-    const svgHtml = acuSVGs[p.code] ? `<div class="acu-svg-wrap">${acuSVGs[p.code]}</div>` : '';
+    let diagHtml = '';
+    if (acuPhotos[p.code]) {
+      diagHtml = `<div class="acu-photo-wrap" onclick="openLightbox('${acuPhotos[p.code]}','${p.code} — ${p.name}')"><img src="${acuPhotos[p.code]}" alt="${p.code} ${p.name} illustration"><div class="acu-photo-hint">tap to enlarge</div></div>`;
+    } else if (acuSVGs[p.code]) {
+      diagHtml = `<div class="acu-svg-wrap">${acuSVGs[p.code]}</div>`;
+    }
+    const svgHtml = diagHtml;
     return `<div class="acupoint-card">
       ${svgHtml}
       <span class="acu-code">${p.code}</span>
@@ -1136,7 +1158,24 @@ function handleEmailSignup(e) {
 
 // ── Init ───────────────────────────────────────────────
 switchSection('oils');
+
+function openLightbox(src, caption) {
+  const lb = document.getElementById('lightbox-overlay');
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = caption;
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox-overlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 </script>
+
+<div id="lightbox-overlay" onclick="closeLightbox()">
+  <span id="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+</div>
 
 </body>
 </html>
