@@ -14,9 +14,13 @@
 *.jpeg
 *.gif
 
-# Exceptions — allow poster HTML files
+# Exceptions — allow poster HTML files and drawings
 !poster-*.html
 !index.html
 !*.md
 !*.js
 !*.json
+!drawings body parts/
+!drawings body parts/*.jpeg
+!drawings body parts/*.jpg
+!drawings body parts/*.png
